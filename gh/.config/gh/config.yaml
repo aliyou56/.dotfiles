@@ -1,0 +1,19 @@
+# What protocol to use when performing git operations. Supported values: ssh, https
+git_protocol: https
+# What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
+editor:
+# When to interactively prompt. This is a global config that cannot be overriden by hostname. Supported values: enabled, disabled
+prompt: enabled
+# A pager program to send command output to. Example value: less
+pager:
+# Aliases allow you to create nicknames for gh commands
+aliases:
+  iv: issue view
+  ivw: issue view --web
+  prc: pr checkout
+  prv: pr view
+  prvw: pr view --web
+  rc: '!gh repo create $(basename $(pwd)) --public && git remote add origin git@github.com:aliyou56/$(basename $(pwd)).git'
+  rcp: '!gh repo create $(basename $(pwd)) --private && git remote add origin git@github.com:aliyou56/$(basename $(pwd)).git'
+  rv: repo view
+  rvw: repo view --web
