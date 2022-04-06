@@ -1,0 +1,49 @@
+
+" set mouse=a
+set number relativenumber
+set ideajoin
+set easymotion
+set incsearch             " highlight as I type"
+set surrond               " visual select and then S"
+set multi-cursors         " <A + c>, <A + x>, <A + a>"
+set ignorecase            " Make searches case-insensitive"
+set smartcase             " Make case insensitve when no uppercase char is typed
+
+set clipboard+unamed      " yank and paste from system clipboard"
+set clipboard+=ideaput
+
+let mapleader = " "
+
+nnoremap <C-j> :m +1<CR>
+nnoremap <C-k> :m -2<CR>
+inoremap <C-j> <Esc>:m +1<CR>gi
+inoremap <C-k> <Esc>:m -2<CR>gi
+
+" system clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>Y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>P "+P
+vmap <leader>P "+P
+
+" scrolling
+nmap <leader>d <C-d>
+nmap <leader>u <C-u>
+vmap <leader>d <C-d>
+vmap <leader>u <C-u>
+
+" actions
+nmap <leader>h <action>(PreviousTab)
+nmap <leader>l <action>(NextTab)
+nmap <leader>bd <action>(CloseEditor)
+nmap <leader>i <action>(Generate)
+nmap <leader>m <action>(Git.Menu)
+nmap <leader>s <action>(QuickChangeScheme)
+nmap <leader>/ <action>(ShowErrorDescription)
+nmap <leader>e <action>(GotoNextError)
+noremap <leader><leader> <C-Tab>
+
+" map <leader>* :grep -R <cword> * --exclude-dir={.git,tmp,log,target}<CR><CR>
+" map <leader>* :Ggrep --untracked <cword> <CR><CR>
