@@ -62,7 +62,14 @@ target/
 ###########
 .vscode/
 .history/
+.settings/
+.project
+.classpath
 
 # Git #
 ###########
 *.orig
+
+# JS #
+#########
+node_modules/

@@ -36,7 +36,10 @@
 #  detachedHead = false
 [include]
   path = ~/.local/.gitconfig
+  path = ~/.local/themes.gitconfig
 [delta]
+  features = villsau
+  # features = zebra-dark
   #file-decoration-style = black ul
   #file-style = black
   #hunk-header-decoration-style = black box

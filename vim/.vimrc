@@ -1,89 +1,64 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General Settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set noshowmode " prevent non-normal modes showing in powerline and below powerline.
-set laststatus=2 " always show statusline
-
-syntax on
-set path+=**				    	" Searches current directory recursively.
-set wildmenu				     	" Display all matches when tab complete.
-set incsearch             " Incremental search
-" set hidden              " Needed to keep multiple buffers open
-set nobackup              " No auto backups
-set noswapfile            " No swap
-set t_Co=256              " Set if term supports 256 colors.
-set number relativenumber " Display line numbers
-set clipboard=unnamedplus " Copy/paste between vim and other programs.
-set smartcase
-" undodir=~/.vim/undodir
-" undofile
-set ruler
-set termguicolors
-set tabstop=2 softtabstop=2
-set shiftwidth=2
-set expandtab              " Use spaces instead of tabs.
-" set smarttab
-set smartindent
-set autoindent
-set scrolloff=8
-set signcolumn=yes
-set colorcolumn=100
-
 let mapleader=" "
-let g:rehash256 = 1
 
+set noshowmode
+set laststatus=2
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle For Managing Plugins
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nowrap
+
+let g:rainbow_active = 1
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'scala']
 
 call plug#begin('~/vim/plugged')
 
-"{{ The Basics }}
-  "Plug 'gmarik/Vundle.vim'                           " Vundle
-  Plug 'itchyny/lightline.vim'                       " Lightline statusbar
-  "Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
-  Plug 'frazrepo/vim-rainbow'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
 
-"Plug 'nvim-telescope/telescope.nvim'
-
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'gruvbox-community/gruvbox'
-Plug 'godlygeek/tabular'
-"Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi'
-Plug 'junegunn/goyo.vim'
-Plug 'itchyny/lightline.vim'            " Lightline status bar
+Plug 'itchyny/lightline.vim'       " Lightline status bar
 Plug 'frazrepo/vim-rainbow'
 
+Plug 'triglav/vim-visual-increment'
+
 call plug#end()
+
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+nnoremap <leader>gco :GCheckout<CR>
 
 colorscheme gruvbox
 set background=dark
 
-" nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search =vim.fn.input("Grep For > ")})<CR>
+runtime ftplugin/man.vim " Show man page in vim
 
-"set clipboard+=unamedplus          " check
+syntax on
+set number relativenumber
+set smartcase
+set incsearch
+set scrolloff=8
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+set autoindent
+set smartcase
+set ruler
+set termguicolors
 
 " Autocompletion
 set wildmode=longest,list,full
 
+" Fix splitting
 set splitbelow splitright
 
-"au FileType scala,java,typescript call rainbow#load() " load rainbow for specific files
-let g:rainbow_active = 1   " enable rainbow globally
+set nrformats=alpha " vim-visual-increment
 
 nnoremap <leader>e :Explore<CR>
-
-" system clipboard
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>Y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>P "+P
-vmap <leader>P "+P
 
 " splits
 nnoremap <leader>v :vsp<CR>
@@ -91,44 +66,21 @@ nnoremap <leader>V :sp<CR>
 nnoremap <leader>h <C-W>h
 nnoremap <leader>l <C-W>l
 nnoremap <leader>k <C-W>k
-nnoremap <leader>j <C-W>j
+nnoremap <leader>j <C-w>j
 
 " buffers
 nnoremap <leader>b :buffers<CR>:b
 
-nnoremap Y yg$
-" Keeping it centered
-noremap n nzzzv
-noremap N Nzzzv
-noremap J mzJ`z
-" Undo break point
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap ! !<c-g>u
-inoremap ? ?<c-g>u
-" Jumplist mutations
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
-" Moving text
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-j> <esc>:m .+1<CR>==
-inoremap <C-k> <esc>:m .-2<CR>==
-nnoremap <leader>j :m .+1<CR>==
-nnoremap <leader>k :m .-2<CR>==
+" Learn the hjkl
+" nnoremap <Up> <NOP>
+" nnoremap <Down> <NOP>
+" nnoremap <Left> <NOP>
+" nnoremap <Right> <NOP>
 
-nmap <leader>o o<Esc>k
-" nmap 00 0<Esc>j
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
 
-inoremap <silent> <Bar> <Bar><Esc>:call <SID>align()<CR>a
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-"    Tabularize/|/l1
-    Tabularize/\\\@<!|/l1
-    normal! 0
-    call search(repeat('[^|]*|', column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
+" macvim
+"set guifont=Source \ Code \ Powerline:12
+
