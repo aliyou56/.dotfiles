@@ -23,8 +23,10 @@ alias new-install-repo='g8 git@github.com:agilesteel/install-seed.g8.git'
 # alias sbtnoss='sbt -Dsbt.supershell=false'
 # alias scalac-phases='scala -Xwhow-phases'
 alias scalalines='find . -path "*/src" -name "*.scala" | xargs wc -l | sort n'
-alias update='sudo apt update && sudo apt -y full-upgrade && sudo ap -y autoremove && cs update && cd ~/.dotfiles && gfa'
-alias v='vim'
+alias update='sudo apt update && sudo apt -y full-upgrade && sudo apt -y autoremove && cs update' # && cd ~/.dotfiles && gfa'
+alias v='nvim'
+alias gt='git ls-tree -r --name-only HEAD | tree --fromfile'
+alias lg='lazygit'
 
 # Git & Github
 alias fgco='gco $(gb | fzf)'
@@ -130,8 +132,8 @@ alias tart="tar tzvf"
 alias ldir='ls -l | grep ^d'
 
 # Apply changes to aliases
-alias sa='source ~/.bash_aliases;source ~/.bashrc;echo "Bash aliases sourced."'
+alias sa='source ~/.bash_aliases;source ~/.bashrc;source ~/.zshrc;echo "Bash aliases sourced."'
 
 # Edit Aliases
-alias via='vim ~/.bash_aliases'
-alias vib='vim ~/.bashrc'
+alias via='nvim ~/.bash_aliases'
+alias vib='nvim ~/.bashrc'

@@ -3,6 +3,16 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/aliyou/.oh-my-zsh"
+function git_prompt_info() {
+  local ref
+  if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
+    if [[ "$(__git_prompt_git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+      ref=$(__git_prompt_git symbolic-ref HEAD 2> /dev/null) || \
+      ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) || return 0
+      echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    fi
+  fi
+}
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -158,3 +168,16 @@ fi
 if [ -f "$HOME/.local/.bash_aliases" ] ; then
   source "$HOME/.local/.bash_aliases"
 fi
+
+export PATH="$PATH:~/.local/bin"
+export PATH="$PATH:~/.npm-global/bin"
+export PATH="$PATH:~/go/bin"
+
+# Path to oh-my-zsh installation
+export ZSH="$HOME/.oh-my-zsh"
+
+
+# >>> scala-cli completions >>>
+fpath=("/home/aliyou/.local/share/scalacli/completions/zsh" $fpath)
+compinit
+# <<< scala-cli completions <<<

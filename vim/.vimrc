@@ -4,6 +4,9 @@
 set noshowmode " prevent non-normal modes showing in powerline and below powerline.
 set laststatus=2 " always show statusline
 
+set nocompatible " use vim settings, rather than Vi
+filetype off
+
 syntax on
 set path+=**				    	" Searches current directory recursively.
 set wildmenu				     	" Display all matches when tab complete.
@@ -74,6 +77,7 @@ set splitbelow splitright
 "au FileType scala,java,typescript call rainbow#load() " load rainbow for specific files
 let g:rainbow_active = 1   " enable rainbow globally
 
+nnoremap jk <esc>
 nnoremap <leader>e :Explore<CR>
 
 " system clipboard

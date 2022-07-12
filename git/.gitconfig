@@ -1,6 +1,8 @@
 [user]
 	email = aliyou29@hotmail.com
 	name = Aliyou Sylla
+[core]
+	editor = nvim
 [diff]
   tool = vscode
 #[difftool]
@@ -37,6 +39,7 @@
 [include]
   path = ~/.local/.gitconfig
 [delta]
+  features = villsau
   #file-decoration-style = black ul
   #file-style = black
   #hunk-header-decoration-style = black box
@@ -62,3 +65,8 @@
   #zero-style = black
 [submodule]
     recursive = true
+# [filter "lfs"]
+# 	smudge = git-lfs smudge -- %f
+# 	process = git-lfs filter-process
+# 	required = true
+# 	clean = git-lfs clean -- %f
