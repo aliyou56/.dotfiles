@@ -118,12 +118,12 @@ keymap("n", "S", ":HopChar2<cr>", opts)
 -- keymap("o", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
 
 -- Hlslens
-keymap("n", "n", [[<Cmd>execute("normal! " . v:count1 . "n")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
-keymap("n", "N", [[<Cmd>execute("normal! " . v:count1 . "N")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
-keymap("n", "*", [[*<Cmd>lua require("hlslens").start()<CR>]], opts)
-keymap("n", "#", [[#<Cmd>lua require("hlslens").start()<CR>]], opts)
-keymap("n", "g*", [[g*<Cmd>lua require("hlslens").start()<CR>]], opts)
-keymap("n", "g#", [[g#<Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "n", [[<Cmd>execute("normal! " . v:count1 . "n")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "N", [[<Cmd>execute("normal! " . v:count1 . "N")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "*", [[*<Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "#", [[#<Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "g*", [[g*<Cmd>lua require("hlslens").start()<CR>]], opts)
+-- keymap("n", "g#", [[g#<Cmd>lua require("hlslens").start()<CR>]], opts)
 -- keymap("n", "<Leader>l", ":noh<CR>")
 
 -- trouble
@@ -133,3 +133,6 @@ keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opts)
 keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
 keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
 keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
+
+-- UI
+keymap('n', '<leader>mm', [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)

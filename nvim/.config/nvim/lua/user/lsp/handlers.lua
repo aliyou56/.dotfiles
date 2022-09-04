@@ -54,13 +54,33 @@ M.setup = function()
   })
 end
 
+
+local function lsp_highlight_document(client)
+  -- if client.server_capabilities.document_highlight then
+  local status_ok, illuminate = pcall(require, "illuminate")
+  if not status_ok then
+    return
+  end
+  illuminate.on_attach(client)
+  -- end
+end
+
+local function attach_navic(client, bufnr)
+  vim.g.navic_silence = true
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+  navic.attach(client, bufnr)
+end
+
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
@@ -76,26 +96,45 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.server_capabilities.document_formatting = false
-  end
-
-  if client.name == "sumneko_lua" then
+  if client.name == "sumneko_lua" or client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
   end
 
   lsp_keymaps(bufnr)
-  local status_ok, illuminate = pcall(require, "illuminate")
-  if not status_ok then
-    return
-  end
-  illuminate.on_attach(client)
+  lsp_highlight_document(client)
+  attach_navic(client, bufnr)
 
-  -- local navic_status_ok, navic = pcall(require, "nvim-navic")
-  -- if not navic_status_ok then
-  --   return
-  -- end
-  -- navic.on_attach(client)
+  function M.enable_format_on_save()
+    vim.cmd [[
+      augroup format_on_save
+        autocmd! 
+        autocmd BufWritePre * lua vim.lsp.buf.format({ async = true }) 
+      augroup end
+    ]]
+    vim.notify "Enabled format on save"
+  end
+
+  function M.disable_format_on_save()
+    M.remove_augroup "format_on_save"
+    vim.notify "Disabled format on save"
+  end
+
+  function M.toggle_format_on_save()
+    if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
+      M.enable_format_on_save()
+    else
+      M.disable_format_on_save()
+    end
+  end
+
+  function M.remove_augroup(name)
+    if vim.fn.exists("#" .. name) == 1 then
+      vim.cmd("au! " .. name)
+    end
+  end
+
+  vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]]
+
 end
 
 return M

@@ -25,11 +25,13 @@ require "user.project"
 require "user.impatient"
 require "user.illuminate"   -- Automatically hilighting other uses of the current word under the curosor
 require "user.indentline"
+require "user.better-escape"
 require "user.alpha"
 require "user.lsp"
 require "user.dap"
 require "user.nvim-metals"
-require "user.neoscroll"    -- Smooth scrolling
+-- require "user.winbar"
+-- require "user.neoscroll"    -- Smooth scrolling
 -- require "user.hlslens"      -- Hlsearch Lens
 require "user.ufo"          -- Ultra Fold in Neovim
 require "user.autosession"  -- A small automated session manager

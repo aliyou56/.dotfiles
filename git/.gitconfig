@@ -38,6 +38,10 @@
 #  detachedHead = false
 [include]
   path = ~/.local/.gitconfig
+  path = ~/.config/git/themes.gitconfig
+[includeIf "gitdir:~/work/github/"]
+  path = ~/work/github/.gitconfig
+
 [delta]
   features = villsau
   #file-decoration-style = black ul

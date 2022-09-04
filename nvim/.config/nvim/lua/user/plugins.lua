@@ -45,7 +45,7 @@ return packer.startup(function(use)
   use { "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" }  -- Useful lua functions used by lots of plugins
   use { "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" }  -- Autopairs, integrates with both cmp and treesitter
   use { "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" }
-  use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" }
+  -- use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" }
   use { "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" }
   use { "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" }
   use { "akinsho/bufferline.nvim", commit = "c78b3ecf9539a719828bca82fc7ddb9b3ba0c353" }
@@ -64,25 +64,30 @@ return packer.startup(function(use)
 
   use { "luukvbaal/stabilize.nvim" }
   use { "SmiteshP/nvim-navic" }
+  -- use { "fgheng/winbar.nvim" }
 
   use { "scalameta/nvim-metals" }
   use { "karb94/neoscroll.nvim" }
-  use { "kevinhwang91/nvim-hlslens" }
+  -- use { "kevinhwang91/nvim-hlslens" }
   use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
   use { "rmagatti/auto-session" }
   use { "norcalli/nvim-colorizer.lua" }
   use { "phaazon/hop.nvim" }
   use { "j-hui/fidget.nvim" }
-  use { "xiyaowong/nvim-transparent" }
+  use { "max397574/better-escape.nvim" }
+  -- use { "xiyaowong/nvim-transparent" }
+
+  use { "vim-test/vim-test" }
 
   -- Colorschemes
-  -- use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
-  -- use { "lunarvim/darkplus.nvim", commit = "2584cdeefc078351a79073322eb7f14d7fbb1835" }
+  use { "marko-cerovac/material.nvim" }
+  use { "rebelot/kanagawa.nvim" }
   use { "folke/tokyonight.nvim" }
+  use { "olimorris/onedarkpro.nvim" }
   use { "lunarvim/darkplus.nvim" }
   use { "LunarVim/onedarker.nvim" }
-  use { "olimorris/onedarkpro.nvim" }
-  use { "rebelot/kanagawa.nvim" }
+  -- use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
+  -- use { "lunarvim/darkplus.nvim", commit = "2584cdeefc078351a79073322eb7f14d7fbb1835" }
   -- use { "gruvbox-community/gruvbox" }
   -- use { "EdenEast/nightfox.nvim" }
 

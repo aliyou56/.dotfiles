@@ -17,12 +17,13 @@ local opts = { silent = true }
 
 -- LSP mappings
 keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+-- keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
 -- keymap("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 -- keymap("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 keymap("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
 keymap("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
@@ -81,8 +82,8 @@ metals_conf.on_attach = function(client, bufnr)
 end
 
 -- Autocmd that will actuallybe in charge od starting the whole thing
-local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
-api.nvim_create_autocmd("FileType", {
+local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "scala", "sbt", "java" },
   callback = function()
     require("metals").initialize_or_attach(metals_conf)
