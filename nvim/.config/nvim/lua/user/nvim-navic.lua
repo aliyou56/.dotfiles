@@ -42,4 +42,4 @@ navic.setup {
 }
 
 -- vim.opt.winbar = "%{v:lua.require'nvim-navic'.get_location()%}"
-vim.opt.statusline = ([[%= %{%v:lua.nvim-navic()%} %p%% %l:%c]])
+-- vim.opt.statusline = ([[%= %{%v:lua.nvim-navic()%} %p%% %l:%c]])

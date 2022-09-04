@@ -34,7 +34,7 @@ require "user.nvim-metals"
 -- require "user.neoscroll"    -- Smooth scrolling
 -- require "user.hlslens"      -- Hlsearch Lens
 require "user.ufo"          -- Ultra Fold in Neovim
-require "user.autosession"  -- A small automated session manager
+require "user.auto-session"  -- A small automated session manager
 require "user.tabnine"
 require "user.whichkey"
 -- require "user.hydra"        -- Bind a bunch of key bindings together

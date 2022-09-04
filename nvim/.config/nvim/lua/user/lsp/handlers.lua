@@ -1,11 +1,12 @@
 local M = {}
 
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
   return
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities.textDocument.foldingRange = { -- ufo
   dynamicRegistration = false,
@@ -14,11 +15,12 @@ M.capabilities.textDocument.foldingRange = { -- ufo
 M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
 M.setup = function()
+  local icons = require "user.icons"
   local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignError", text = icons.diagnostics.Error },
+    { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+    { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+    { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
   }
 
   for _, sign in ipairs(signs) do
@@ -26,7 +28,7 @@ M.setup = function()
   end
 
   local config = {
-    virtual_text = true, -- disable virtual text
+    virtual_text = true, 
     signs = {
       active = signs, -- show signs
     },
@@ -37,7 +39,7 @@ M.setup = function()
       focusable = true,
       style = "minimal",
       border = "rounded",
-      source = "always",
+      source = "if_many", -- always",
       header = "",
       prefix = "",
     },
@@ -55,15 +57,15 @@ M.setup = function()
 end
 
 
-local function lsp_highlight_document(client)
-  -- if client.server_capabilities.document_highlight then
-  local status_ok, illuminate = pcall(require, "illuminate")
-  if not status_ok then
-    return
-  end
-  illuminate.on_attach(client)
-  -- end
-end
+-- local function lsp_highlight_document(client)
+--   -- if client.server_capabilities.document_highlight then
+--   local status_ok, illuminate = pcall(require, "illuminate")
+--   if not status_ok then
+--     return
+--   end
+--   illuminate.on_attach(client)
+--   -- end
+-- end
 
 local function attach_navic(client, bufnr)
   vim.g.navic_silence = true
@@ -80,29 +82,40 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
-  keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-  keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
-  keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
+  keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  keymap(bufnr, "n", "<M-f>", "<cmd>Format<cr>", opts)
+  keymap(bufnr, "n", "<M-a>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+
+  -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
   keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
   keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
-  keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-  keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute "lua vim.lsp.buf.formatting()" ]]
+  -- keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  -- keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  -- keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  -- vim.cmd [[ command! Format execute "lua vim.lsp.buf.formatting()" ]]
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "sumneko_lua" or client.name == "tsserver" then
-    client.server_capabilities.document_formatting = false
+  lsp_keymaps(bufnr)
+  -- lsp_highlight_document(client)
+  attach_navic(client, bufnr)
+
+  -- if client.name == "sumneko_lua" or client.name == "tsserver" then
+  --   client.server_capabilities.document_formatting = false
+  -- end
+  if client.name == "tsserver" then
+    -- require("lsp-inlayhints").on_attach(client, bufnr)
+    -- client.server_capabilities.document_formatting = false
   end
 
-  lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
-  attach_navic(client, bufnr)
 
   function M.enable_format_on_save()
     vim.cmd [[
