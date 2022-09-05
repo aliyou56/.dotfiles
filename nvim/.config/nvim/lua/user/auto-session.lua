@@ -1,4 +1,3 @@
-
 local status_ok, autosession = pcall(require, "auto-session")
 if not status_ok then
   return
@@ -21,8 +20,8 @@ local opts = {
   auto_session_enabled = true,
   auto_saved_enabled = nil,
   auto_session_suppress_dirs = {
-    -- "~/", "~/Projects"
-    os.getenv "HOME",
+    "~/", "~/Downloads"
+    -- os.getenv "HOME",
   },
   auto_session_use_git_branch = nil,
   -- the configs bellow are lua only
@@ -36,9 +35,12 @@ telescope.load_extension "session-lens"
 session_lens.setup {
   path_display = { "shorten" },
   -- theme_conf = { border = false },
-  previwer = false,
+  previewer = false,
   prompt_tile = "Session"
 }
 
 autosession.setup(opts)
 
+if vim.g.vscode then
+  vim.g.auto_session_enabled = false
+end

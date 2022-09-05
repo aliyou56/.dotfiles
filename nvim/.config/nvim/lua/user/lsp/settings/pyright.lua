@@ -1,12 +1,3 @@
--- return {
---   settings = {
---     python = {
---       analysis = {
---         typeCheckingMode = "off",
---       },
---     },
---   },
--- }
 return {
   cmd = { "py" },
   settings = {

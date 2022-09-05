@@ -50,8 +50,8 @@ vim.opt.shortmess:append "c"
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
-vim.notify = require("notify")
+-- vim.notify = require("notify")
 
-vim.g.material_style = "darker"
-vim.g.gitblame_enabled = 0
-vim.opt.statusline = ([[%= %{%v:lua.nvim-navic()%} %p%% %l:%c]])
+-- vim.g.material_style = "darker"
+-- vim.g.gitblame_enabled = 0
+-- vim.opt.statusline = ([[%= %{%v:lua.nvim-navic()%} %p%% %l:%c]])

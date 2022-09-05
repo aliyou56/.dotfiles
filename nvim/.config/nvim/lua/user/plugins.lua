@@ -149,7 +149,8 @@ return packer.startup(function(use)
   -- use "ravenxrz/DAPInstall.nvim"
 
   -- Tabline
-  use "akinsho/bufferline.nvim"
+  -- use "akinsho/bufferline.nvim"
+  use {"akinsho/bufferline.nvim" , commit = "c78b3ecf9539a719828bca82fc7ddb9b3ba0c353" }
 
   -- Statusline
   use "nvim-lualine/lualine.nvim"
