@@ -1,7 +1,0 @@
---
--- local status_ok, hydra = pcall(require, "hydra")
--- if not status_ok then
---   return
--- end
---
--- hydra.setuo()

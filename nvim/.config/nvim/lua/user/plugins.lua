@@ -1,335 +1,238 @@
 local fn = vim.fn
 
 -- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
+	PACKER_BOOTSTRAP = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+	print("Installing packer close and reopen Neovim...")
+	vim.cmd([[packadd packer.nvim]])
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
-]]
+]])
 
--- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  return
+	return
 end
 
 -- Have packer use a popup window
-packer.init {
-  snapshot_path = fn.stdpath "config" .. "/snapshots",
-  max_jobs = 50,
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-    prompt_border = "rounded"
-  }
-}
+packer.init({
+	snapshot_path = fn.stdpath("config") .. "/snapshots",
+	max_jobs = 50,
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+		prompt_border = "rounded",
+	},
+})
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- Plugin Manager
-  use "wbthomason/packer.nvim" -- Have packer manage itself
+	use("wbthomason/packer.nvim") -- Have packer manage itself
+	use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
 
-  -- Utils
-  use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
-  use "luukvbaal/stabilize.nvim"
+	-- LSP
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
+	use("neovim/nvim-lspconfig")
+	use("scalameta/nvim-metals")
+	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	use("ray-x/lsp_signature.nvim") -- Show function signature when you type
+	use("SmiteshP/nvim-navic")
+	-- use "simrat39/symbols-outline.nvim"
+	use("b0o/SchemaStore.nvim") -- JSON schemas for Neovim
+	use("RRethy/vim-illuminate")
+	use("j-hui/fidget.nvim")
+	use("lvimuser/lsp-inlayhints.nvim")
 
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  -- use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-  use "scalameta/nvim-metals"
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use "ray-x/lsp_signature.nvim"
-  use "SmiteshP/nvim-navic"
-  -- use "simrat39/symbols-outline.nvim"
-  use "b0o/SchemaStore.nvim"
-  use "RRethy/vim-illuminate"
-  -- use "j-hui/fidget.nvim"
-  -- use "lvimuser/lsp-inlayhints.nvim"
+	-- Completion
+	use("hrsh7th/nvim-cmp") -- The completion plugin
+	use("hrsh7th/cmp-buffer") -- buffer completions
+	use("hrsh7th/cmp-path") -- path completions
+	use("hrsh7th/cmp-cmdline") -- cmdline completions
+	use("saadparwaiz1/cmp_luasnip") -- snippet completions
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
+	use({
+		"tzachar/cmp-tabnine",
+		-- run = "./install.sh",
+	})
 
-  -- Completion
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
-  use {
-    "tzachar/cmp-tabnine",
-    -- config = function()
-    --   local tabnine = require "cmp_tabnine.config"
-    --   tabnine:setup {
-    --     max_lines = 1000,
-    --     max_num_results = 20,
-    --     sort = true,
-    --     run_on_every_keystroke = true,
-    --     snippet_placeholder = "..",
-    --     ignored_file_types = { -- default is not to ignore
-    --       -- uncomment to ignore in lua:
-    --       -- lua = true
-    --     },
-    --   }
-    -- end,
-    run = "./install.sh",
-    -- requires = "hrsh7th/nvim-cmp",
-  }
+	-- snippets
+	use("L3MON4D3/LuaSnip") -- snippet engine
+	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
-  -- snippets
-  use "L3MON4D3/LuaSnip"             -- snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+	-- Syntax / Treesitter
+	use("nvim-treesitter/nvim-treesitter")
+	use("nvim-treesitter/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 
-  -- Syntax/Treesitter
-  use "nvim-treesitter/nvim-treesitter"
-  use "nvim-treesitter/nvim-treesitter-textobjects"
-  use "kylechui/nvim-surround"
-  -- use "abecodes/tabout.nvm"
+	-- Marks
+	-- use "MattesGroeger/vim-bookmarks"
 
-  -- Marks
-  -- use "MattesGroeger/vim-bookmarks"
+	-- Fuzzy Finder/ Telescope
+	use("nvim-telescope/telescope.nvim")
+	use("nvim-telescope/telescope-media-files.nvim")
+  use("LukasPietzschmann/telescope-tabs")
+	-- use "tom-anders/telescope-vim-bookmarks.nvim"
 
-  -- Fuzzy Finder/ Telescope
-  use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
-  -- use "tom-anders/telescope-vim-bookmarks.nvim"
+	-- Color
+	use("norcalli/nvim-colorizer.lua")
+	-- use "NvChad/nvim-colorizer.nvim"
+	-- use "nvim-colortils/colortils.nvim"
 
+	-- Colorschemes
+	use("rebelot/kanagawa.nvim")
+	use("catppuccin/nvim")
+	use("lunarvim/darkplus.nvim")
+	-- use("LunarVim/onedarker.nvim")
+	-- use("marko-cerovac/material.nvim")
+	-- use("folke/tokyonight.nvim")
+	-- use("olimorris/onedarkpro.nvim")
+	-- use("gruvbox-community/gruvbox")
+	-- use("EdenEast/nightfox.nvim")
 
-  -- Color
-  use "norcalli/nvim-colorizer.lua"
-  -- use "NvChad/nvim-colorizer.nvim"
-  -- use "nvim-colortils/colortils.nvim"
-
-  -- Colorschemes
-  use "rebelot/kanagawa.nvim"
-  -- use "marko-cerovac/material.nvim"
-  -- use "folke/tokyonight.nvim"
-  -- use "olimorris/onedarkpro.nvim"
-  -- use "lunarvim/darkplus.nvim"
-  -- use "LunarVim/onedarker.nvim"
-  -- use "gruvbox-community/gruvbox"
-  -- use "EdenEast/nightfox.nvim"
-
-  -- Utility
-  use "rcarriga/nvim-notify"
-  -- use "stevearc/dressing.nvim"
-  -- use "ghillb/cybu.nvim"
-  use "moll/vim-bbye"
-  use "lewis6991/impatient.nvim"
-  -- use "lalitmee/browse.nvim"
-  use "max397574/better-escape.nvim"
-  -- use "xiyaowong/nvim-transparent"
-
-  -- Icon
-  use "kyazdani42/nvim-web-devicons"
-
-  -- Testing
-  use "vim-test/vim-test"
-
-  -- Debugging - DAP
-  use "mfussenegger/nvim-dap"
-  use "rcarriga/nvim-dap-ui"
-  -- use "ravenxrz/DAPInstall.nvim"
-
-  -- Tabline
-  -- use "akinsho/bufferline.nvim"
-  use {"akinsho/bufferline.nvim" , commit = "c78b3ecf9539a719828bca82fc7ddb9b3ba0c353" }
-
-  -- Statusline
-  use "nvim-lualine/lualine.nvim"
-
-  -- Startup
-  use "goolord/alpha-nvim"
-
-  -- Indent
-  use "lukas-reineke/indent-blankline.nvim"
-
-  -- File explorer
-  use "kyazdani42/nvim-tree.lua"
-
-  -- Comment
-  use "numToStr/Comment.nvim"
-  use "folke/todo-comments.nvim"
-
-  -- Terminal
-  use "akinsho/toggleterm.nvim"
-
-  -- Project
-  use "ahmedkhalf/project.nvim"
-  -- use "windp/nvim-specter"
-
-  -- Session
-  use "rmagatti/auto-session"
-  use "rmagatti/session-lens"
-
-  -- Quickfix
-  -- use "kevinhwang91/nvim-bqf"
-
-  -- Code Runner
-  -- use "is0n/jaq-nvim"
-
-  -- Git
-  use "lewis6991/gitsigns.nvim"
-  use "f-person/git-blame.nvim"
-  use "ruifm/gitlinker.nvim"
-  use "sindrets/diffview.nvim"
-
-  -- Editing Support
-  use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" } -- Folding
-  use "windwp/nvim-autopairs"
-  -- use "monaqa/dial.nvim"
-  -- use "nacro90/numb.nvim"
-  -- use "andymass/vim-matchup"
-  -- use "folke/zen-mode.nvim"
-  use "karb94/neoscroll.nvim"
-  -- use "junegunn/vim-slash"
-  use { "folke/trouble.nvim", requires = { "folke/lsp-colors.nvim" } }
-
-  -- Motion
-  use "phaazon/hop.nvim" 
-
-  -- Keybinding
-  use "folke/which-key.nvim"
-
-  -- Rust
-  -- use "Saecki/crates.nvim"
-
-  -- Markdown
-  -- use "iamcco/markdown-review"
+	-- Utility
+	use("rcarriga/nvim-notify")
+	use("moll/vim-bbye") -- Delete buffer and close files w/o closing windows
+	use({
+		"lewis6991/impatient.nvim", -- improve statup time
+		config = function()
+			require("impatient").enable_profile()
+		end,
+	})
+	use("max397574/better-escape.nvim")
+	-- use "lalitmee/browse.nvim"
 
 
+	-- Testing
+	-- use({
+	-- 	"nvim-neotest/neotest",
+	-- 	requires = {
+	-- 		-- "autoinemadec/FixCursorHold.nvim",
+	-- 		"stevanmilic/neotest-scala",
+	-- 		"nvim-neotest/neotest-python",
+	-- 		-- "stevanmilic/neotest-scala",
+	-- 	},
+	-- })
+	-- use "vim-test/vim-test"
 
-  -- My plugins here
-  -- use { "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" } -- Have packer manage itself
-  -- use { "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" }  -- Useful lua functions used by lots of plugins
-  -- use { "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" }  -- Autopairs, integrates with both cmp and treesitter
-  -- use { "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" }
-  -- use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" }
-  -- use { "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" }
-  -- use { "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" }
-  -- use { "akinsho/bufferline.nvim", commit = "c78b3ecf9539a719828bca82fc7ddb9b3ba0c353" }
-  -- use { "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" }
-  -- use { "nvim-lualine/lualine.nvim", commit = "3362b28f917acc37538b1047f187ff1b5645ecdd" }
-  -- use { "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" }
-  -- use { "ahmedkhalf/project.nvim", commit = "541115e762764bc44d7d3bf501b6e367842d3d4f" }
-  -- use { "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" }
-  -- use { "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" }
-  -- use { "goolord/alpha-nvim", commit = "ef27a59e5b4d7b1c2fe1950da3fe5b1c5f3b4c94" }
-  -- use { "folke/which-key.nvim" }
-  -- use { "folke/trouble.nvim", requires = { "folke/lsp-colors.nvim" } }
-  -- use { "folke/todo-comments.nvim" }
-  -- use { "rcarriga/nvim-notify" }
-  -- use { "tpope/vim-surround" }
+	-- Debugging - DAP
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+	use("mfussenegger/nvim-dap-python")
 
-  -- use { "luukvbaal/stabilize.nvim" }
-  -- use { "SmiteshP/nvim-navic" }
-  -- use { "fgheng/winbar.nvim" }
+	-- Tabline
+	-- use "akinsho/bufferline.nvim"
+	use({
+		"kwkarlwang/bufjump.nvim",
+		config = function()
+			require("bufjump").setup()
+		end,
+	})
 
-  -- use { "scalameta/nvim-metals" }
-  -- use { "karb94/neoscroll.nvim" }
-  -- use { "kevinhwang91/nvim-hlslens" }
-  -- use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
-  -- use { "norcalli/nvim-colorizer.lua" }
-  -- use { "phaazon/hop.nvim" }
-  -- use { "j-hui/fidget.nvim" }
-  -- use { "max397574/better-escape.nvim" }
-  -- use { "xiyaowong/nvim-transparent" }
 
-  -- use { "vim-test/vim-test" }
+	use("goolord/alpha-nvim") -- Startup
+	use("folke/which-key.nvim")	-- Keybinding
+	use("kevinhwang91/nvim-bqf") -- Quickfix
+	use("kylechui/nvim-surround")
+	use("akinsho/toggleterm.nvim")	-- Terminal
+	use("ahmedkhalf/project.nvim") -- Project
+	use("kyazdani42/nvim-tree.lua")	-- File explorer
+	use("nvim-lualine/lualine.nvim") -- Statusline 
+	use("kyazdani42/nvim-web-devicons")	-- Icon
+	use("lukas-reineke/indent-blankline.nvim")	-- Indent
+  use("ThePrimeagen/harpoon")
+  
 
-  -- Colorschemes
-  -- use { "marko-cerovac/material.nvim" }
-  -- use { "rebelot/kanagawa.nvim" }
-  -- use { "folke/tokyonight.nvim" }
-  -- use { "olimorris/onedarkpro.nvim" }
-  -- use { "lunarvim/darkplus.nvim" }
-  -- use { "LunarVim/onedarker.nvim" }
-  -- use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
-  -- use { "lunarvim/darkplus.nvim", commit = "2584cdeefc078351a79073322eb7f14d7fbb1835" }
-  -- use { "gruvbox-community/gruvbox" }
-  -- use { "EdenEast/nightfox.nvim" }
+	-- Comment
+	use("numToStr/Comment.nvim")
+	use("folke/todo-comments.nvim") -- Highlight, list and search todo comments.
 
-  -- cmp plugins
-  -- use { "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" } -- The completion plugin
-  -- use { "hrsh7th/cmp-buffer", commit = "62fc67a2b0205136bc3e312664624ba2ab4a9323" } -- buffer completions
-  -- use { "hrsh7th/cmp-path", commit = "466b6b8270f7ba89abd59f402c73f63c7331ff6e" } -- path completions
-  -- use { "saadparwaiz1/cmp_luasnip", commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36" } -- snippet completions
-  -- use { "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" }
-  -- use { "hrsh7th/cmp-nvim-lua", commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21" }
-  -- use {
-  --   "tzachar/cmp-tabnine",
-  --   config = function()
-  --     local tabnine = require "cmp_tabnine.config"
-  --     tabnine:setup {
-  --       max_lines = 1000,
-  --       max_num_results = 20,
-  --       sort = true,
-  --       run_on_every_keystroke = true,
-  --       snippet_placeholder = "..",
-  --       ignored_file_types = { -- default is not to ignore
-  --         -- uncomment to ignore in lua:
-  --         -- lua = true
-  --       },
-  --     }
-  --   end,
-  --   run = "./install.sh",
-  --   requires = "hrsh7th/nvim-cmp",
-  -- }
+	-- Session
+	use("rmagatti/auto-session")
+	use("rmagatti/session-lens")
+	
 
-  -- snippets
-  -- use { "L3MON4D3/LuaSnip", commit = "79b2019c68a2ff5ae4d732d50746c901dd45603a" } --snippet engine
-  -- use { "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" } -- a bunch of snippets to use
-  -- use "L3MON4D3/LuaSnip" --snippet engine
-  -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+	-- Code Runner
+	-- use "is0n/jaq-nvim" -- TODO
 
-  -- LSP
-  -- use { "neovim/nvim-lspconfig", commit = "148c99bd09b44cf3605151a06869f6b4d4c24455" } -- enable LSP
-  -- use { "williamboman/nvim-lsp-installer", commit = "e9f13d7acaa60aff91c58b923002228668c8c9e6" } -- simple to use language server installer
-  -- use { "jose-elias-alvarez/null-ls.nvim", commit = "ff40739e5be6581899b43385997e39eecdbf9465" } -- for formatters and linters
-  -- use { "RRethy/vim-illuminate", commit = "c82e6d04f27a41d7fdcad9be0bce5bb59fcb78e5" }
+	-- Git
+	use("lewis6991/gitsigns.nvim")
+	use("f-person/git-blame.nvim")
+	use("ruifm/gitlinker.nvim")
+	use("sindrets/diffview.nvim") -- single tabpage interface for easily cycling through diff
 
-  -- Telescope
-  -- use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
+	-- Editing Support
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }) -- Folding
+	use("windwp/nvim-autopairs")
+	-- use "monaqa/dial.nvim"
+	use("nacro90/numb.nvim")
+	-- use "andymass/vim-matchup"
+	use("folke/zen-mode.nvim")
+	use("karb94/neoscroll.nvim")
+	-- use "junegunn/vim-slash"
+	-- use({ "folke/trouble.nvim", requires = { "folke/lsp-colors.nvim" } })
 
-  -- Treesitter
-  -- use { "nvim-treesitter/nvim-treesitter", commit = "518e27589c0463af15463c9d675c65e464efc2fe" }
+	-- Motion
+	-- use("phaazon/hop.nvim")
+	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	})
+	use({
+		"jinh0/eyeliner.nvim",
+		config = function()
+			require("eyeliner").setup({
+				highlight_on_key = true,
+			})
+		end,
+	})
 
-  -- session
-  -- use { "rmagatti/auto-session" }
-  -- use { "rmagatti/session-lens"}
 
-  -- Git
-  -- use { "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" }
-  -- use { "lewis6991/gitsigns.nvim" }
-  -- use { "f-person/git-blame.nvim" }
-  -- use { "ruifm/gitlinker.nvim" }
-  -- use { "sindrets/diffview.nvim" }
+	-- Markdown
+	-- use "iamcco/markdown-review"
 
-  -- DAP
-  -- use { "mfussenegger/nvim-dap", commit = "014ebd53612cfd42ac8c131e6cec7c194572f21d" }
-  -- use { "rcarriga/nvim-dap-ui", commit = "d76d6594374fb54abf2d94d6a320f3fd6e9bb2f7" }
-  -- use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
+	-- "MattesGroeger/vim-bookmarks",
+	-- "windwp/nvim-spectre",
+	-- "mattn/webapi-vim",
+	-- "simrat39/rust-tools.nvim",
+	-- "olexsmir/gopher.nvim",
+	-- "jose-elias-alvarez/typescript.nvim",
+	-- "mxsdev/nvim-dap-vscode-js",
+	-- {
+	--   "saecki/crates.nvim",
+	--   tag = "v0.3.0",
+	--   requires = { "nvim-lua/plenary.nvim" },
+	--   config = function()
+	--     require("crates").setup {
+	--       null_ls = {
+	--         enabled = true,
+	--         name = "crates.nvim",
+	--       },
+	--     }
+	--   end,
+	-- },
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+	-- Automatically set up your configuration after cloning packer.nvim
+	-- Put this at the end after all plugins
+	if PACKER_BOOTSTRAP then
+		require("packer").sync()
+	end
 end)

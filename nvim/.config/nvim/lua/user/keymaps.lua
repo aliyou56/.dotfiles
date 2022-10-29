@@ -1,7 +1,6 @@
-local keymap = vim.keymap.set  -- Shorten function name
-local opts = { silent = true } -- Silent keymap option
+local keymap = vim.keymap.set
+local opts = { silent = true }
 
---Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
@@ -19,6 +18,16 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<M-o>", ":lua require('bufjump').backward()<CR>", opts)
+keymap("n", "<M-i>", ":lua require('bufjump').forward()<CR>", opts)
+
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+
+-- Tabs --
+keymap("n", "<m-t>", ":tabnew %<cr>", opts)
+keymap("n", "<m-y>", ":tabclose<cr>", opts)
+keymap("n", "<m-\\>", ":tabonly<cr>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -30,6 +39,12 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+keymap("n", "<c-i>", "<c-i>", opts)
+
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
@@ -40,8 +55,8 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Copy/Paste
-keymap('n', '<leader>y', '"+y', opts)
-keymap('n', '<leader>p', '"+p', opts)
+keymap("n", "<leader>y", '"+y', opts)
+keymap("n", "<leader>p", '"+p', opts)
 -- Mac/window
 -- keymap('n', '<leader>y', '"*y', opts)
 -- keymap('n', '<leader>p', '"*p', opts)
@@ -57,51 +72,50 @@ keymap("v", ">", ">gv", opts)
 
 -- Plugins --
 
-keymap("n", "<leader>fo", ":copen<CR>", opts)
-keymap("n", "<leader>fc", ":cclose<CR>", opts)
-keymap("n", "<leader>fn", ":cnext<CR>", opts)
-keymap("n", "<leader>fp", ":cprevious<CR>", opts)
+-- keymap("n", "<leader>fo", ":copen<CR>", opts)
+-- keymap("n", "<leader>fc", ":cclose<CR>", opts)
+-- keymap("n", "<leader>fn", ":cnext<CR>", opts)
+-- keymap("n", "<leader>fp", ":cprevious<CR>", opts)
 
 -- Keeping it centered
 keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
 keymap("n", "J", "mzJ`z", opts)
 
--- Jumplist mutations
--- keymap("n", "<expr> k)
-
--- Undo break point 
+-- Undo break point
 keymap("i", ",", ",<C-g>u", opts)
 keymap("i", ".", ".<C-g>u", opts)
 keymap("i", "!", "!<C-g>u", opts)
 keymap("i", "?", "?<C-g>u", opts)
 
-keymap("n", "<leader>o", "<Esp>k", opts)
-keymap("n", "OO", "O<Esp>j", opts)
- 
-keymap("n", "<leader>sv", ":source $MYVIMRC<CR>", opts)
+-- keymap("n", "<leader>o", "<Esp>k", opts)
+-- keymap("n", "OO", "O<Esp>j", opts)
+
+-- keymap("n", "<leader>sr", ":source $MYVIMRC<CR>", opts)
 
 -- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>fm", "<cmd>lua require'telescope'.extensions.metals.commands()<CR>", opts)
-keymap("n", "gds", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]], opts)
-keymap("n", "gws", [[<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>]], opts)
+keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", opts)
+keymap("n", "<leader>ft", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
+keymap("n", "<leader>P", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
+keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
+-- keymap("n", "<leader>fm", "<cmd>lua require'telescope'.extensions.metals.commands()<CR>", opts)
+-- keymap("n", "gds", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]], opts)
+-- keymap("n", "gws", [[<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>]], opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+-- keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
+-- keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 
 -- Null-ls
-keymap("n", "<leader>f", ":Format<cr>", opts)
+-- keymap("n", "<leader>f", ":Format<cr>", opts)
+
+keymap("n", "<C-z>", "<cmd>ZenMode<cr>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
@@ -115,43 +129,78 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- hop
-keymap("n", "s", ":HopWordCurrentLine<cr>", opts)
-keymap("n", "S", ":HopChar2<cr>", opts)
+-- keymap("n", "s", ":HopWordCurrentLine<cr>", opts)
+-- keymap("n", "S", ":HopChar2<cr>", opts)
 -- keymap("", "L", ":HopWordCurrentLine<cr>", { silent = true })
 -- keymap("", "S", ":HopChar2<cr>", { silent = true })
 -- keymap("", "Q", ":HopPattern<cr>", { silent = true })
 -- keymap("", "H", ":HopChar2<cr>", { silent = true })
 
-keymap("o", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
-keymap("o", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
-keymap("o", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
-keymap("o", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
-
-keymap("n", "f", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
-keymap("n", "F", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
-keymap("n", "t", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
-keymap("n", "T", ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
-
--- Hlslens
--- keymap("n", "n", [[<Cmd>execute("normal! " . v:count1 . "n")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "N", [[<Cmd>execute("normal! " . v:count1 . "N")<CR><Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "*", [[*<Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "#", [[#<Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "g*", [[g*<Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "g#", [[g#<Cmd>lua require("hlslens").start()<CR>]], opts)
--- keymap("n", "<Leader>l", ":noh<CR>")
+-- keymap("o", "f",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>"
+--   , opts)
+-- keymap("o", "F",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>"
+--   , opts)
+-- keymap("o", "t",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>"
+--   , opts)
+-- keymap("o", "T",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>"
+--   , opts)
+--
+-- keymap("n", "f",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>"
+--   , opts)
+-- keymap("n", "F",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>"
+--   , opts)
+-- keymap("n", "t",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>"
+--   , opts)
+-- keymap("n", "T",
+--   ":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>"
+--   , opts)
 
 -- illuminate
 -- vim.api.nvim_set_keymap('n', '<a-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', {noremap=true})
 -- vim.api.nvim_set_keymap('n', '<a-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', {noremap=true})
 
 -- trouble
-keymap("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
-keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
-keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opts)
-keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
-keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
-keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
+-- keymap("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
+-- keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
+-- keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opts)
+-- keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
+-- keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
+-- keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
 
 -- UI
-keymap('n', '<leader>mm', [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
+-- keymap("n", "<leader>mm", [[<Cmd>lua require('material.functions').toggle_style()<CR>]], opts)
+
+keymap("n", "<c-/>", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
+keymap("x", "<c-/>", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', opts)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<tab>",
+  "<cmd>lua require('telescope').extensions.harpoon.marks(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Harpoon'})<cr>",
+  opts
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<s-tab>",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal'})<cr>",
+  opts
+)
+
+vim.cmd([[
+  function! QuickFixToggle()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+      copen
+    else
+      cclose
+    endif
+  endfunction
+]])
+
+keymap("n", "<m-q>", ":call QuickFixToggle()<cr>", opts)

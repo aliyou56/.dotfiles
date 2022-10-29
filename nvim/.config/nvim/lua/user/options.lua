@@ -14,6 +14,7 @@ vim.opt.smartcase = true                        -- smart case
 vim.opt.smartindent = true                      -- make indenting smarter again
 vim.opt.splitbelow = true                       -- force all horizontal splits to go below current window
 vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
+vim.opt.splitkeep = "screen"
 vim.opt.swapfile = false                        -- creates a swapfile
 vim.opt.termguicolors = true                    -- set term gui colors (most terminals support this)
 vim.opt.timeoutlen = 1000                       -- time to wait for a mapped sequence to complete (in milliseconds)
@@ -25,6 +26,7 @@ vim.opt.shiftwidth = 2                          -- the number of spaces inserted
 vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines
+vim.opt.relativenumber = true                   -- set relative numbered lines
 vim.opt.laststatus = 3
 vim.opt.wildignore = { ".git", "*/node_modules/*", "*/target/*", ".metals", ".bloop", ".amonite", ".history" }
 vim.opt.showcmd = false
@@ -37,6 +39,9 @@ vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"               -- the font used in graphical neovim applications
 vim.opt.title = true                            -- set the title of window to the value of the titlestring
 vim.opt.titlestring = "%<%F - nvim"             -- what the title of the window will be set to
+-- vim.opt.cmdheight = 0
+vim.opt.grepprg = "rg -S --vimgrep $*"
+vim.opt.grepformat = "%f:%l:%c:%m"
 
 vim.opt.foldenable = true
 vim.opt.foldmethod = "expr"
@@ -50,8 +55,7 @@ vim.opt.shortmess:append "c"
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
--- vim.notify = require("notify")
+vim.g.python3_host_prog = '/home/aliyou/py3nvim/bin/python'
 
 -- vim.g.material_style = "darker"
 -- vim.g.gitblame_enabled = 0
--- vim.opt.statusline = ([[%= %{%v:lua.nvim-navic()%} %p%% %l:%c]])
