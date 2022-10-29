@@ -4,11 +4,14 @@
 [core]
 	editor = nvim
 [diff]
-  tool = vscode
-#[difftool]
-#  prompt = false
-[difftool "vscode"]
-  cmd = code --wait --diff $LOCAL $REMOTE
+  tool = difftastic
+#   tool = vscode
+[difftool]
+  prompt = false
+#[difftool "vscode"]
+#  cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [merge]
   tool = vscode
   conflictStyle = diff3
@@ -22,6 +25,7 @@
   log = delta
   reflog = delta
   show = delta
+  difftool = true
 [pull]
   rebase = true
   thowhead = ort
@@ -41,6 +45,8 @@
   path = ~/.config/git/themes.gitconfig
 [includeIf "gitdir:~/work/github/"]
   path = ~/work/github/.gitconfig
+[alias]
+  dft = difftool
 
 [delta]
   features = villsau
