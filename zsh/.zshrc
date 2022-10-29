@@ -176,8 +176,12 @@ export PATH="$PATH:~/go/bin"
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
+eval "$(direnv hook zsh)"
 
 # >>> scala-cli completions >>>
 fpath=("/home/aliyou/.local/share/scalacli/completions/zsh" $fpath)
 compinit
 # <<< scala-cli completions <<<
+
+# Created by `pipx` on 2022-10-07 21:35:03
+export PATH="$PATH:/home/aliyou/.local/bin"
