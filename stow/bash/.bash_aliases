@@ -31,12 +31,24 @@ alias update='\
   sudo apt -y full-upgrade && \
   sudo apt -y autoremove && \
   cs update && \
-  nix-channel --update && \
-  nix-env -u && \
+#  nix-channel --update && \
+#  nix-env -u && \
+#  nix profile upgrade ".*" && \
+ # nix flake update ~/.dotfiles/nix/home-manager && \
+ # hms && \
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
 alias gt='git ls-tree -r --name-only HEAD | tree --fromfile'
+
+# Nix Home Manager
+alias hm='home-manager'
+alias hmd='cd ~/.dotfiles/nix/home-manager'
+alias hmgd='home-manager generations | head -n 2 | tac | cut -d " " -f 7 | xargs nix store diff-closures'
+alias hmp='home-manager packages'
+alias hms='home-manager switch --flake ~/.dotfiles/nix/home-manager#aliyou && hmgd'
+alias hmu='nix flake update ~/.dotfiles/nix/home-manager && hms'
+alias hmhe='nvim ~/.dotfiles/nix/home-manager/home.nix'
 
 # Git and GitHub
 alias fgco='gco $(gb | fzf)'
