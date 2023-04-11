@@ -1,0 +1,6 @@
+[user]
+  name = Aliyou Sylla
+  email = aliyou29@hotmail.com
+[core]
+  hooksPath = ~/work/github/.git-hooks
+
