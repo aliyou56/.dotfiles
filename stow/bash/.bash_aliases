@@ -26,14 +26,16 @@ alias sbtnoss='sbt -Dsbt.supershell=false'
 alias scalac-phases='scalac -Xshow-phases'
 alias scalalines='find . -path "*/src*" -name "*.scala" | xargs wc -l | sort -n'
 alias ld='lazydocker'
+alias dc='docker-compose'
 
 alias update='\
   sudo apt update && \
   sudo apt -y full-upgrade && \
   sudo apt -y autoremove && \
   cs update && \
-  nix-channel --update && \
-  nix-env -u && \
+#  nix-channel --update && \
+#  nix-env -u && \
+  hmu \
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
@@ -80,6 +82,18 @@ alias gwipp='gcmsg "--wip-- [skip ci]" --no-verify --no-gpg-sign'
 # alias hk='gcam housekeeping && gpe'
 alias lg='lazygit'
 
+DOTFILES="$HOME/work/github/.dotfiles"
+# Nix Home Manager
+alias hm='home-manager'
+alias hmd='cd ${DOTFILES}/nix/home-manager'
+alias hmgd='hm generations | head -n 2 | tac | cut -d " " -f 7 | xargs nix store diff-closures'
+alias hmp='hm packages'
+alias hms='hm switch --flake ${DOTFILES}/nix/home-manager#aliyou && hmgd'
+alias hmu='nix flake update ${DOTFILES}/nix/home-manager && hms'
+alias hmhe='nvim ${DOTFILES}/nix/home-manager/home.nix'
+alias reload='hms && source ~/.zshrc'
+alias garbage='nix-collect-garbage -d' # && docker image prune --force
+
 # Changing "ls" to "exa"
 alias ls='exa -al --color=always --group-directories-first --icons'
 alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
@@ -109,8 +123,3 @@ alias sa='source ~/.bash_aliases;source ~/.bashrc;source ~/.zshrc;echo "Bash ali
 # Edit Aliases
 alias via='nvim ~/.bash_aliases'
 alias vib='nvim ~/.bashrc'
-
-# Nix
-# alias nix-shell-q='echo -e ${buildInputs// /\\n} | cut -d - -f 2- | sort' # like nix-env -q
-# alias nix-shell-qq='echo -e ${buildInputs// /\\n} | sort -t- -k2,2 -k3,3' # like nix-env -q
-

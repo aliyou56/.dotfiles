@@ -32,3 +32,5 @@ export PATH="$PATH:/home/aliyou/.local/share/coursier/bin"
 . "$HOME/.cargo/env"
 
 export PATH="$PATH:/home/aliyou/.cache/scalacli/local-repo/bin/scala-cli"
+
+if [ -e /home/aliyou/.nix-profile/etc/profile.d/nix.sh ]; then . /home/aliyou/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
