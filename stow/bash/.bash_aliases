@@ -2,7 +2,7 @@ alias aliases='bat ~/.bash_aliases --pager never && bat ~/.local/.bash_aliases -
 
 alias b='bloop'
 alias br='bloop exit && bloop about'
-alias s='kitty +kitten ssh'
+alias ssh='kitty +kitten ssh'
 alias c='code .'
 # alias cdf='cd $(ls | fzf)'
 # alias ce='code . && exit'
@@ -14,11 +14,12 @@ alias di='echo dotenv >> .envrc && touch .env && direnv allow'
 alias dr='direnv reload'
 alias ipp='curl ifconfig.me && echo'
 # alias ipl="hostname -I | awk '{print $1}'"
+# alias ipl="ip -f inet addr show wlp3s0 | awk '/inet / {print $2}' | cut -d/ -f1"
 alias java-switch='cs java --jvm $(cs java --available | fzf) --env 2>/dev/null > .envrc && di'
 alias jps='jps -lm'
 alias jpsk9='jps | fzf --reverse -m -e -i | cut -d " " -f1 | xargs kill -9 2>/dev/null'
 # alias jpsk='jps | fzf --reverse -m -e -i | cut -d " " -f1 | xargs kill 2>/dev/null'
-# alias k='kubectl'
+alias k='kubectl'
 # alias list-colors='for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\''\n'\''}; done'
 alias sbtd='sbt -jvm-debug 5005'
 alias sbtnoss='sbt -Dsbt.supershell=false'
@@ -80,10 +81,10 @@ alias gwipp='gcmsg "--wip-- [skip ci]" --no-verify --no-gpg-sign'
 alias lg='lazygit'
 
 # Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first'
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias ls='exa -al --color=always --group-directories-first --icons'
+alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first --icons'  # long format
+alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
 alias l.='exa -a | egrep "^\."'
 
 alias http='noglob http'

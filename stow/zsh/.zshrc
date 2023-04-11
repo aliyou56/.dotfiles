@@ -90,10 +90,12 @@ plugins=(
   git
   mosh
   timer
-  # zsh-autocomplete
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-z
+  zsh-fzf-history-search
+  # zsh-autocomplete
+  # autoswitch_virtualenv
   # fzf-tab
 )
 
