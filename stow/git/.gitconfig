@@ -1,0 +1,75 @@
+[user]
+	email = aliyou29@hotmail.com
+	name = Aliyou Sylla
+[core]
+	editor = nvim
+[diff]
+  tool = difftastic
+#   tool = vscode
+[difftool]
+  prompt = false
+#[difftool "vscode"]
+#  cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[merge]
+  tool = vscode
+  conflictStyle = diff3
+[mergetool]
+  keepBackup = false
+[mergetoll "vscode"]
+  cmd = code --wait $MERGED
+[pager]
+  branch = false
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+  difftool = true
+[pull]
+  rebase = true
+  thowhead = ort
+[rebase]
+  autosquash = true
+  abbreviateCommands = true
+[credential]
+  helper = cache --timeout 3600
+[rerere]
+  enabled = true
+[init]
+	defaultBranch = main
+#[advice]
+#  detachedHead = false
+[include]
+  path = ~/.local/.gitconfig
+[includeIf "gitdir:~/work/github/"]
+  path = ~/work/github/.gitconfig
+[alias]
+  dft = difftool
+
+[delta]
+  #features = villsau
+  line-numbers = true
+  navigate = true
+
+  #file-decoration-style = black ul
+  #file-style = black
+  #hunk-header-decoration-style = black box
+  #hunk-header-line-number-style = black
+  #minus-emph-style = red bold
+  minus-empty-line-marker-style = omit
+  minus-style = red
+  #plus-emph-style = green bold
+  plus-empty-line-marker-style = omit
+  #plus-style = green
+  true-color = auto
+  zero-style = black
+  #syntax-theme = base16-ocean.dark
+[submodule]
+  recursive = true
+
+# [filter "lfs"]
+# 	smudge = git-lfs smudge -- %f
+# 	process = git-lfs filter-process
+# 	required = true
+# 	clean = git-lfs clean -- %f

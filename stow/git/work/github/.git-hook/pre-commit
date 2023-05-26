@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REMOTE=`git config --get remote.origin.url`
+USERNAME=`git config --get user.name`
+EMAIL=`git config --get user.email`
+
+check() {
+  if [[ "$EMAIL" != "$1" ]]; then
+    echo "Invalid email: $EMAIL"
+    echo "git config user.email $1"
+    exit 1
+  fi
+  if [[ "$USERNAME" != "$2" ]]; then
+    echo "Invalid username: $USERNAME"
+    echo "git config user.name $2"
+    exit 1
+  fi
+}
+
+if [[ $REMOTE == *"github.com"* ]]; then
+  check aliyou29@hotmail.com "Aliyou Sylla"
+fi
