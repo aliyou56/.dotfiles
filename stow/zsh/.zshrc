@@ -2,7 +2,9 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/aliyou/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+
+# exec in the repo: git config --add oh-my-zsh.hide-dirty 1
 function git_prompt_info() {
   local ref
   if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
@@ -87,16 +89,18 @@ plugins=(
   docker
   dotenv
   extract
+  kubectl
   git
   mosh
   timer
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-z
-  zsh-fzf-history-search
+  fzf-zsh-plugin
+  fzf-tab
+ # zsh-fzf-history-search
   # zsh-autocomplete
   # autoswitch_virtualenv
-  # fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -127,20 +131,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# stow (th stands for target=home)
-stowth() {
-  stow -vSt ~ $1
-}
-
-unstow() {
-  stow -vDt ~ $1
-}
-
-diy-install() {
-  wget -q https://script.install.devinsideyou.com/$1
-  sudo chmod +x $1 && ./$1 $2 $3
-}
-
 # source global settings
 if [ -f "$HOME/.bash_aliases" ] ; then
   source "$HOME/.bash_aliases"
@@ -163,20 +153,22 @@ if [ -e $HOME/.nix-profile/bin/java ]; then
   export JAVA_HOME="${$(readlink -e $HOME/.nix-profile/bin/java)%*/bin/java}"
 fi
 
-export PATH="$PATH:~/.local/bin"
-export PATH="$PATH:~/.npm-global/bin"
-export PATH="$PATH:~/go/bin"
-
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+#export PATH="$PATH:~/.npm-global/bin"
+#export PATH="$PATH:~/go/bin"
 
 eval "$(direnv hook zsh)"
 
+export PATH="$PATH:$HOME/.local/share/coursier/bin"
 # >>> scala-cli completions >>>
-fpath=("/home/aliyou/.local/share/scalacli/completions/zsh" $fpath)
+fpath=("~/.local/share/scalacli/completions/zsh" $fpath)
 compinit
 # <<< scala-cli completions <<<
 
-# Created by `pipx` on 2022-10-07 21:35:03
-export PATH="$PATH:/home/aliyou/.local/bin"
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

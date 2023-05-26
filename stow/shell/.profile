@@ -34,3 +34,13 @@ export PATH="$PATH:/home/aliyou/.local/share/coursier/bin"
 export PATH="$PATH:/home/aliyou/.cache/scalacli/local-repo/bin/scala-cli"
 
 if [ -e /home/aliyou/.nix-profile/etc/profile.d/nix.sh ]; then . /home/aliyou/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# fix app icons (installed by nix)
+if [ -n "${XDG_SESSION_ID}" ];then
+    if [ -d ~/.nix-profile ];then
+        for x in $(find ~/.nix-profile/share/applications/*.desktop);do
+            MY_XDG_DIRS=$(dirname $(dirname $(readlink -f $x))):${MY_XDG_DIRS}
+        done
+        export XDG_DATA_DIRS=${MY_XDG_DIRS}:${XDG_DATA_DIRS}
+    fi
+fi
