@@ -7,84 +7,113 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
-#      asciiquarium
-      git
-      broot
-      trivy
-      grype
-      firefox
       bat
+      wezterm
       bottom
+      brave
+      broot
       cachix
-#      certstrap
-#      cmatrix
-#      coursier
-#      cowsay
-      exa
-      sd
-      tokei
+      cargo-edit # Easy Rust dependency management
+      cargo-graph # Rust dependency graphs
+      cargo-watch # watch rust project and execute custom commands upon change
+      clickhouse # for clickhouse-client
+      coursier
       delta
       direnv
       dive
 #      docker
-#      docker-compose
-#      doppler
+      docker-compose
       duf
+      elixir
+      exa
       fd
       figlet
       fx
       fzf
-      go
-      elixir
-      rustup
-      httpie
-      helix
-      hyperfine
-      jq
-      kind
-      kubectl
-      lazydocker
-      lazygit
-      luarocks
-      minikube
-      tldr
-      yq
-      kubernetes-helm
-#      firefox
       gettext
       gh
       git
-#      glow
-      mdcat
-#      graalvm17-ce
-#      graphviz
-#      gum
+      git
+      git-lfs
+      go
+      graalvm17-ce
+      graphviz
+      grype
+      helix
       htop
+      httpie
+      hyperfine
+      insomnia
       ipfetch
+      jq
       keychain
+      kind
+      kubectl
+      kubernetes-helm
+      lazydocker
+      lazygit
       less
-#      lolcat
+      luarocks
+      mdcat
+      minikube
       mosh
       ncdu
-#      neofetch
-#      neovim
+      neovim
       ngrok
       nix-direnv
-#      nvd
+      nodejs
       ookla-speedtest
-#      pulumi
       ripgrep
       ripgrep-all
-#      scala-cli
-#      sl
+      rustup
+      scala-cli
+      sd
+      slack
       stow
-      tig
+      tldr
+      tokei
       tree
+      trivy
       unzip
-#      wl-clipboard
-      zip
-#      zsh
+      virt-manager
       vlc
+      vscode
+      wget
+      wl-clipboard
+      yq
+      zip
+      zsh
+#      # consul # service discovery
+#      # pre-commit
+#      #kubectlx # kubectl context switching
+#      #lorri # easy nix shell
+#      #skaffold # local kubernetes dev tool
+#      asciiquarium
+#      certstrap
+#      clickhouse-client
+#      cmatrix
+#      doppler
+#      firefox
+#      glow
+#      gnome-browser-connector
+#      kitty
+#      lolcat
+#      lua5
+#      neofetch
+#      nomad # lightwight scheduler
+#      nvd
+#      podman
+#      pulumi
+#      skim # High-powered fuzzy finder
+#      sl
+#      spotify-tui 
+#      tealder # tldr for various shell tools
+#      tig
+#      tilt # Fast paced kubernetes development
+#      vault # secret management
+#      watchexec # Filesystem watcher/executor
+#      xsv # CSV parsing utility
+#      yarn # Node.js package manager
     ];
 
     stateVersion = "22.11";
