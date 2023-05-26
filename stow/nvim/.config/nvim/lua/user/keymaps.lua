@@ -36,8 +36,9 @@ map("n", "n", "nzzzv", opts)
 map("n", "N", "Nzzzv", opts)
 map("n", "J", "mzJ`z", opts)
 
-map("n", "<leader>Q", "<cmd>qa<CR>", opts)
 map("n", "<C-s>", "<cmd>w<CR>", opts)
+map("n", "<leader>qq", "<cmd>qa<cr>", opts)
+--map("n", "<leader>Q", "<cmd>qa<CR>", opts)
 
 -- Tabs --
 map("n", "<m-t>", ":tabnew %<cr>", opts)
@@ -79,9 +80,6 @@ map("n", "<leader>p", '"+p', opts)
 
 -- Insert --
 map("i", "jk", "<ESC>", opts)
-
--- quit
--- map("n", "<leader>qq", "<cmd>qa<cr>", opts)
 
 -- Undo break point
 map("i", ",", ",<C-g>u", opts)

@@ -28,7 +28,7 @@ require("user.harpoon")
 require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
 require("user.inlay-hints")
 -- require("user.winbar")
--- require("user.auto-session") -- A small automated session manager
+require("user.auto-session") -- A small automated session manager
 require("user.whichkey")
 -- require("user.zen-mode")
 require("user.neoscroll") -- Smooth scrolling
