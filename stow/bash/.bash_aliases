@@ -4,8 +4,8 @@ alias b='bloop'
 alias br='bloop exit && bloop about'
 alias ssh='kitty +kitten ssh'
 alias c='code .'
-# alias cdf='cd $(ls | fzf)'
-# alias ce='code . && exit'
+alias sc='scala-cli'
+alias ce='code . && exit'
 # alias dg-with-tests='bloop projects --dot-graph | dot -Tsvg -o dependency-graph.svg'
 # alias dg='bloop projects --dot-graph | sed "/-test/d" | dot -Tsvg -o dependency-graph.svg'
 alias di='echo dotenv >> .envrc && touch .env && direnv allow'
@@ -33,9 +33,7 @@ alias update='\
   sudo apt -y full-upgrade && \
   sudo apt -y autoremove && \
   cs update && \
-#  nix-channel --update && \
-#  nix-env -u && \
-  hmu \
+  hmu && \
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
@@ -118,8 +116,10 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Apply changes to aliases
-alias sa='source ~/.bash_aliases;source ~/.bashrc;source ~/.zshrc;echo "Bash aliases sourced."'
+alias sa='source ~/.bash_aliases;source ~/.zshrc;echo "Bash aliases sourced."'
+#alias sa='source ~/.bash_aliases;source ~/.bashrc;source ~/.zshrc;echo "Bash aliases sourced."'
 
 # Edit Aliases
 alias via='nvim ~/.bash_aliases'
-alias vib='nvim ~/.bashrc'
+alias viz='nvim ~/.zshrc'
+alias vin='cd ~/.config/nvim && nvim'
