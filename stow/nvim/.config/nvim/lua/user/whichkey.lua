@@ -285,7 +285,7 @@ local mappings = {
 
 	S = {
 		name = "Session",
-		s = { "<cmd>SaveSession<cr>", "Save" },
+		s = { "<cmd>SessionSave<cr>", "Save" },
 		l = { "<cmd>LoadLastSession!<cr>", "Load Last" },
 		d = { "<cmd>LoadCurrentDirSession!<cr>", "Load Last Dir" },
 		f = { "<cmd>Telescope sessions save_current=false<cr>", "Find Session" },

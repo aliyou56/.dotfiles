@@ -7,7 +7,7 @@ require("user.colorizer")
 require("user.functions")
 require("user.cmp")
 require("user.lsp")
-require("user.dap")
+-- require("user.dap")
 require("user.bqf") -- Better Quick Fix
 require("user.ufo") -- Ultra Fold in Neovim
 require("user.git") -- git-blame - gitsigns - gitlinker - diffview
@@ -24,7 +24,7 @@ require("user.project")
 require("user.notify")
 require("user.autopairs")
 require("user.indentline")
-require("user.harpoon")
+-- require("user.harpoon")
 require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
 require("user.inlay-hints")
 -- require("user.winbar")

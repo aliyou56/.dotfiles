@@ -15,7 +15,6 @@ null_ls.setup({
 		-- 	extra_filetypes = { "toml" },
 		-- 	extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
 		-- }),
-    -- formatting.scalafmt,
 		-- formatting.ruff,
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.isort,
@@ -23,7 +22,6 @@ null_ls.setup({
 		formatting.sql_formatter,
 		formatting.yamlfmt,
 		formatting.jq,
-		-- formatting.rustfmt,
 
 		diagnostics.ruff,
 		diagnostics.luacheck,

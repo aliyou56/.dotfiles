@@ -29,6 +29,8 @@ map("n", "<C-l>", "<C-w>l", opts)
 map("n", "<M-o>", ":lua require('bufjump').backward()<CR>", opts)
 map("n", "<M-i>", ":lua require('bufjump').forward()<CR>", opts)
 
+map("n", "<leader>sv", "<cmd>source $MYVIMRC<CR>", opts)
+
 -- Keeping it centered
 map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)

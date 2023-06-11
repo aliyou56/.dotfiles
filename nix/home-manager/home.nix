@@ -7,32 +7,35 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
-      bat
-      wezterm
-      bottom
+      awscli2          # Universal Command Line Interface for Amazon Web Services
+      azure-cli        # Azure Command-Line Interface
+      google-cloud-sdk # Google Cloud Platform SDK
+      terraform
+      bat              # A cat(1) clone with wings
+      bottom           # Yet another cross-platform graphical process/system monitor.
       brave
-      broot
-      cachix
-      cargo-edit # Easy Rust dependency management
-      cargo-graph # Rust dependency graphs
-      cargo-watch # watch rust project and execute custom commands upon change
-      clickhouse # for clickhouse-client
-      coursier
-      delta
-      direnv
-      dive
-#      docker
-      docker-compose
-      duf
+      broot            # A new way to see and navigate directory trees
+      cachix           # Command line client for Nix binary cache hosting
+      cargo-edit       # Easy Rust dependency management
+      cargo-graph      # Rust dependency graphs
+      cargo-watch      # watch rust project and execute custom commands upon change
+      clickhouse       # for clickhouse-client
+      coursier         # Pure Scala Artifact Fetching
+      dbeaver          # Free universal database tool and SQL client
+      delta            # A syntax-highlighting pager for git, diff, and grep output
+      direnv           # load/unload env variables. unclutter your .profile
+      dive             # A tool for exploring each layer in a docker image
+      # docker
+      docker-compose   # Define and run multi-container applications with Docker
+      duf              # Disk Usage/Free Utility - a better 'df' alternative
       elixir
-      exa
-      fd
-      figlet
-      fx
-      fzf
-      gettext
-      gh
-      git
+      exa              # A modern replacement for ‘ls’
+      fd               # A simple, fast and user-friendly alternative to 'find'
+      # figlet           # creates large characters out of ordinary screen characters
+      fx               # Terminal JSON viewer
+      fzf              # A command-line fuzzy finder
+      # gettext
+      gh               # GitHub command line
       git
       git-lfs
       go
@@ -41,30 +44,34 @@
       grype
       helix
       htop
-      httpie
-      hyperfine
+      httpie        # modern, user-friendly command-line HTTP client for the API era
+      hyperfine     # A command-line benchmarking tool
       insomnia
       ipfetch
-      jq
+      jq            # Command-line JSON processor
       keychain
       kind
       kubectl
       kubernetes-helm
-      lazydocker
-      lazygit
+      lazydocker    # The lazier way to manage everything docker
+      lazygit       # simple terminal UI for git commands Topics
       less
       luarocks
       mdcat
       minikube
-      mosh
+      moreutils
+#      mosh
+      obsidian
       ncdu
       neovim
       ngrok
       nix-direnv
       nodejs
       ookla-speedtest
+      pqrs # parquet
+      protonvpn-gui
       ripgrep
-      ripgrep-all
+      # ripgrep-all
       rustup
       scala-cli
       sd
@@ -80,43 +87,42 @@
       vscode
       wget
       wl-clipboard
-      yq
+      yq-go
       zip
       zsh
-#      # consul # service discovery
-#      # pre-commit
-#      #kubectlx # kubectl context switching
-#      #lorri # easy nix shell
-#      #skaffold # local kubernetes dev tool
+
+      # wezterm
+      # consul # service discovery
+      # pre-commit
+      # kubectlx # kubectl context switching
+      # lorri # easy nix shell
+      # skaffold # local kubernetes dev tool
 #      asciiquarium
 #      certstrap
-#      clickhouse-client
 #      cmatrix
 #      doppler
 #      firefox
 #      glow
 #      gnome-browser-connector
 #      kitty
-#      lolcat
-#      lua5
-#      neofetch
+     neofetch
 #      nomad # lightwight scheduler
 #      nvd
 #      podman
 #      pulumi
 #      skim # High-powered fuzzy finder
 #      sl
-#      spotify-tui 
+#      spotify-tui
 #      tealder # tldr for various shell tools
 #      tig
 #      tilt # Fast paced kubernetes development
 #      vault # secret management
 #      watchexec # Filesystem watcher/executor
-#      xsv # CSV parsing utility
+      # xsv # CSV parsing utility
 #      yarn # Node.js package manager
     ];
 
-    stateVersion = "22.11";
+    stateVersion = "23.05";
     username = "aliyou";
   };
 

@@ -72,5 +72,5 @@ end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
-vim.g.python3_host_prog = '/home/aliyou/py3nvim/bin/python'
+-- vim.g.python3_host_prog = '/home/aliyou/py3nvim/bin/python'
 

@@ -55,7 +55,7 @@ end, opts)
 keymap("n","<leader>o", "<cmd>LSoutlineToggle<CR>",opts)
 
 -- Hover Doc
-keymap("n", "<leader>K", "<cmd>Lspsaga hover_doc<CR>", opts)
+-- keymap("n", "<leader>K", "<cmd>Lspsaga hover_doc<CR>", opts)
 
 -- Float terminal
 keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", opts)

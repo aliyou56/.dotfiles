@@ -56,7 +56,10 @@ return packer.startup(function(use)
 	-- use "simrat39/symbols-outline.nvim"
 	use("b0o/SchemaStore.nvim") -- JSON schemas for Neovim
 	use("RRethy/vim-illuminate")
-	use("j-hui/fidget.nvim")
+	use { -- TODO
+    "j-hui/fidget.nvim",
+    tag = 'legacy',
+  }
 	use("lvimuser/lsp-inlayhints.nvim")
 	use("simrat39/rust-tools.nvim")
 
