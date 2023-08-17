@@ -35,7 +35,7 @@ alias update='\
 #  nix-env -u && \
 #  nix profile upgrade ".*" && \
  # nix flake update ~/.dotfiles/nix/home-manager && \
- # hms && \
+  hms && \
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
@@ -49,6 +49,9 @@ alias hmp='home-manager packages'
 alias hms='home-manager switch --flake ~/.dotfiles/nix/home-manager#aliyou && hmgd'
 alias hmu='nix flake update ~/.dotfiles/nix/home-manager && hms'
 alias hmhe='nvim ~/.dotfiles/nix/home-manager/home.nix'
+alias reload='hms && source ~/.zshrc'
+alias garbage='nix-collect-garbage -d' # && docker image prune --force"
+alias installed='nix-env --query --installed'
 
 # Git and GitHub
 alias fgco='gco $(gb | fzf)'

@@ -21,6 +21,7 @@
       fzf
       glow
       helix
+      exa
       hyperfine
       jq
       ncdu
@@ -30,6 +31,9 @@
       virt-manager
       vlc
       yq
+      sd
+      mdcat
+      tokei
     ];
 
     stateVersion = "22.11";
