@@ -163,8 +163,12 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 	use("folke/todo-comments.nvim") -- Highlight, list and search todo comments.
 	-- Session
-	use("rmagatti/auto-session")
-	use("rmagatti/session-lens")
+  use({
+    "olimorris/persisted.nvim",
+    -- config = function()
+    --   require("persisted").setup()
+    -- end,
+  })
 	-- Motion
 	use({
 		"ggandor/leap.nvim",

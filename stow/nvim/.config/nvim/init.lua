@@ -8,6 +8,7 @@ require("user.functions")
 require("user.cmp")
 require("user.lsp")
 -- require("user.dap")
+require("user.persisted") -- Simple session management for Neovim with git branching, autoloading and Telescope support
 require("user.bqf") -- Better Quick Fix
 require("user.ufo") -- Ultra Fold in Neovim
 require("user.git") -- git-blame - gitsigns - gitlinker - diffview
@@ -28,7 +29,6 @@ require("user.indentline")
 require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
 require("user.inlay-hints")
 -- require("user.winbar")
-require("user.auto-session") -- A small automated session manager
 require("user.whichkey")
 -- require("user.zen-mode")
 require("user.neoscroll") -- Smooth scrolling
