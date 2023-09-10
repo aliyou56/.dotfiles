@@ -29,7 +29,7 @@
       docker-compose   # Define and run multi-container applications with Docker
       duf              # Disk Usage/Free Utility - a better 'df' alternative
       elixir
-      exa              # A modern replacement for ‘ls’
+      eza              # A modern replacement for ‘ls’
       fd               # A simple, fast and user-friendly alternative to 'find'
       # figlet           # creates large characters out of ordinary screen characters
       fx               # Terminal JSON viewer
@@ -75,6 +75,7 @@
       rustup
       scala-cli
       sd
+      shellcheck     # a static analysis tool for shell scripts - neovim
       slack
       stow
       tldr
