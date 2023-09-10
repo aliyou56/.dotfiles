@@ -47,21 +47,24 @@ local options = {
   wrap = false,                            -- display lines as one long line
 
   foldenable = true,
-  foldmethod = "expr",
-  foldexpr = "nvim_treesitter#foldexpr()",
+  -- foldmethod = "expr",
+  -- foldexpr = "nvim_treesitter#foldexpr()",
   foldcolumn = '1',
   foldlevel = 99,                          -- Using ufo provider need a large value
-  foldlevelstart = -1,
+  foldlevelstart = 99,
 
   grepprg = "rg -S --vimgrep $*",
   grepformat = "%f:%l:%c:%m",
   formatoptions = "jcroqlnt" -- tcqj,
 }
 
-vim.opt.fillchars = vim.opt.fillchars + "eob: "
-vim.opt.fillchars:append({
-	stl = " ",
-})
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.opt.fillchars = vim.opt.fillchars + "eob: "
+-- vim.opt.fillchars:append({
+-- 	stl = " ",
+--   foldopen = "",
+--   foldclose = ""
+-- })
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")

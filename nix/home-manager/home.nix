@@ -76,6 +76,7 @@
       scala-cli
       sd
       shellcheck     # a static analysis tool for shell scripts - neovim
+      sqlfluff       # A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
       slack
       stow
       tldr

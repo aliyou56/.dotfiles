@@ -70,8 +70,8 @@ end
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
-  local api = vim.api
-  -- local keymap = vim.keymap.set
+	local api = vim.api
+	-- local keymap = vim.keymap.set
 
 	-- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -81,10 +81,10 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
 	-- keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-	keymap(bufnr, "n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]], opts)
+	keymap(bufnr, "n", "<leader>cl", ":lua vim.lsp.codelens.run()<CR>", opts)
 	keymap(bufnr, "n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
+	-- keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
 	keymap(bufnr, "n", "<leader>aa", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts) -- all workplace diagnostics
 	keymap(bufnr, "n", "<leader>ae", "<cmd>lua vim.diagnostic.setqflist({severity = 'E'})<CR>", opts) -- all workplace errors
 	keymap(bufnr, "n", "<leader>aw", "<cmd>lua vim.diagnostic.setqflist({severity = 'W'})<CR>", opts)
@@ -97,7 +97,7 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 	-- keymap(bufnr, "n", "<M-f>", "<cmd>Format<cr>", opts)
 
-  api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+	api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
 M.on_attach = function(client, bufnr)
@@ -107,8 +107,8 @@ M.on_attach = function(client, bufnr)
 	function M.enable_format_on_save()
 		vim.cmd([[
       augroup format_on_save
-        autocmd! 
-        autocmd BufWritePre * lua vim.lsp.buf.format({ async = true }) 
+        autocmd!
+        autocmd BufWritePre * lua vim.lsp.buf.format({ async = true })
       augroup end
     ]])
 		vim.notify("Enabled format on save")

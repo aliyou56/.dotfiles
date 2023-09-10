@@ -126,20 +126,36 @@ return packer.startup(function(use)
 			require("dressing").setup()
 		end,
 	})
-  use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    -- config = function()
-    --     local saga = require("lspsaga")
-
-    --     saga.init_lsp_saga({
-    --         -- your configuration
-    --     })
-    -- end,
-})
+  use({ "glepnir/lspsaga.nvim", branch = "main" })
 
 	-- Utility / Editing Support
-	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }) -- Folding
+	use({ "kevinhwang91/nvim-ufo", 
+    requires = {
+      "kevinhwang91/promise-async",
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup({
+            relculright = true,
+            segments = {
+              {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+              {text = {"%s"}, click = "v:lua.ScSa"},
+              {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
+            }
+          })
+        end
+      }
+    }
+  }) -- Folding
+  use { 'anuvyklack/fold-preview.nvim',
+    requires = 'anuvyklack/keymap-amend.nvim',
+    config = function()
+        require('fold-preview').setup({
+          -- Your configuration goes here.
+        })
+    end
+  }
 	use("rcarriga/nvim-notify")
 	use("karb94/neoscroll.nvim")
 	use("moll/vim-bbye") -- Delete buffer and close files w/o closing windows

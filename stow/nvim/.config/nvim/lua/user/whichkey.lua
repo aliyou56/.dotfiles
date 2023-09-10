@@ -1,5 +1,7 @@
 local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then return end
+if not status_ok then
+	return
+end
 
 local setup = {
 	plugins = {
@@ -98,9 +100,9 @@ local m_mappings = {
 	-- },
 	-- x = { "<cmd>BookmarkClearAll<cr>", "Clear All" },
 	-- u = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
- --  v = { "<cmd>vsplit<cr>", "vsplit" }
+	--  v = { "<cmd>vsplit<cr>", "vsplit" }
 
-  m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
+	m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
 	["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
 	[","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
 	-- l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
@@ -126,12 +128,11 @@ local mappings = {
 	["w"] = { "<cmd>w<CR>", "Write" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No HL" },
 	["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
-	["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+	["/"] = { '<cmd>lua require("Comment.api").toggle_linewise()<CR>', "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-	["u"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
-  ["v"] = { "<cmd>vsplit<cr>", "vsplit" },
+	-- ["u"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
+	["v"] = { "<cmd>vsplit<cr>", "vsplit" },
 
-	-- :lua require'lir.float'.toggle()
 	-- ["f"] = {
 	--   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 	--   "Find files",
@@ -142,136 +143,101 @@ local mappings = {
 	["z"] = { "<cmd>ZenMode<cr>", "Zen" },
 	["gy"] = "Link",
 
-	p = {
-		name = "Packer",
-		c = { "<cmd>PackerCompile<cr>", "Compile" },
-		i = { "<cmd>PackerInstall<cr>", "Install" },
-		s = { "<cmd>PackerSync<cr>", "Sync" },
-		S = { "<cmd>PackerStatus<cr>", "Status" },
-		u = { "<cmd>PackerUpdate<cr>", "Update" },
-	},
+	-- p = {
+	-- 	name = "Packer",
+	-- 	c = { "<cmd>PackerCompile<cr>", "Compile" },
+	-- 	i = { "<cmd>PackerInstall<cr>", "Install" },
+	-- 	s = { "<cmd>PackerSync<cr>", "Sync" },
+	-- 	S = { "<cmd>PackerStatus<cr>", "Status" },
+	-- 	u = { "<cmd>PackerUpdate<cr>", "Update" },
+	-- },
 
 	o = {
 		name = "Options",
-		w = { '<cmd>lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
-		r = { '<cmd>lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
-		l = { '<cmd>lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
-		s = { '<cmd>lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
-		t = { '<cmd>lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
+		w = { ':lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
+		r = { ':lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
+		l = { ':lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
+		s = { ':lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
+		t = { ':lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
 	},
 
-	-- r = {
-	-- 	name = "Replace",
-	-- 	r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-	-- 	w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-	-- 	f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+	-- d = {
+	-- 	name = "Debug",
+	-- 	b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
+	-- 	c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+	-- 	i = { "<cmd>lua require'dap'.step_into()<cr>", "Into" },
+	-- 	o = { "<cmd>lua require'dap'.step_over()<cr>", "Over" },
+	-- 	O = { "<cmd>lua require'dap'.step_out()<cr>", "Out" },
+	-- 	r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Repl" },
+	-- 	l = { "<cmd>lua require'dap'.run_last()<cr>", "Last" },
+	-- 	u = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
+	-- 	x = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
 	-- },
-
-	d = {
-		name = "Debug",
-		b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
-		c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-		i = { "<cmd>lua require'dap'.step_into()<cr>", "Into" },
-		o = { "<cmd>lua require'dap'.step_over()<cr>", "Over" },
-		O = { "<cmd>lua require'dap'.step_out()<cr>", "Out" },
-		r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Repl" },
-		l = { "<cmd>lua require'dap'.run_last()<cr>", "Last" },
-		u = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
-		x = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
-	},
 
 	f = {
 		name = "Find",
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+		b = { ":Telescope git_branches<cr>", "Checkout branch" },
+		c = { ":Telescope colorscheme<cr>", "Colorscheme" },
 		f = {
-			-- "<cmd>lua require('telescope.builtin').find_files({ require('telescope.themes').get_dropdown{previewer = false}, hidden = true} )<cr>",
-			-- "<cmd>lua require('telescope.builtin').find_files({ layout_config = { prompt_position = 'top' }, previewer = false, find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
-			"<cmd>lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+			":lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
 			"Find files",
 		},
-		t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-		h = { "<cmd>Telescope help_tags<cr>", "Help" },
-		i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
-		l = { "<cmd>Telescope resume<cr>", "Last Search" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-		R = { "<cmd>Telescope registers<cr>", "Registers" },
-		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		t = { ":Telescope live_grep theme=ivy<cr>", "Find Text" },
+		h = { ":Telescope help_tags<cr>", "Help" },
+		i = { ":lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+		l = { ":Telescope resume<cr>", "Last Search" },
+		M = { ":Telescope man_pages<cr>", "Man Pages" },
+		r = { ":Telescope oldfiles<cr>", "Recent File" },
+		R = { ":Telescope registers<cr>", "Registers" },
+		k = { ":Telescope keymaps<cr>", "Keymaps" },
+		C = { ":Telescope commands<cr>", "Commands" },
 	},
 
 	g = {
 		name = "Git",
-		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-		l = { "<cmd>GitBlameToggle<cr>", "Blame" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+		g = { ":lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+		j = { ":lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+		k = { ":lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+		l = { ":GitBlameToggle<cr>", "Blame" },
+		p = { ":lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+		r = { ":lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+		R = { ":lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+		s = { ":lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
 		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+			":lua require 'gitsigns'.undo_stage_hunk()<cr>",
 			"Undo Stage Hunk",
 		},
-		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-		d = {
-			"<cmd>Gitsigns diffthis HEAD<cr>",
-			"Diff",
-		},
-		-- G = {
-		-- 	name = "Gist",
-		-- 	a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
-		-- 	d = { "<cmd>Gist -d<cr>", "Delete" },
-		-- 	f = { "<cmd>Gist -f<cr>", "Fork" },
-		-- 	g = { "<cmd>Gist -b<cr>", "Create" },
-		-- 	l = { "<cmd>Gist -l<cr>", "List" },
-		-- 	p = { "<cmd>Gist -b -p<cr>", "Create Private" },
-		-- },
+		o = { ":Telescope git_status<cr>", "Open changed file" },
+		b = { ":Telescope git_branches<cr>", "Checkout branch" },
+		c = { ":Telescope git_commits<cr>", "Checkout commit" },
+		d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff", },
 	},
 
 	l = {
 		name = "LSP",
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-		d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-		w = {
-			"<cmd>Telescope lsp_workspace_diagnostics<cr>",
-			"Workspace Diagnostics",
-		},
-		f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
-		F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
-		i = { "<cmd>LspInfo<cr>", "Info" },
-		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-		j = {
-			"<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
-			"Next Diagnostic",
-		},
-		k = {
-			"<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
-			"Prev Diagnostic",
-		},
-		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-		o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-		R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+		a = { ":lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+		l = { ":lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+		f = { ":lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
+		-- d = { ":TroubleToggle<cr>", "Diagnostics" },
+		w = { ":Lspsaga show_workspace_diagnostics<cr>", "Workspace Diagnostics", },
+		b = { ":Lspsaga show_buf_diagnostics<cr>", "buffer Diagnostics" },
+		-- F = { ":LspToggleAutoFormat<cr>", "Toggle Autoformat" },
+		i = { ":LspInfo<cr>", "Info" },
+		I = { ":LspInstallInfo<cr>", "Installer Info" },
+		j = { ":lua vim.diagnostic.goto_next({buffer=0})<CR>", "Next Diagnostic", },
+		k = { ":lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Prev Diagnostic", },
+		o = { ":Lspsaga outline<cr>", "Outline" },
+		-- q = { ":lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+		r = { ":lua vim.lsp.buf.rename()<cr>", "Rename" },
+		-- R = { ":TroubleToggle lsp_references<cr>", "References" },
+		s = { ":Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		S = {
-			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+			":Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
-		t = { '<cmd>lua require("user.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
-		u = { "<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
+		t = { ':lua require("user.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
+		-- u = { ":LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
 	},
-
-	-- S = {
-	-- 	name = "Split",
-	-- 	s = { "<cmd>split<cr>", "HSplit" },
-	-- 	v = { "<cmd>vsplit<cr>", "VSplit" },
-	-- },
 
 	-- s = {
 	--   name = "Surround",
@@ -289,14 +255,14 @@ local mappings = {
 		l = { ":SessionLoadLast<cr>", "Load Last" },
 		d = { ":SessionLoad<cr>", "Load Last Dir" },
 		f = { ":Telescope persisted<cr>", "Find Session" },
-	-- 	-- name = "SnipRun",
-	-- 	-- c = { "<cmd>SnipClose<cr>", "Close" },
-	-- 	-- f = { "<cmd>%SnipRun<cr>", "Run File" },
-	-- 	-- i = { "<cmd>SnipInfo<cr>", "Info" },
-	-- 	-- m = { "<cmd>SnipReplMemoryClean<cr>", "Mem Clean" },
-	-- 	-- r = { "<cmd>SnipReset<cr>", "Reset" },
-	-- 	-- t = { "<cmd>SnipRunToggle<cr>", "Toggle" },
-	-- 	-- x = { "<cmd>SnipTerminate<cr>", "Terminate" },
+		-- 	-- name = "SnipRun",
+		-- 	-- c = { "<cmd>SnipClose<cr>", "Close" },
+		-- 	-- f = { "<cmd>%SnipRun<cr>", "Run File" },
+		-- 	-- i = { "<cmd>SnipInfo<cr>", "Info" },
+		-- 	-- m = { "<cmd>SnipReplMemoryClean<cr>", "Mem Clean" },
+		-- 	-- r = { "<cmd>SnipReset<cr>", "Reset" },
+		-- 	-- t = { "<cmd>SnipRunToggle<cr>", "Toggle" },
+		-- 	-- x = { "<cmd>SnipTerminate<cr>", "Terminate" },
 	},
 
 	T = {
@@ -305,8 +271,6 @@ local mappings = {
 		["2"] = { ":2ToggleTerm<cr>", "2" },
 		["3"] = { ":3ToggleTerm<cr>", "3" },
 		["4"] = { ":4ToggleTerm<cr>", "4" },
-		-- n = { ":lua _NODE_TOGGLE()<cr>", "Node" },
-		-- t = { ":lua _HTOP_TOGGLE()<cr>", "Htop" },
 		-- p = { ":lua _PYTHON_TOGGLE()<cr>", "Python" },
 		f = { ":ToggleTerm direction=float<cr>", "Float" },
 		h = { ":ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
@@ -314,32 +278,32 @@ local mappings = {
 	},
 
 	t = {
-    name = "Tab",
-    -- t = {
-    --   ":lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
-    --   "Find Tab",
-    -- },
-    n = { ":tabnew %<cr>", "New Tab" },
-    c = { ":tabclose<cr>", "Close Tab" },
-    o = { ":tabonly<cr>", "Only Tab" },
+		name = "Tab",
+		-- t = {
+		--   ":lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>",
+		--   "Find Tab",
+		-- },
+		n = { ":tabnew %<cr>", "New Tab" },
+		c = { ":tabclose<cr>", "Close Tab" },
+		o = { ":tabonly<cr>", "Only Tab" },
 		-- name = "Treesitter",
 		-- h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
 		-- p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
 		-- name = "Test",
-  --   n = { "<cmd>lua require('neotest').run.run()" }, -- nearest test
-  --   d = { "<cmd>lua require('neotest').run.run(strategy = 'dap')" }, -- debug the nearest test
-  --   f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))" }, -- run the current file
-  --   s = { "<cmd>lua require('neotest').run.stop()" } -- stop the nearest test
+		--   n = { "<cmd>lua require('neotest').run.run()" }, -- nearest test
+		--   d = { "<cmd>lua require('neotest').run.run(strategy = 'dap')" }, -- debug the nearest test
+		--   f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))" }, -- run the current file
+		--   s = { "<cmd>lua require('neotest').run.stop()" } -- stop the nearest test
 	},
 }
 
 local vopts = {
 	mode = "v", -- VISUAL mode
 	prefix = "<leader>",
-	buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-	silent = true,  -- use `silent` when creating keymaps
+	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+	silent = true, -- use `silent` when creating keymaps
 	noremap = true, -- use `noremap` when creating keymaps
-	nowait = true,  -- use `nowait` when creating keymaps
+	nowait = true, -- use `nowait` when creating keymaps
 }
 local vmappings = {
 	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
@@ -349,4 +313,4 @@ local vmappings = {
 which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
-which_key.register(m_mappings, m_opts)
+-- which_key.register(m_mappings, m_opts)
