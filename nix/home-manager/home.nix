@@ -7,11 +7,13 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
+      clang
       awscli2          # Universal Command Line Interface for Amazon Web Services
-      azure-cli        # Azure Command-Line Interface
+      # azure-cli        # Azure Command-Line Interface
       google-cloud-sdk # Google Cloud Platform SDK
       terraform
       bat              # A cat(1) clone with wings
+      bun
       bottom           # Yet another cross-platform graphical process/system monitor.
       brave
       broot            # A new way to see and navigate directory trees
@@ -62,7 +64,9 @@
       moreutils
 #      mosh
       obsidian
-      ncdu
+      ncdu             # a disk usage analyzer with an ncurses interface
+      neofetch
+      fastfetch
       neovim
       ngrok
       nix-direnv
@@ -73,6 +77,7 @@
       ripgrep
       # ripgrep-all
       rustup
+      # sbt
       scala-cli
       sd
       shellcheck     # a static analysis tool for shell scripts - neovim
@@ -93,7 +98,7 @@
       zip
       zsh
 
-      # wezterm
+      wezterm
       # consul # service discovery
       # pre-commit
       # kubectlx # kubectl context switching
@@ -107,7 +112,6 @@
 #      glow
 #      gnome-browser-connector
 #      kitty
-     neofetch
 #      nomad # lightwight scheduler
 #      nvd
 #      podman
