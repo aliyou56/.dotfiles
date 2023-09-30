@@ -26,7 +26,7 @@ local servers = {
 	-- "clangd",
 	-- "ansiblels",
 	-- "dockerls",
-	-- "gopls",
+	"gopls",
 }
 
 local settings = {

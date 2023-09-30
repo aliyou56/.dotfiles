@@ -81,7 +81,7 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- Syntax / Treesitter
-	use("nvim-treesitter/nvim-treesitter")
+	use{ "nvim-treesitter/nvim-treesitter", run = ':TSUpdate' }
 	use("nvim-treesitter/nvim-treesitter-context")
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 
