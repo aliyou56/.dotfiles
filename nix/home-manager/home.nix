@@ -41,7 +41,8 @@
       git
       git-lfs
       go
-      graalvm17-ce
+      # graalvm-ce
+      jdk
       graphviz
       grype
       helix
@@ -77,6 +78,7 @@
       ripgrep
       # ripgrep-all
       rustup
+      # rust-analyzer
       # sbt
       scala-cli
       sd
