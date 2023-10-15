@@ -75,7 +75,7 @@ gitsigns.setup({
 	},
 })
 
-local dv_status_ok, diffview = pcall(require, "diffview")
-if dv_status_ok then
-	diffview.setup()
-end
+-- local dv_status_ok, diffview = pcall(require, "diffview")
+-- if dv_status_ok then
+-- 	diffview.setup()
+-- end

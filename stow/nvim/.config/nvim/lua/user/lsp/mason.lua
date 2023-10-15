@@ -15,8 +15,8 @@ local servers = {
 	"jsonls",
 	"lemminx", -- xml
 	"pyright",
-	-- "rust_analyzer",
-	-- "ruff_lsp",
+	"rust_analyzer",
+	"ruff_lsp",
 	"sqlls",
 	"lua_ls",
 	"yamlls",
@@ -33,9 +33,6 @@ local settings = {
 	ui = {
 		border = "rounded",
 		icons = {
-			-- package_installed = "◍",
-			-- package_pending = "◍",
-			-- package_uninstalled = "◍",
       package_installed = "✓",
 			package_pending = "➜",
 			package_uninstalled = "✗",
@@ -99,10 +96,10 @@ for _, server in pairs(servers) do
 	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
 	-- end
 
-	-- if server == "yamlls" then
-	-- 	local lsp_opts = require("user.lsp.settings.yamlls")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
+	if server == "yamlls" then
+		local lsp_opts = require("user.lsp.settings.yamlls")
+		opts = vim.tbl_deep_extend("force", lsp_opts, opts)
+	end
 
 	if server == "lua_ls" then
 		local lsp_opts = {
@@ -140,17 +137,17 @@ for _, server in pairs(servers) do
 	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
 	-- end
 
-	-- if server == "rust_analyzer" then
-	-- 	local lsp_opts = require("user.lsp.settings.rust")
-	-- 	-- opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- 	local rust_tools_status_ok, rust_tools = pcall(require, "rust_tools")
-	-- 	if not rust_tools_status_ok then
-	-- 		return
-	-- 	end
+	if server == "rust_analyzer" then
+		local lsp_opts = require("user.lsp.settings.rust")
+		opts = vim.tbl_deep_extend("force", lsp_opts, opts)
+		local rt_ok, rust_tools = pcall(require, "rust-tools")
+		if not rt_ok then
+			return
+		end
 
-	-- 	rust_tools.setuo(rust_opts)
-	-- 	goto continue
-	-- end
+		rust_tools.setup(lsp_opts)
+		goto continue
+	end
 
 	lspconfig[server].setup(opts)
 	::continue::

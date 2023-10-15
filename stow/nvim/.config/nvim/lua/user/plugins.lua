@@ -111,7 +111,17 @@ return packer.startup(function(use)
 
 	use("goolord/alpha-nvim") -- Startup
 	use("folke/which-key.nvim") -- Keybinding
-	use("kevinhwang91/nvim-bqf") -- Quickfix
+	use{
+    "kevinhwang91/nvim-bqf",
+    requires = {
+      'junegunn/fzf'
+    }
+  } -- Quickfix
+  -- optional
+  -- use {'junegunn/fzf', run = function()
+  --     vim.fn['fzf#install']()
+  -- end
+  -- }
 	use("kylechui/nvim-surround")
 	use("akinsho/toggleterm.nvim") -- Terminal
 	use("ahmedkhalf/project.nvim") -- Project
@@ -174,7 +184,7 @@ return packer.startup(function(use)
 	use("lewis6991/gitsigns.nvim")
 	use("f-person/git-blame.nvim")
 	use("ruifm/gitlinker.nvim")
-	use("sindrets/diffview.nvim") -- single tabpage interface for easily cycling through diff
+	-- use("sindrets/diffview.nvim") -- single tabpage interface for easily cycling through diff
 	-- Comment
 	use("numToStr/Comment.nvim")
 	use("folke/todo-comments.nvim") -- Highlight, list and search todo comments.

@@ -8,18 +8,18 @@ require("user.functions")
 require("user.cmp")
 require("user.lsp")
 -- require("user.dap")
-require("user.persisted") -- Simple session management for Neovim with git branching, autoloading and Telescope support
-require("user.bqf") -- Better Quick Fix
-require("user.ufo") -- Ultra Fold in Neovim
-require("user.git") -- git-blame - gitsigns - gitlinker - diffview
-require("user.alpha") -- programmable greeter
-require("user.telescope") -- Find, Filter, Preview, Pick.
-require("user.treesitter") -- incremental parsing system for programming tools
-require("user.toggleterm") -- manage multiple terminal windows
-require("user.nvim-tree") -- file explorer
+require("user.persisted")     -- Simple session management for Neovim with git branching, autoloading and Telescope support
+require("user.bqf")           -- Better Quick Fix
+require("user.ufo")           -- Ultra Fold in Neovim
+require("user.git")           -- git-blame - gitsigns - gitlinker - diffview
+require("user.alpha")         -- programmable greeter
+require("user.telescope")     -- Find, Filter, Preview, Pick.
+require("user.treesitter")    -- incremental parsing system for programming tools
+require("user.toggleterm")    -- manage multiple terminal windows
+require("user.nvim-tree")     -- file explorer
 require("user.nvim-webdev-icons")
 require("user.nvim-navic")
-require("user.comment") -- comment - todo-comments
+require("user.comment")       -- comment - todo-comments
 require("user.lualine")
 require("user.project")
 require("user.notify")
@@ -43,3 +43,4 @@ require("user.numb") -- Peeking the buffer while entering command :{number} requ
 
 -- require "user.bufferline"
 -- require("user.hop")
+

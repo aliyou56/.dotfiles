@@ -48,26 +48,14 @@ configs.setup({
 	},
 })
 
--- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
--- parser_config.scala = {
---   install_info = {
---     -- url can be Git repo or a local directory:
---     -- url = "~/work/tree-sitter-scala",
---     url = "https://github.com/eed3si9n/tree-sitter-scala.git",
---     branch = "fork-integration",
---     files = {"src/parser.c", "src/scanner.c"},
---     requires_generate_from_grammar = false,
---   },
--- }
+-- local ctx_status_ok, treesitter_context = pcall(require, "nvim-treesitter-context")
+-- if not ctx_status_ok then
+-- 	return
+-- end
 
-local ctx_status_ok, treesitter_context = pcall(require, "nvim-treesitter-context")
-if not ctx_status_ok then
-	return
-end
-
-treesitter_context.setup({
-	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-	max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-	min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-})
+-- treesitter_context.setup({
+--   enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+--   max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+--   trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+--   min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+-- })

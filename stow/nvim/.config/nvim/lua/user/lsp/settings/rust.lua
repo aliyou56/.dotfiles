@@ -64,13 +64,8 @@ return {
     },
   },
   server = {
-    --[[
-        $ mkdir -p ~/.local/bin
-        $ curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/.local/bin/rust-analyzer
-        $ chmod +x ~/.local/bin/rust-analyzer
-    --]]
-    -- cmd = { os.getenv "HOME" .. "/.local/bin/rust-analyzer" },
-    cmd = { "rustup", "run", "nightly", os.getenv "HOME" .. "/.local/bin/rust-analyzer" },
+    -- cmd = { os.getenv "HOME" .. "/.nix-profile/bin/rust-analyzer" },
+    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
     on_attach = require("user.lsp.handlers").on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
 
@@ -86,41 +81,3 @@ return {
     },
   },
 }
--- return {
---   settings = {
---     rust_analyzer = {
---       inlayHints = {
---         bindingModeHints = {
---           enable = true,
---         },
---         typeHints = {
---           enable = true,
---           hideClosureInitialization = false,
---           hideNamedConstructor = false,
---         },
---         chainingHints = {
---           enable = true,
---         },
---         closingBraceHints = {
---           enable = true,
---           minLines = 25,
---         },
---         closureReturnTypeHints = {
---           enable = "never",
---         },
---         lifetimeElisionHints = {
---           enable = "never",
---           useParameterNames = false,
---           maxLength = 25,
---         },
---         parameterHints = {
---           enable = true,
---         },
---         reborrowHints = {
---           enable = "never",
---         },
---         renderColons = true,
---       },
---     },
---   },
--- }
