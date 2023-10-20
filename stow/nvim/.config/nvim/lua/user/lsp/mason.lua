@@ -20,20 +20,20 @@ local servers = {
 	"sqlls",
 	"lua_ls",
 	"yamlls",
+	"gopls",
+	"ansiblels",
+	"dockerls",
 	-- "zk",
+	-- "clangd",
 	-- "tsserver",
 	-- "cssls",
-	-- "clangd",
-	-- "ansiblels",
-	-- "dockerls",
-	"gopls",
 }
 
 local settings = {
 	ui = {
 		border = "rounded",
 		icons = {
-      package_installed = "✓",
+			package_installed = "✓",
 			package_pending = "➜",
 			package_uninstalled = "✗",
 		},
@@ -63,22 +63,6 @@ for _, server in pairs(servers) do
 
 	server = vim.split(server, "@")[1]
 
-	-- if server == "bashls" then
-	-- 	local lsp_opts = require("user.lsp.settings.bashls")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
-	-- if server == "cssls" then
-	-- 	local lsp_opts = require("user.lsp.settings.cssls")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
-	-- if server == "elixirls" then
-	-- 	local lsp_opts = require("user.lsp.settings.elixirls")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
-	-- if server == "html" then
-	-- 	local lsp_opts = require("user.lsp.settings.html")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
 	-- if server == "jsonls" then
 	-- 	local jsonls_opts = require("user.lsp.settings.jsonls")
 	-- 	opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
@@ -114,19 +98,14 @@ for _, server in pairs(servers) do
 							[vim.fn.stdpath("config") .. "/lua"] = true,
 						},
 					},
-          telemetry = {
-            enable = false,
-          },
+					telemetry = {
+						enable = false,
+					},
 				},
 			},
 		}
 		opts = vim.tbl_deep_extend("force", lsp_opts, opts)
 	end
-
-	-- if server == "tsserver" then
-	-- 	local lsp_opts = require("user.lsp.settings.tsserver")
-	-- 	opts = vim.tbl_deep_extend("force", lsp_opts, opts)
-	-- end
 
 	if server == "pyright" then
 		local lsp_opts = require("user.lsp.settings.pyright")

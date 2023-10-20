@@ -33,7 +33,7 @@ require("user.lsp.lsp-signature")
 require("user.lsp.mason")
 require("user.lsp.handlers").setup()
 require("user.lsp.metals")
-require("user.lsp.null-ls")
+require("user.lsp.none-ls")
 require("user.lsp.lsp-saga")
 
 return M

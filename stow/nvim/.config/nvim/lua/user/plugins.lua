@@ -50,7 +50,7 @@ return packer.startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 	use("scalameta/nvim-metals")
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	use("nvimtools/none-ls.nvim") -- for formatters and linters
 	use("ray-x/lsp_signature.nvim") -- Show function signature when you type
 	use("SmiteshP/nvim-navic")
 	-- use "simrat39/symbols-outline.nvim"
@@ -235,32 +235,6 @@ return packer.startup(function(use)
 	-- 	},
 	-- })
 	-- use "vim-test/vim-test"
-
-	-- Code Runner
-	-- use "is0n/jaq-nvim" -- TODO
-
-	-- Markdown
-	-- use "iamcco/markdown-review"
-
-	-- "windwp/nvim-spectre",
-	-- "mattn/webapi-vim",
-	-- use("simrat39/rust-tools.nvim" ),
-	-- "olexsmir/gopher.nvim",
-	-- "jose-elias-alvarez/typescript.nvim",
-	-- "mxsdev/nvim-dap-vscode-js",
-	-- use({
-	--   "saecki/crates.nvim",
-	--   tag = "v0.3.0",
-	--   requires = { "nvim-lua/plenary.nvim" },
-	--   config = function()
-	--     require("crates").setup {
-	--       null_ls = {
-	--         enabled = true,
-	--         name = "crates.nvim",
-	--       },
-	--     }
-	--   end,
-	-- } )
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

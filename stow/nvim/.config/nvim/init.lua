@@ -28,7 +28,6 @@ require("user.indentline")
 -- require("user.harpoon")
 require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
 require("user.inlay-hints")
--- require("user.winbar")
 require("user.whichkey")
 -- require("user.zen-mode")
 require("user.neoscroll") -- Smooth scrolling
@@ -36,11 +35,6 @@ require("user.better-escape")
 
 require("user.surround")
 require("user.fidget") -- Standalone UI for nvim-lsp progress
-require("user.numb") -- Peeking the buffer while entering command :{number} require("user.zen-mode")
-
--- require("user.cybu") -- cycling buffers in the form of a customizable notification window
--- require("user.neotest")
+require("user.numb")   -- Peeking the buffer while entering command :{number} require("user.zen-mode")
 
 -- require "user.bufferline"
--- require("user.hop")
-
