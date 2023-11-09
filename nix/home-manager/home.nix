@@ -12,6 +12,7 @@
       # azure-cli        # Azure Command-Line Interface
       google-cloud-sdk # Google Cloud Platform SDK
       terraform
+      duckdb
       bat              # A cat(1) clone with wings
       bun
       bottom           # Yet another cross-platform graphical process/system monitor.
@@ -67,7 +68,7 @@
       obsidian
       ncdu             # a disk usage analyzer with an ncurses interface
       neofetch
-      fastfetch
+      # fastfetch
       neovim
       ngrok
       nix-direnv
@@ -82,6 +83,7 @@
       # sbt
       scala-cli
       sd
+      sad
       shellcheck     # a static analysis tool for shell scripts - neovim
       sqlfluff       # A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
       slack
