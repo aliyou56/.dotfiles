@@ -102,11 +102,10 @@ plugins=(
 
   # mosh
   # zsh-autocomplete
-  # autoswitch_virtualenv
 )
 
 source $ZSH/oh-my-zsh.sh
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # User configuration
 

@@ -7,21 +7,22 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
+      imagemagick
       clang
-      awscli2          # Universal Command Line Interface for Amazon Web Services
+      # awscli2          # Universal Command Line Interface for Amazon Web Services
       # azure-cli        # Azure Command-Line Interface
       google-cloud-sdk # Google Cloud Platform SDK
-      terraform
-      duckdb
+      # terraform
+      # duckdb
       bat              # A cat(1) clone with wings
-      bun
+      # bun
       bottom           # Yet another cross-platform graphical process/system monitor.
       brave
       broot            # A new way to see and navigate directory trees
       cachix           # Command line client for Nix binary cache hosting
-      cargo-edit       # Easy Rust dependency management
-      cargo-graph      # Rust dependency graphs
-      cargo-watch      # watch rust project and execute custom commands upon change
+      # cargo-edit       # Easy Rust dependency management
+      # cargo-graph      # Rust dependency graphs
+      # cargo-watch      # watch rust project and execute custom commands upon change
       clickhouse       # for clickhouse-client
       coursier         # Pure Scala Artifact Fetching
       dbeaver          # Free universal database tool and SQL client
@@ -35,6 +36,7 @@
       eza              # A modern replacement for ‘ls’
       fd               # A simple, fast and user-friendly alternative to 'find'
       # figlet           # creates large characters out of ordinary screen characters
+      # fish
       fx               # Terminal JSON viewer
       fzf              # A command-line fuzzy finder
       # gettext
@@ -65,7 +67,7 @@
       minikube
       moreutils
 #      mosh
-      obsidian
+      # obsidian
       ncdu             # a disk usage analyzer with an ncurses interface
       neofetch
       # fastfetch
@@ -81,7 +83,7 @@
       rustup
       # rust-analyzer
       # sbt
-      scala-cli
+      # scala-cli
       sd
       sad
       shellcheck     # a static analysis tool for shell scripts - neovim
@@ -102,7 +104,7 @@
       zip
       zsh
 
-      wezterm
+      # wezterm
       # consul # service discovery
       # pre-commit
       # kubectlx # kubectl context switching

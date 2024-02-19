@@ -5,6 +5,7 @@ alias br='bloop exit && bloop about'
 alias ssh='kitty +kitten ssh'
 alias c='code .'
 alias sc='scala-cli'
+alias scr='sc repl'
 alias ce='code . && exit'
 # alias dg-with-tests='bloop projects --dot-graph | dot -Tsvg -o dependency-graph.svg'
 # alias dg='bloop projects --dot-graph | sed "/-test/d" | dot -Tsvg -o dependency-graph.svg'
@@ -34,7 +35,7 @@ alias update='\
   sudo apt -y autoremove && \
   cs update && \
   hmu && \
-  rustup update \
+  rustup update && \
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
