@@ -7,25 +7,28 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
-      imagemagick
+      boundary
+      # bruno
       clang
+      zoxide           # A smarter cd command
+      btop
       # awscli2          # Universal Command Line Interface for Amazon Web Services
       # azure-cli        # Azure Command-Line Interface
-      google-cloud-sdk # Google Cloud Platform SDK
+      # google-cloud-sdk # Google Cloud Platform SDK
       # terraform
       # duckdb
       bat              # A cat(1) clone with wings
       # bun
       bottom           # Yet another cross-platform graphical process/system monitor.
       brave
-      broot            # A new way to see and navigate directory trees
+      # broot            # A new way to see and navigate directory trees
       cachix           # Command line client for Nix binary cache hosting
-      # cargo-edit       # Easy Rust dependency management
-      # cargo-graph      # Rust dependency graphs
-      # cargo-watch      # watch rust project and execute custom commands upon change
+      cargo-edit       # Easy Rust dependency management
+      # cargo-graph      # !! Rust dependency graphs
+      cargo-watch      # watch rust project and execute custom commands upon change
       clickhouse       # for clickhouse-client
       coursier         # Pure Scala Artifact Fetching
-      dbeaver          # Free universal database tool and SQL client
+      dbeaver-bin          # Free universal database tool and SQL client
       delta            # A syntax-highlighting pager for git, diff, and grep output
       direnv           # load/unload env variables. unclutter your .profile
       dive             # A tool for exploring each layer in a docker image
@@ -46,63 +49,68 @@
       go
       # graalvm-ce
       jdk
-      graphviz
-      grype
+      # graphviz
       helix
       htop
-      httpie        # modern, user-friendly command-line HTTP client for the API era
-      hyperfine     # A command-line benchmarking tool
+      httpie          # modern, user-friendly command-line HTTP client for the API era
+      hyperfine       # A command-line benchmarking tool
       insomnia
-      ipfetch
-      jq            # Command-line JSON processor
+      # ipfetch
+      jq              # Command-line JSON processor
       keychain
       kind
       kubectl
       kubernetes-helm
-      lazydocker    # The lazier way to manage everything docker
-      lazygit       # simple terminal UI for git commands Topics
+      lazydocker      # The lazier way to manage everything docker
+      lazygit         # simple terminal UI for git commands Topics
       less
       luarocks
-      mdcat
+      # mdcat
       minikube
       moreutils
-#      mosh
       # obsidian
       ncdu             # a disk usage analyzer with an ncurses interface
       neofetch
       # fastfetch
       neovim
-      ngrok
+      # ngrok
       nix-direnv
       nodejs
       ookla-speedtest
       pqrs # parquet
-      protonvpn-gui
+      # protonvpn-gui
       ripgrep
       # ripgrep-all
       rustup
       # rust-analyzer
       # sbt
       # scala-cli
-      sd
-      sad
-      shellcheck     # a static analysis tool for shell scripts - neovim
-      sqlfluff       # A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
-      slack
+      sd              # Intuitive find & replace CLI (sed alternative)
+      sad             # CLI search and replace | Space Age seD
+      shellcheck      # a static analysis tool for shell scripts - neovim
+      sqlfluff        # A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
+      # slack
       stow
       tldr
       tokei
       tree
-      trivy
       unzip
       virt-manager
-      vlc
+      # vlc
       vscode
       wget
       wl-clipboard
+      yarn # Node.js package manager
       yq-go
       zip
       zsh
+
+      grype           # A vulnerability scanner for container images and filesystems
+      trivy            # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
+
+      # rarely used tools
+      img2pdf
+      # imagemagick # to be removed ??
 
       # wezterm
       # consul # service discovery
@@ -131,7 +139,6 @@
 #      vault # secret management
 #      watchexec # Filesystem watcher/executor
       # xsv # CSV parsing utility
-#      yarn # Node.js package manager
     ];
 
     stateVersion = "23.05";
