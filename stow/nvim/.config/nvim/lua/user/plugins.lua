@@ -73,30 +73,24 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lua")
 	use({
 		"tzachar/cmp-tabnine",
-		 run = "./install.sh",
+		run = "./install.sh",
 	})
 
 	-- snippets
-	use("L3MON4D3/LuaSnip") -- snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+	-- use("L3MON4D3/LuaSnip") -- snippet engine
+	-- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- Syntax / Treesitter
-	use{ "nvim-treesitter/nvim-treesitter", run = ':TSUpdate' }
-	use("nvim-treesitter/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter")
+	-- use("nvim-treesitter/nvim-treesitter-context")
 	use("nvim-treesitter/nvim-treesitter-textobjects")
-
-	-- Marks
-	-- use "MattesGroeger/vim-bookmarks"
 
 	-- Fuzzy Finder / Telescope
 	use("nvim-telescope/telescope.nvim")
 	use("nvim-telescope/telescope-media-files.nvim")
-	-- use "tom-anders/telescope-vim-bookmarks.nvim"
 
 	-- Color
 	use("norcalli/nvim-colorizer.lua")
-	-- use "NvChad/nvim-colorizer.nvim"
-	-- use "nvim-colortils/colortils.nvim"
 
 	-- Colorschemes
 	use("rebelot/kanagawa.nvim")
@@ -117,11 +111,6 @@ return packer.startup(function(use)
       'junegunn/fzf'
     }
   } -- Quickfix
-  -- optional
-  -- use {'junegunn/fzf', run = function()
-  --     vim.fn['fzf#install']()
-  -- end
-  -- }
 	use("kylechui/nvim-surround")
 	use("akinsho/toggleterm.nvim") -- Terminal
 	use("ahmedkhalf/project.nvim") -- Project
@@ -139,7 +128,7 @@ return packer.startup(function(use)
   use({ "glepnir/lspsaga.nvim", branch = "main" })
 
 	-- Utility / Editing Support
-	use({ "kevinhwang91/nvim-ufo", 
+	use({ "kevinhwang91/nvim-ufo",
     requires = {
       "kevinhwang91/promise-async",
       {
@@ -161,9 +150,7 @@ return packer.startup(function(use)
   use { 'anuvyklack/fold-preview.nvim',
     requires = 'anuvyklack/keymap-amend.nvim',
     config = function()
-        require('fold-preview').setup({
-          -- Your configuration goes here.
-        })
+        require('fold-preview').setup()
     end
   }
 	use("rcarriga/nvim-notify")
@@ -179,7 +166,6 @@ return packer.startup(function(use)
 		end,
 	})
 	use("max397574/better-escape.nvim")
-	-- use "lalitmee/browse.nvim"
 	-- Git
 	use("lewis6991/gitsigns.nvim")
 	use("f-person/git-blame.nvim")
@@ -211,9 +197,9 @@ return packer.startup(function(use)
 		end,
 	})
 	-- Debugging - DAP
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("mfussenegger/nvim-dap-python")
+	-- use("mfussenegger/nvim-dap")
+	-- use("rcarriga/nvim-dap-ui")
+	-- use("mfussenegger/nvim-dap-python")
 
 	-- Tabline
 	-- use "akinsho/bufferline.nvim"

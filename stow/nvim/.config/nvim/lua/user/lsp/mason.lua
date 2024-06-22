@@ -16,17 +16,12 @@ local servers = {
 	"lemminx", -- xml
 	"pyright",
 	"rust_analyzer",
-	"ruff_lsp",
+	-- "ruff_lsp",
 	"sqlls",
 	"lua_ls",
 	"yamlls",
 	"gopls",
-	"ansiblels",
 	"dockerls",
-	-- "zk",
-	-- "clangd",
-	-- "tsserver",
-	-- "cssls",
 }
 
 local settings = {

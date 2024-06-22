@@ -24,7 +24,7 @@ metals_conf = {
 }
 
 metals_conf.on_attach = function(client, bufnr)
-	metals.setup_dap()
+	-- metals.setup_dap()
 	require("user.lsp.handlers").on_attach(client, bufnr)
 
   local opts = { noremap = true, silent = true }

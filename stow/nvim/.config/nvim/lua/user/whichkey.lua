@@ -88,33 +88,10 @@ local m_opts = {
 }
 
 local m_mappings = {
-	-- a = { "<cmd>BookmarkAnnotate<cr>", "Annotate" },
-	-- c = { "<cmd>BookmarkClear<cr>", "Clear" },
-	-- m = { "<cmd>BookmarkToggle<cr>", "Toggle" },
-	-- h = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
-	-- k = { "<cmd>BookmarkPrev<cr>", "Prev" },
-	-- s = { "<cmd>BookmarkShowAll<cr>", "Prev" },
-	-- s = {
-	--   "<cmd>lua require('telescope').extensions.vim_bookmarks.all({ hide_filename=false, prompt_title=\"bookmarks\", shorten_path=false })<cr>",
-	--   "Show",
-	-- },
-	-- x = { "<cmd>BookmarkClearAll<cr>", "Clear All" },
-	-- u = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
-	--  v = { "<cmd>vsplit<cr>", "vsplit" }
-
 	m = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
 	["."] = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', "Harpoon Next" },
 	[","] = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', "Harpoon Prev" },
-	-- l = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
-	-- j = { "<cmd>silent BookmarkNext<cr>", "Next" },
 	s = { "<cmd>Telescope harpoon marks<cr>", "Search Files" },
-	-- k = { "<cmd>silent BookmarkPrev<cr>", "Prev" },
-	-- S = { "<cmd>silent BookmarkShowAll<cr>", "Prev" },
-	-- -- s = {
-	-- --   "<cmd>lua require('telescope').extensions.vim_bookmarks.all({ hide_filename=false, prompt_title=\"bookmarks\", shorten_path=false })<cr>",
-	-- --   "Show",
-	-- -- },
-	-- x = { "<cmd>BookmarkClearAll<cr>", "Clear All" },
 	[";"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
 }
 
@@ -128,29 +105,13 @@ local mappings = {
 	["w"] = { "<cmd>w<CR>", "Write" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No HL" },
 	["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
-	["/"] = { '<cmd>lua require("Comment.api").toggle_linewise()<CR>', "Comment" },
+	-- ["/"] = { '<cmd>lua require("Comment.api").toggle_linewise)<CR>', "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-	-- ["u"] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
 	["v"] = { "<cmd>vsplit<cr>", "vsplit" },
 
-	-- ["f"] = {
-	--   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-	--   "Find files",
-	-- },
-	-- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-	-- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
-	["z"] = { "<cmd>ZenMode<cr>", "Zen" },
+	-- ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
 	["gy"] = "Link",
-
-	-- p = {
-	-- 	name = "Packer",
-	-- 	c = { "<cmd>PackerCompile<cr>", "Compile" },
-	-- 	i = { "<cmd>PackerInstall<cr>", "Install" },
-	-- 	s = { "<cmd>PackerSync<cr>", "Sync" },
-	-- 	S = { "<cmd>PackerStatus<cr>", "Status" },
-	-- 	u = { "<cmd>PackerUpdate<cr>", "Update" },
-	-- },
 
 	o = {
 		name = "Options",
@@ -179,12 +140,13 @@ local mappings = {
 		b = { ":Telescope git_branches<cr>", "Checkout branch" },
 		c = { ":Telescope colorscheme<cr>", "Colorscheme" },
 		f = {
+	--   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 			":lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
 			"Find files",
 		},
 		t = { ":Telescope live_grep theme=ivy<cr>", "Find Text" },
 		h = { ":Telescope help_tags<cr>", "Help" },
-		i = { ":lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+		-- i = { ":lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
 		l = { ":Telescope resume<cr>", "Last Search" },
 		M = { ":Telescope man_pages<cr>", "Man Pages" },
 		r = { ":Telescope oldfiles<cr>", "Recent File" },
@@ -239,16 +201,6 @@ local mappings = {
 		-- u = { ":LuaSnipUnlinkCurrent<cr>", "Unlink Snippet" },
 	},
 
-	-- s = {
-	--   name = "Surround",
-	--   ["."] = { "<cmd>lua require('nvim-surround').repeat_last()<cr>", "Repeat" },
-	--   a = { "<cmd>lua require('nvim-surround').surround_add(true)<cr>", "Add" },
-	--   d = { "<cmd>lua require('nvim-surround').surround_delete()<cr>", "Delete" },
-	--   r = { "<cmd>lua require('nvim-surround').surround_replace()<cr>", "Replace" },
-	--   q = { "<cmd>lua require('nvim-surround').toggle_quotes()<cr>", "Quotes" },
-	--   b = { "<cmd>lua require('nvim-surround').toggle_brackets()<cr>", "Brackets" },
-	-- },
-
 	S = {
 		name = "Session",
 		s = { ":SessionSave<cr>", "Save" },
@@ -297,20 +249,20 @@ local mappings = {
 	},
 }
 
-local vopts = {
-	mode = "v", -- VISUAL mode
-	prefix = "<leader>",
-	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-	silent = true, -- use `silent` when creating keymaps
-	noremap = true, -- use `noremap` when creating keymaps
-	nowait = true, -- use `nowait` when creating keymaps
-}
-local vmappings = {
-	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
-	-- s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
-}
+-- local vopts = {
+-- 	mode = "v", -- VISUAL mode
+-- 	prefix = "<leader>",
+-- 	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+-- 	silent = true, -- use `silent` when creating keymaps
+-- 	noremap = true, -- use `noremap` when creating keymaps
+-- 	nowait = true, -- use `nowait` when creating keymaps
+-- }
+-- local vmappings = {
+-- 	["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise(vim.fn.visualmode())<CR>', "Comment" },
+-- 	-- s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
+-- }
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
--- which_key.register(m_mappings, m_opts)
+-- which_key.register(vmappings, vopts)
+which_key.register(m_mappings, m_opts)

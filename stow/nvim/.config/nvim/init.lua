@@ -24,7 +24,7 @@ require("user.lualine")
 require("user.project")
 require("user.notify")
 require("user.autopairs")
-require("user.indentline")
+require("user.ibl")
 -- require("user.harpoon")
 require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
 require("user.inlay-hints")
@@ -37,4 +37,10 @@ require("user.surround")
 require("user.fidget") -- Standalone UI for nvim-lsp progress
 require("user.numb")   -- Peeking the buffer while entering command :{number} require("user.zen-mode")
 
--- require "user.bufferline"
+-- -- require "user.bufferline"
+-- vim.keymap.set({ 'n' }, '<C-k>', function()       require('lsp_signature').toggle_float_win()
+--     end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+--     vim.keymap.set({ 'n' }, '<Leader>k', function()
+--      vim.lsp.buf.signature_help()
+--     end, { silent = true, noremap = true, desc = 'toggle signature' })
