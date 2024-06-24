@@ -39,6 +39,7 @@ alias update='\
   nvim --headless +PackerSync +qall'
 
 alias v='nvim'
+alias fv='v $(fzf)'
 alias gt='git ls-tree -r --name-only HEAD | tree --fromfile'
 
 # Git and GitHub
