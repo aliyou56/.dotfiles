@@ -14,7 +14,7 @@
     - name: Download Hack
       when: hack_exists is failed
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip
         dest: "{{ lookup('env', 'HOME') }}/.fonts/"
         remote_src: yes
 

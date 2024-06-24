@@ -6,7 +6,7 @@
         path: "{{ lookup('env', 'HOME') }}/.fonts"
         state: directory
 
-    - name: CascadiaCode exists 
+    - name: CascadiaCode exists
       shell: "ls {{ lookup('env', 'HOME') }}/.fonts/CascadiaCode*Nerd*Font*Complete*"
       register: hack_exists
       ignore_errors: yes
@@ -14,7 +14,7 @@
     - name: Download CascadiaCode
       when: hack_exists is failed
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip
         dest: "{{ lookup('env', 'HOME') }}/.fonts/"
         remote_src: yes
 
