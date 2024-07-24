@@ -17,7 +17,27 @@ function M.config()
   }
 
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "lua", "elixir", "markdown", "markdown_inline", "bash", "python", "rust", "scala", "java" },
+    ensure_installed = {
+      "bash",
+      "c",
+      "css",
+      "elixir",
+      "heex",
+      "java",
+      "javascript",
+      "json",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "ruby",
+      "rust",
+      "scala",
+      "tsx",
+      "unison",
+      "typescript",
+      "yaml",
+    },
     ignore_install = { "" },
     sync_install = false,
     highlight = {

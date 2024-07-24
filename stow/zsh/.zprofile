@@ -1,9 +1,12 @@
 
-export PATH="$PATH:/home/aliyou/.cache/scalacli/local-repo/bin/scala-cli"
+export PATH="$PATH:$HOME/.cache/scalacli/local-repo/bin/scala-cli"
 
-# Created by `pipx` on 2022-10-07 21:35:03
-export PATH="$PATH:/home/aliyou/.local/bin"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+  export PATH="$PATH:$HOME/.local/bin"
+end
 
+# fix app icons (installed by nix)
 if [ -n ${XDG_SESSION_ID} ];then
     if [ -d ~/.nix-profile ];then
         for x in $(find ~/.nix-profile/share/applications/*.desktop);do

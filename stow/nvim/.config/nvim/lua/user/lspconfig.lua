@@ -113,11 +113,11 @@ function M.config()
   local servers = {
     -- -- "basedpyright",
     -- "marksman",
-    -- "tailwindcss",
-    -- "eslint",
+    "tailwindcss",
+    "eslint",
 
     "bashls",
-    -- "cssls",
+    "cssls",
     "elixirls",
     "html",
     "jsonls",
@@ -130,6 +130,8 @@ function M.config()
     "yamlls",
     "gopls",
     "dockerls",
+    "solargraph",
+    -- "unison",
   }
 
   vim.diagnostic.config {
@@ -171,6 +173,12 @@ function M.config()
     end
 
     lspconfig[server].setup(opts)
+
+    if server == "elixirls" then
+      require("lspconfig").elixirls.setup {
+        cmd = { os.getenv("HOME") .. "/.local/share/nvim/mason/bin/elixir-ls" },
+      }
+    end
 
     -- if server == "nginx-language-server" then
     --   require("lspconfig").nginx_language_server.setup(opts)

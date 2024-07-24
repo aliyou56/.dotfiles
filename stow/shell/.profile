@@ -27,13 +27,12 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # >>> coursier install directory >>>
-export PATH="$PATH:/home/aliyou/.local/share/coursier/bin"
+export PATH="$PATH:$HOME/.local/share/coursier/bin"
 # <<< coursier install directory <<<
-. "$HOME/.cargo/env"
 
-export PATH="$PATH:/home/aliyou/.cache/scalacli/local-repo/bin/scala-cli"
+export PATH="$PATH:$HOME/.cache/scalacli/local-repo/bin/scala-cli"
 
-if [ -e /home/aliyou/.nix-profile/etc/profile.d/nix.sh ]; then . /home/aliyou/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # fix app icons (installed by nix)
 if [ -n "${XDG_SESSION_ID}" ];then
