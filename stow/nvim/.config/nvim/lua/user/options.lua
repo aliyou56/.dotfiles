@@ -1,14 +1,14 @@
 local options = {
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  cmdheight = 0,                           -- more space in the neovim command line for displaying messages
+  cmdheight = 1,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
-  conceallevel = 3,                        -- so that `` is visible in markdown files
+  conceallevel = 0,                        -- so that `` is visible in markdown files
   confirm = true,
   cursorline = true,                       -- highlight the current line
   expandtab = true,                        -- convert tabs to spaces
-  fileencoding = "utf-8",                  -- the encoding written to a file
-  -- guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  -- fileencoding = "utf-8",                  -- the encoding written to a file
+  guifont = "monospace:h17",               -- the font used in graphical neovim applications
   hlsearch = true,                         -- highlight all matches on previous search pattern
   ignorecase = true,                       -- ignore case in search patterns
   inccommand = "nosplit", -- preview incremental substitute
@@ -16,6 +16,7 @@ local options = {
   list = true, -- Show some invisible characters (tabs...
   mouse = "a",                             -- allow the mouse to be used in neovim
   number = true,                           -- set numbered lines
+  pumblend = 10,                          -- pop up menu height
   pumheight = 10,                          -- pop up menu height
   relativenumber = true,                   -- set relative numbered lines
   ruler = false,
@@ -25,7 +26,7 @@ local options = {
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   showcmd = false,
   showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
-  showtabline = 0,                         -- always show tabs
+  showtabline = 1,                         -- always show tabs
   sidescrolloff = 8, -- Columns of context
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   smartcase = true,                        -- D'ont ignore case with capitals
@@ -59,21 +60,15 @@ local options = {
 }
 
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
--- vim.opt.fillchars = vim.opt.fillchars + "eob: "
--- vim.opt.fillchars:append({
--- 	stl = " ",
---   foldopen = "",
---   foldclose = ""
--- })
-vim.opt.shortmess:append("c")
-vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.iskeyword:append("-")
+vim.opt.shortmess:append "c"
+vim.opt.whichwrap:append "<,>,[,],h,l"
+vim.opt.iskeyword:append "-"
 
 for k, v in pairs(options) do
-	vim.opt[k] = v
+  vim.opt[k] = v
 end
 
 -- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+-- vim.g.markdown_recommended_style = 0
 -- vim.g.python3_host_prog = '/home/aliyou/py3nvim/bin/python'
 

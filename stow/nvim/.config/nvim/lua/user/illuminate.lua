@@ -1,49 +1,37 @@
-local status_ok, illuminate = pcall(require, "illuminate")
-if not status_ok then
-  return
+local M = {
+  "RRethy/vim-illuminate",
+  event = "VeryLazy",
+} -- automatically highlighting other uses of the word under the cursor using either LSP, Tree-sitter, or regex matching.
+
+function M.config()
+  require("illuminate").configure {
+    filetypes_denylist = {
+      "mason",
+      "harpoon",
+      "DressingInput",
+      "NeogitCommitMessage",
+      "qf",
+      "dirvish",
+      "oil",
+      "minifiles",
+      "fugitive",
+      "alpha",
+      "NvimTree",
+      "lazy",
+      "NeogitStatus",
+      "Trouble",
+      "netrw",
+      "lir",
+      "DiffviewFiles",
+      "Outline",
+      "Jaq",
+      "spectre_panel",
+      "toggleterm",
+      "DressingSelect",
+      "TelescopePrompt",
+      "neo-tree",
+    },
+  }
 end
 
--- default configuration
-illuminate.configure {
-  -- providers: provider used to get references in the buffer, ordered by priority
-  providers = {
-    "lsp",
-    "treesitter",
-    "regex",
-  },
-  -- delay: delay in milliseconds
-  delay = 120,
-  -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
-  filetypes_denylist = {
-    "dirvish",
-    "fugitive",
-    "alpha",
-    "NvimTree",
-    "packer",
-    "neogitstatus",
-    "Trouble",
-    "lir",
-    "Outline",
-    "spectre_panel",
-    "toggleterm",
-    "DressingSelect",
-    "TelescopePrompt",
-  },
-  -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
-  filetypes_allowlist = {},
-  -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
-  modes_denylist = {},
-  -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
-  modes_allowlist = {},
-  -- providers_regex_syntax_denylist: syntax to not illuminate, this overrides providers_regex_syntax_allowlist
-  -- Only applies to the 'regex' provider
-  -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
-  providers_regex_syntax_denylist = {},
-  -- providers_regex_syntax_allowlist: syntax to illuminate, this is overriden by providers_regex_syntax_denylist
-  -- Only applies to the 'regex' provider
-  -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
-  providers_regex_syntax_allowlist = {},
-  -- under_cursor: whether or not to illuminate under the cursor
-  under_cursor = true,
-}
-
+return M

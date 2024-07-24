@@ -35,8 +35,8 @@ alias update='\
   sudo apt -y autoremove && \
   cs update && \
   hmu && \
-  rustup update && \
-  nvim --headless +PackerSync +qall'
+  rustup update'
+# nvim --headless +PackerSync +qall'
 
 alias v='nvim'
 alias fv='v $(fzf)'

@@ -1,3 +1,11 @@
+
+-- Fixes Autocomment
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  callback = function()
+    vim.cmd "set formatoptions-=cro"
+  end,
+})
+
 -- Remove statusline and tabline when in Alpha
 vim.api.nvim_create_autocmd({ "User" }, {
   pattern = { "AlphaReady" },
@@ -15,9 +23,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "Trouble" },
   callback = function()
     vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      nnoremap <silent> <buffer> <esc> :close<CR> 
-      set nobuflisted 
+      nnoremap <silent> <buffer> q :close<CR>
+      " nnoremap <silent> <buffer> <esc> :close<CR>
+      set nobuflisted
     ]]
   end,
 })
@@ -28,9 +36,9 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     local buf_ft = vim.bo.filetype
     if buf_ft == "" or buf_ft == nil then
       vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      nnoremap <silent> <buffer> <c-j> j<CR> 
-      nnoremap <silent> <buffer> <c-k> k<CR> 
+      nnoremap <silent> <buffer> q :close<CR>
+      nnoremap <silent> <buffer> <c-j> j<CR>
+      nnoremap <silent> <buffer> <c-k> k<CR>
       set nobuflisted 
     ]]
     end
@@ -69,14 +77,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---   pattern = { "lir" },
---   callback = function()
---     vim.opt_local.number = false
---     vim.opt_local.relativenumber = false
---   end,
--- })
-
 vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -91,32 +91,25 @@ vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
   end,
 })
 
--- Fixes Autocomment
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-    vim.cmd "set formatoptions-=cro"
-  end,
-})
-
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+    vim.highlight.on_yank { higroup = "Visual", timeout = 40 }
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.scala" },
-  callback = function()
-    vim.lsp.codelens.refresh()
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   pattern = { "*.scala" },
+--   callback = function()
+--     vim.lsp.codelens.refresh()
+--   end,
+-- })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  callback = function()
-    vim.cmd "hi link illuminatedWord LspReferenceText"
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--   callback = function()
+--     vim.cmd "hi link illuminatedWord LspReferenceText"
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   pattern = { "*" },
@@ -129,6 +122,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.scala", "*.sc" },
   callback = function()
     vim.lsp.buf.format { async = true }
+    vim.lsp.codelens.refresh()
   end,
 })
 
@@ -143,7 +137,7 @@ local function handle_command(cmd)
 end
 
 vim.api.nvim_create_user_command("ExtGrep", function(params)
-  local command = "silent grep" 
+  local command = "silent grep"
   local has_extension = #params.fargs > 1
 
   if params.bang then
@@ -151,7 +145,7 @@ vim.api.nvim_create_user_command("ExtGrep", function(params)
     command = command .. " -uu"
   end
 
-  if has_extension then 
+  if has_extension then
     local ext = params.fargs[1]
     local query = ""
     for index, arg in ipairs(params.fargs) do
@@ -161,7 +155,7 @@ vim.api.nvim_create_user_command("ExtGrep", function(params)
     end
     command = command .. " -g " .. vim.fn.shellescape(("*.%s"):format(ext))
     command = command .. query
-  else 
+  else
     command = command .. " " .. params.args
   end
 
