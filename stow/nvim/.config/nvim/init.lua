@@ -1,46 +1,64 @@
-require("user.options")
-require("user.keymaps")
-require("user.plugins")
-require("user.autocommands")
-require("user.colorscheme")
-require("user.colorizer")
-require("user.functions")
-require("user.cmp")
-require("user.lsp")
--- require("user.dap")
-require("user.persisted")     -- Simple session management for Neovim with git branching, autoloading and Telescope support
-require("user.bqf")           -- Better Quick Fix
-require("user.ufo")           -- Ultra Fold in Neovim
-require("user.git")           -- git-blame - gitsigns - gitlinker - diffview
-require("user.alpha")         -- programmable greeter
-require("user.telescope")     -- Find, Filter, Preview, Pick.
-require("user.treesitter")    -- incremental parsing system for programming tools
-require("user.toggleterm")    -- manage multiple terminal windows
-require("user.nvim-tree")     -- file explorer
-require("user.nvim-webdev-icons")
-require("user.nvim-navic")
-require("user.comment")       -- comment - todo-comments
-require("user.lualine")
-require("user.project")
-require("user.notify")
-require("user.autopairs")
-require("user.ibl")
--- require("user.harpoon")
-require("user.illuminate") -- Automatically hilighting other uses of the current word under the curosor
-require("user.inlay-hints")
-require("user.whichkey")
--- require("user.zen-mode")
-require("user.neoscroll") -- Smooth scrolling
-require("user.better-escape")
+require "user.launch"
+require "user.options"
+require "user.keymaps"
+require "user.autocommands"
 
-require("user.surround")
-require("user.fidget") -- Standalone UI for nvim-lsp progress
-require("user.numb")   -- Peeking the buffer while entering command :{number} require("user.zen-mode")
+spec "user.colorscheme"
+spec "user.miniicons"
+spec "user.treesitter"
+spec "user.mason"
+spec "user.schemastore"
+spec "user.lspconfig"
+spec "user.metals"
+spec "user.lsp-saga"
+spec "user.lsp-signature"
+-- spec "user.navic"
+spec "user.none-ls"
+spec "user.illuminate"
+spec "user.telescope"
+spec "user.neotree"
+spec "user.lualine"
+spec "user.whichkey"
+-- spec "user.dap"
+spec "user.cmp"
+spec "user.autopairs"
+spec "user.comment"
+spec "user.gitsigns"
+spec "user.neogit"
+spec "user.indentline"
+spec "user.alpha"
+spec "user.project"
+spec "user.toggleterm"
+spec "user.bufdelete"
+spec "user.bufjump"
 
--- -- require "user.bufferline"
--- vim.keymap.set({ 'n' }, '<C-k>', function()       require('lsp_signature').toggle_float_win()
---     end, { silent = true, noremap = true, desc = 'toggle signature' })
+-- Extras
+spec "user.extras.notify"
+spec "user.extras.colorizer"
+spec "user.extras.neoscroll"
+-- spec "user.extras.copilot"
+spec "user.extras.modicator"
+spec "user.extras.bqf"
+spec "user.extras.ufo"
+spec "user.extras.nui"
+spec "user.extras.dressing"
+-- spec "user.extras.mini-surround"
+spec "user.extras.surround"
+spec "user.extras.eyeliner"
+spec "user.extras.numb"
+spec "user.extras.fidget"
+spec "user.extras.neotab"
+-- spec "user.extras.neotest"
+-- spec "user.extras.cmp-tabnine"
+spec "user.extras.tabby"
+-- -- spec "user.extras.test"
+spec "user.extras.gitlinker"
+spec "user.extras.harpoon"
+spec "user.extras.trouble"
+spec "user.extras.todo-comments"
+-- spec "user.extras.persistence"
+spec "user.extras.persisted"
+spec "user.extras.rustacean"
+spec "user.extras.crates"
 
---     vim.keymap.set({ 'n' }, '<Leader>k', function()
---      vim.lsp.buf.signature_help()
---     end, { silent = true, noremap = true, desc = 'toggle signature' })
+require "user.lazy"
