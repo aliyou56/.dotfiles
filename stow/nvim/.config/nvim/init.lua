@@ -60,5 +60,6 @@ spec "user.extras.todo-comments"
 spec "user.extras.persisted"
 spec "user.extras.rustacean"
 spec "user.extras.crates"
+spec "user.extras.endwise"
 
 require "user.lazy"
