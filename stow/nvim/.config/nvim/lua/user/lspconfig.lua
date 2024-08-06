@@ -103,10 +103,6 @@ function M.config()
     {"<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
   }
 
-  -- wk.add {
-  --   {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", mode = "v" },
-  -- }
-
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
