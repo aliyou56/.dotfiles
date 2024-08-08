@@ -12,7 +12,7 @@ function M.config()
     debug = true,
     sources = {
       formatting.stylua,
-      -- formatting.prettier,
+      formatting.prettier,
       formatting.black,
       formatting.shfmt,
 

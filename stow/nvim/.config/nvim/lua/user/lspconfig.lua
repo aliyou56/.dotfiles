@@ -16,12 +16,12 @@ M.lsp_keymaps = function(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
 
   -- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.keymap.set("n", "K", function()
-    local winid = require("ufo").peekFoldedLinesUnderCursor()
-    if not winid then
-      vim.lsp.buf.hover()
-    end
-  end)
+  -- vim.keymap.set("n", "K", function()
+  --   local winid = require("ufo").peekFoldedLinesUnderCursor()
+  --   if not winid then
+  --     vim.lsp.buf.hover()
+  --   end
+  -- end)
 
   -- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -31,7 +31,8 @@ M.lsp_keymaps = function(bufnr)
 
   keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
   keymap(bufnr, "n", "<leader>cl", ":lua vim.lsp.codelens.run()<CR>", opts)
-  keymap(bufnr, "n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  -- keymap(bufnr, "n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  keymap(bufnr, "n", "<CR>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   -- keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
   keymap(bufnr, "n", "<leader>aa", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)                 -- all workplace diagnostics
@@ -102,10 +103,6 @@ function M.config()
     {"<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
     {"<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
   }
-
-  -- wk.add {
-  --   {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", mode = "v" },
-  -- }
 
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"

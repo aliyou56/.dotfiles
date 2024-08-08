@@ -8,7 +8,7 @@ function M.config()
 
   local function button(sc, txt, keybind, keybind_opts)
     local b = dashboard.button(sc, txt, keybind, keybind_opts)
-    b.opts.hl_shortcut = "Function"
+    b.opts.hl_shortcut = "Boolean"
     return b
   end
 
@@ -39,7 +39,7 @@ function M.config()
   dashboard.section.footer.val = footer()
 
   dashboard.section.header.opts.hl = "Function"
-  dashboard.section.buttons.opts.hl = "Type"
+  dashboard.section.buttons.opts.hl = "Boolean"
   dashboard.section.footer.opts.hl = "@keyword.return"
 
   dashboard.opts.opts.noautocmd = true
