@@ -34,7 +34,7 @@ function M.config()
       "rust",
       "scala",
       "tsx",
-      "unison",
+      -- "unison",
       "typescript",
       "yaml",
     },

@@ -15,7 +15,7 @@ function M.config()
   require("persisted").setup {
     save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
     silent = false, -- silent nvim message when sourcing session file
-    use_git_branch = true, -- create session files based on the branch of a git enabled repository
+    use_git_branch = false, -- create session files based on the branch of a git enabled repository
     default_branch = "main", -- the branch to load if a session file is not found for the current branch
     autosave = true, -- automatically save session files when exiting Neovim
     should_autosave = function()

@@ -3,6 +3,7 @@ local M = {
 }
 
 function M.config()
+  require("trouble").setup()
   local wk = require "which-key"
   wk.add {
     { "<leader>ld", "<cmd>Trouble<cr>", desc = "Diagnostics" },
@@ -13,16 +14,23 @@ function M.config()
     --   "<cmd>Trouble diagnostics toggle<cr>",
     --   desc = "Diagnostics (Trouble)",
     -- },
-    -- {
-    --   "<leader>xX",
-    --   "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-    --   desc = "Buffer Diagnostics (Trouble)",
-    -- },
-    -- {
-    --   "<leader>cs",
-    --   "<cmd>Trouble symbols toggle focus=false<cr>",
-    --   desc = "Symbols (Trouble)",
-    -- },
+    {
+      -- "<leader>xX",
+      "<leader>lb",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      -- "<leader>cs",
+      "<leader>ls",
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      desc = "Symbols (Trouble)",
+    },
+    {
+      "<leader>lt",
+      "<cmd>Trouble todo toggle<cr>",
+      desc = "TODO",
+    },
     -- {
     --   "<leader>cl",
     --   "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
@@ -39,7 +47,6 @@ function M.config()
     --   desc = "Quickfix List (Trouble)",
     -- },
   }
-  require("trouble").setup()
 end
 
 return M
