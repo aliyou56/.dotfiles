@@ -97,7 +97,7 @@ plugins=(
   # zsh-z
   ripgrep
   timer
-  fzf-zsh-plugin
+#  fzf-zsh-plugin
   fzf-tab
 
   # mosh

@@ -1,9 +1,25 @@
 theme = "kanagawa"
 
+[editor]
+line-number = "relative"
+bufferline = "always"
+rulers = [100]
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
 # At most one section each of 'keys.normal', 'keys.insert' and 'keys.select'
 [keys.normal]
+"X" = ["extend_line_up", "extend_to_line_bounds"]
 C-s = ":w" # Maps Ctrl-s to the typable command :w which is an alias for :write (save file)
 C-o = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
+C-q = ":bc"
 g = { a = "code_action" } # Maps `ga` to show possible code actions
 
 [keys.insert]
