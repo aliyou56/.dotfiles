@@ -139,6 +139,7 @@ if [ -f "$HOME/.bash_aliases" ] ; then
 fi
 
 if [ -f "$HOME/.fzf.zsh" ] ; then
+  export FZF_PATH="$HOME/.fzf"
   source "$HOME/.fzf.zsh"
 fi
 

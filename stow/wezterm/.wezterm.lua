@@ -1,6 +1,6 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
-local mux = wezterm.mux
+-- local mux = wezterm.mux
 
 -- require 'scrollback'
 
@@ -15,23 +15,17 @@ config.color_scheme = 'Kanagawa (Gogh)'
 
 local TITLEBAR_COLOR = '#333333'
 -- config.native_macos_fullscreen_mode = true
-config.use_fancy_tab_bar = false
+-- config.use_fancy_tab_bar = false
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
-config.integrated_title_button_style = 'Gnome'
+-- config.integrated_title_button_style = 'Gnome'
 config.window_frame = {
-  -- font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
-  font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
-  font_size = 12,
+  font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
+  font_size = 11,
   active_titlebar_bg = TITLEBAR_COLOR,
-  inactive_titlebar_bg = TITLEBAR_COLOR,
-  -- border_left_width = '0.5cell',
-  -- border_right_width = '0.5cell',
-  -- border_bottom_height = '0.25cell',
-  -- border_top_height = '0.25cell',
-  -- border_left_color = 'purple',
-  -- border_right_color = 'purple',
-  -- border_bottom_color = 'purple',
-  -- border_top_color = 'purple',
+  -- inactive_titlebar_bg = TITLEBAR_COLOR,
+
+  -- inactive_titlebar_fg = '#cccccc',
+  -- active_titlebar_fg = '#ffffff',
 }
 config.window_padding = {
   top = 0,
@@ -42,6 +36,9 @@ config.inactive_pane_hsb = {
   brightness = 0.7
 }
 
+-- config.audible_bell = 'Disabled'
+config.window_background_opacity = 0.9
+
 config.disable_default_key_bindings = true
 
 -- config.leader = { key = 'Space', mods = 'CTRL|SHIFT' }
@@ -51,7 +48,6 @@ config.keys = {
   { key = 'P',     mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
   { key = 'N',     mods = 'CTRL|SHIFT', action = act.SpawnWindow, },
   { key = 'T',     mods = 'CTRL|SHIFT', action = act.SpawnTab 'DefaultDomain', },
-  -- { key = 'T',     mods = 'CTRL|SHIFT', action = act.SpawnTab 'CurrentPaneDomain', },
   { key = 'C',     mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard', },
   { key = 'V',     mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard', },
   { key = 'Z',     mods = 'CTRL|SHIFT', action = act.TogglePaneZoomState, },
@@ -109,10 +105,6 @@ config.keys = {
 
 --   { key = '[', mods = 'ALT', action = act.ActivateTabRelative(-1), },
 --   { key = ']', mods = 'ALT', action = act.ActivateTabRelative(1), },
---
---   -- Floating panes (not implemented yet)
---     -- bind "Alt w" { ToggleFloatingPanes; }
---     -- bind "Alt e" { TogglePaneEmbedOrFloating; }
 --     -- bind "Alt b" { MovePaneBackwards; }
 }
 
@@ -136,20 +128,18 @@ config.key_tables = {
   },
 }
 
-
 --   config.scrollback_lines = 10000,
---   -- line_height = 1.2,
---   unicode_version = 15,
 
 -- Switch between just an opacity and a background image based on whether we are fullscreen
-function set_background(config, is_fullscreen)
+local function set_background(config, is_fullscreen)
+  local dotfiles = '/work/github/.dotfiles'
   if is_fullscreen then
     config.window_background_opacity = nil
     config.background = {
       {
         source = {
-          File = wezterm.home_dir .. '/.dotfiles/images/background.jpg',
-          -- File = wezterm.home_dir .. '/work/github/.dotfiles/images/forrest.png',
+          File = wezterm.home_dir .. dotfiles .. '/images/background.jpg',
+          -- File = wezterm.home_dir .. dotfiles .. '/images/forrest.png',
         },
         attachment = { Parallax = 0.1 },
         repeat_y = 'Mirror',
@@ -163,17 +153,25 @@ function set_background(config, is_fullscreen)
       },
     }
   else
-    config.window_background_opacity = 0.85
+    config.window_background_opacity = 0.9
     config.background = nil
   end
 end
 
-wezterm.on('window-resized', function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  local is_fullscreen = window:get_dimensions().is_full_screen
-  set_background(overrides, is_fullscreen)
-  window:set_config_overrides(overrides)
-end)
+-- wezterm.on('window-resized', function(window, _) -- pane
+--   local overrides = window:get_config_overrides() or {}
+--   local is_fullscreen = window:get_dimensions().is_full_screen
+--   set_background(overrides, is_fullscreen)
+--   window:set_config_overrides(overrides)
+-- end)
+
+local function get_ram_usage()
+  local _, result, _ = wezterm.run_child_process {
+    'bash', '-c',
+    "free | grep Mem | awk '{printf \"%d\", $3/$2 * 100.0}'"
+  }
+  return tonumber(result) or 0
+end
 
 wezterm.on('update-status', function(window, pane)
   local cells = {}
@@ -184,18 +182,25 @@ wezterm.on('update-status', function(window, pane)
   if cwd_uri and cwd_uri.host then
     hostname = cwd_uri.host
   end
-  table.insert(cells, '  ' .. hostname)
+  table.insert(cells, wezterm.nerdfonts.md_laptop .. "  " .. hostname)
 
-  -- Format date/time in this style: "Wed Mar 3 08:14"
-  local date = wezterm.strftime ' %a %b %-d %H:%M'
-  table.insert(cells, date)
+  local basename = function(s)
+    return string.gsub(s, "(.*[/\\])(.*)", "%2")
+  end
+  local cmd = basename(pane:get_foreground_process_name())
+  table.insert(cells, wezterm.nerdfonts.fa_code .. "  " .. cmd)
 
-  -- -- Add an entry for each battery (typically 0 or 1)
-  -- local batt_icons = {'', '', '', '', ''}
-  -- for _, b in ipairs(wezterm.battery_info()) do
-  --   local curr_batt_icon = batt_icons[math.ceil(b.state_of_charge * #batt_icons)]
-  --   table.insert(cells, string.format('%s %.0f%%', curr_batt_icon, b.state_of_charge * 100))
-  -- end
+  local ram_usage = string.format("%d%%", get_ram_usage())
+  table.insert(cells, wezterm.nerdfonts.md_memory .. " " .. ram_usage)
+
+  local time = wezterm.strftime("%H:%M")
+  table.insert(cells, wezterm.nerdfonts.md_clock .. " " .. time)
+
+  local batt_icons = {' ', ' ', ' ', ' ', ' '}
+  for _, b in ipairs(wezterm.battery_info()) do
+    local curr_batt_icon = batt_icons[math.ceil(b.state_of_charge * #batt_icons)]
+    table.insert(cells, string.format('%s %.0f%%', curr_batt_icon, b.state_of_charge * 100))
+  end
 
   -- Color palette for each cell
   local text_fg = '#c0c0c0'
@@ -224,51 +229,16 @@ wezterm.on('update-status', function(window, pane)
   window:set_right_status(wezterm.format(elements))
 end)
 
--- wezterm.on("update-right-status", function(window, pane)
---   local stat = window:active_workspace()
---   if window:active_key_table() then stat = window:active_key_table() end
---   if window:leader_is_active() then stat = "leader" end
---   local basename = function(s)
---     return string.gsub(s, "(.*[/\\])(.*)", "%2")
---   end
---   local cwd = basename(pane:get_current_working_dir())
---   local cmd = basename(pane:get_foreground_process_name())
---   local time = wezterm.strftime("%H:%M")
---
---   window:set_right_status(wezterm.format({
---     { Text = wezterm.nerdfonts.oct_table .. " " .. stat },
---     { Text = " | "},
---     { Text = wezterm.nerdfonts.md_folder .. " " .. cwd },
---     { Text = " | "},
---     { Foreground = { Color = "FFB86C" } },
---     { Text = wezterm.nerdfonts.fa_code .. " " .. cmd },
---     "ResetAttributes",
---     { Text = " | "},
---     { Text = wezterm.nerdfonts.md_clock .. " " .. time },
---   }))
+-- wezterm.on("gui-startup", function(cmd)
+--   local _, _, window = wezterm.mux.spawn_window(cmd or {})
+--   window:gui_window():toggle_fullscreen()
 -- end)
 
--- -- wezterm.on("gui-startup", function(cmd)
--- --   local _, _, window = wezterm.mux.spawn_window(cmd or {})
--- --   window:gui_window():toggle_fullscreen()
--- -- end)
-
--- -- this is called by the mux server when it starts up.
--- -- It makes a window split top/bottom
--- -- wezterm.on('mux-startup', function()
--- --   local tab, pane, window = mux.spawn_window {}
--- --   pane:split { direction = 'Top' }
--- -- end)
+-- this is called by the mux server when it starts up.
+-- It makes a window split top/bottom
+-- wezterm.on('mux-startup', function()
+--   local tab, pane, window = mux.spawn_window {}
+--   pane:split { direction = 'Top' }
+-- end)
 
 return config
-
--- return {
---   audible_bell = 'Disabled',
---   window_background_opacity = 0.9,
-
---
---   keys = {
---     { key = 'w', mods = 'CTRL|SHIFT', action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
---   },
-
-
