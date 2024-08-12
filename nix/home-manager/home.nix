@@ -7,7 +7,7 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
-      # boundary
+      boundary
       # bruno
       clang
       zoxide           # A smarter cd command
@@ -20,16 +20,16 @@
       bat              # A cat(1) clone with wings
       bun
       bottom           # Yet another cross-platform graphical process/system monitor.
-      # brave
+      brave
       # broot            # A new way to see and navigate directory trees
       cachix           # Command line client for Nix binary cache hosting
       cargo-audit      # 
       cargo-edit       # Easy Rust dependency management
       # cargo-graph      # !! Rust dependency graphs
       cargo-watch      # watch rust project and execute custom commands upon change
-      # clickhouse       # for clickhouse-client
+      clickhouse       # for clickhouse-client
       coursier         # Pure Scala Artifact Fetching
-      # dbeaver-bin          # Free universal database tool and SQL client
+      dbeaver-bin          # Free universal database tool and SQL client
       delta            # A syntax-highlighting pager for git, diff, and grep output
       direnv           # load/unload env variables. unclutter your .profile
       dive             # A tool for exploring each layer in a docker image
@@ -40,7 +40,7 @@
       eza              # A modern replacement for ‘ls’
       fd               # A simple, fast and user-friendly alternative to 'find'
       # figlet           # creates large characters out of ordinary screen characters
-      # fish
+      fish
       fx               # Terminal JSON viewer
       fzf              # A command-line fuzzy finder
       # gettext
@@ -82,7 +82,7 @@
       # protonvpn-gui
       rbenv
       ripgrep
-      # ripgrep-all
+      ripgrep-all
       rustup
       # rust-analyzer
       # sbt
@@ -105,7 +105,7 @@
       yarn # Node.js package manager
       yq-go
       zip
-      # zsh
+      zsh
 
       grype           # A vulnerability scanner for container images and filesystems
       trivy            # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
@@ -143,7 +143,7 @@
       # xsv # CSV parsing utility
     ];
 
-    stateVersion = "23.05";
+    stateVersion = "24.05";
     username = "aliyou";
   };
 
