@@ -12,7 +12,7 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+      . "$HOME/.bashrc"
     fi
 fi
 
@@ -26,18 +26,15 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# >>> coursier install directory >>>
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
-# <<< coursier install directory <<<
-
 export PATH="$PATH:$HOME/.cache/scalacli/local-repo/bin/scala-cli"
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # fix app icons (installed by nix)
 if [ -n "${XDG_SESSION_ID}" ];then
     if [ -d ~/.nix-profile ];then
-        for x in $(find ~/.nix-profile/share/applications/*.desktop);do
+        for x in $(find ~/.nix-profile/share/applications/*.desktop); do
             MY_XDG_DIRS=$(dirname $(dirname $(readlink -f $x))):${MY_XDG_DIRS}
         done
         export XDG_DATA_DIRS=${MY_XDG_DIRS}:${XDG_DATA_DIRS}

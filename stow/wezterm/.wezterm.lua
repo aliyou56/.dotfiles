@@ -72,9 +72,11 @@ config.keys = {
 
   { key = 'LeftArrow',  mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(-1), },
   { key = 'RightArrow', mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(1), },
+  { key = '<',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1), },
+  { key = '>',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1), },
 
   { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
-  { key = 'Space',     mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
+  { key = 'Space', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
   { key = 'M',     mods = 'CTRL|SHIFT', action = act.RotatePanes 'CounterClockwise', },
 
   { key = 'PageUp',   mods = 'CTRL|SHIFT', action = act.ScrollByPage(-1), },

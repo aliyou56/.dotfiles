@@ -7,7 +7,9 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
+      bitwarden-cli
       boundary
+      chezmoi
       # bruno
       clang
       zoxide           # A smarter cd command
@@ -15,15 +17,15 @@
       awscli2          # Universal Command Line Interface for Amazon Web Services
       # azure-cli        # Azure Command-Line Interface
       # google-cloud-sdk # Google Cloud Platform SDK
-      # terraform
-      # duckdb
+      terraform
+      duckdb
       bat              # A cat(1) clone with wings
       bun
       bottom           # Yet another cross-platform graphical process/system monitor.
       brave
       # broot            # A new way to see and navigate directory trees
       cachix           # Command line client for Nix binary cache hosting
-      cargo-audit      # 
+      # cargo-audit      # 
       cargo-edit       # Easy Rust dependency management
       # cargo-graph      # !! Rust dependency graphs
       cargo-watch      # watch rust project and execute custom commands upon change
@@ -69,7 +71,7 @@
       # mdcat
       minikube
       moreutils
-      # obsidian
+      obsidian
       ncdu             # a disk usage analyzer with an ncurses interface
       neofetch
       # fastfetch
@@ -87,6 +89,7 @@
       # rust-analyzer
       # sbt
       # scala-cli
+      starship
       sd              # Intuitive find & replace CLI (sed alternative)
       sad             # CLI search and replace | Space Age seD
       shellcheck      # a static analysis tool for shell scripts - neovim

@@ -20,10 +20,7 @@ function git_prompt_info() {
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME="agnoster"
-# ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="intheloop"
+# ZSH_THEME="intheloop"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -86,22 +83,21 @@ export UPDATE_ZSH_DAYS=13
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  aliases
+  aws
   docker
-  dotenv
+  docker-compose
   extract
-  fd
+  gh
   git
+  # git-commit # git <type> [(-s, --scope) "<scope>"] [(-a, --attention)] "<message>"
+  httpie
   kubectl
+  timer
+
+  fzf-tab # Replace zsh's default completion selection menu with fzf!
   zsh-autosuggestions
   zsh-syntax-highlighting
-  # zsh-z
-  ripgrep
-  timer
-#  fzf-zsh-plugin
-  fzf-tab
-
-  # mosh
-  # zsh-autocomplete
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -144,10 +140,6 @@ if [ -f "$HOME/.fzf.zsh" ] ; then
 fi
 
 # source local settings
-if [ -f "$HOME/.local/.zshrc" ] ; then
-  source "$HOME/.local/.zshrc"
-fi
-
 if [ -f "$HOME/.local/.bash_aliases" ] ; then
   source "$HOME/.local/.bash_aliases"
 fi
@@ -156,33 +148,26 @@ if [ -e $HOME/.nix-profile/bin/java ]; then
   export JAVA_HOME="${$(readlink -e $HOME/.nix-profile/bin/java)%*/bin/java}"
 fi
 
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(rbenv init - zsh)"
+
+# export PATH="$PATH:$HOME/.cargo/bin"
 #export PATH="$PATH:~/.npm-global/bin"
 #export PATH="$PATH:~/go/bin"
 
 eval "$(direnv hook zsh)"
 
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
-# >>> scala-cli completions >>>
-fpath=("~/.local/share/scalacli/completions/zsh" $fpath)
-compinit
-# <<< scala-cli completions <<<
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv >/dev/null || export PATH="$PAT:$PYENV_ROOT/bin"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # fastfetch
-
-# initialize zoxide
-. ~/.zoxide.sh
-eval "$(zoxide init zsh)"
-
-eval "$(rbenv init - zsh)"
 
 # nixify() {
 #   if [ ! -e ./.envrc ]; then
