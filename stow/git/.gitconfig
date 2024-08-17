@@ -1,8 +1,8 @@
 [user]
-	email = aliyou29@hotmail.com
-	name = Aliyou Sylla
+  email = aliyou29@hotmail.com
+  name = Aliyou Sylla
 [core]
-	editor = nvim
+  editor = nvim
 [diff]
   tool = difftastic
 #   tool = vscode
@@ -37,7 +37,7 @@
 [rerere]
   enabled = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 #[advice]
 #  detachedHead = false
 [include]

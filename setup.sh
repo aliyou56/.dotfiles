@@ -34,3 +34,10 @@ curl -fLOs https://script.install.devinsideyou.com/zsh-autosuggestions
 chmod +x zsh-autosuggestions && ./zsh-autosuggestions
 git clone https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
+
+## Fish plugings
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+fisher install oh-my-fish/pligun-extract
+fisher install acomagu/fish-async-prompt
+fisher install jhillyerd/plugin-git
