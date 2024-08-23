@@ -2,8 +2,9 @@ if status is-interactive
   # Commands to run in interactive sessions can go here
 end
 
-set -gx EIDITOR nvim
 set -g fish_greeting
+set -gx EIDITOR nvim
+set -gx ATUIN_NOBIND "true"
 
 # set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep
 # set -x FZF_DEFAULT_OPTS_FILE ~/.config/fzf
@@ -30,6 +31,7 @@ end
 starship init fish | source
 zoxide init fish | source
 direnv hook fish | source
+atuin init fish | source
 
 # set -x PATH "$PATH:$HOME/.local/share/coursier/bin"
 
@@ -46,3 +48,7 @@ function multicd
 end
 abbr --add dotdot --regex '^\.\.+$' --function multicd
 abbr --add fish-reload-config 'source ~/.config/fish/**/*.fish'
+
+# bind to ctrl-r in normal and insert mode, add any other bindings you want here too
+# bind \cr _atuin_search
+# bind -M insert \cr _atuin_search

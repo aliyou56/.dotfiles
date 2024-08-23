@@ -150,13 +150,19 @@ fi
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
+eval "$(atuin init zsh)"
 eval "$(rbenv init - zsh)"
 
 # export PATH="$PATH:$HOME/.cargo/bin"
 #export PATH="$PATH:~/.npm-global/bin"
 #export PATH="$PATH:~/go/bin"
 
-eval "$(direnv hook zsh)"
+bindkey '^r' atuin-search
+
+# bind to the up key, which depends on terminal mode
+# bindkey '^[[A' atuin-up-search
+# bindkey '^[OA' atuin-up-search
 
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
 

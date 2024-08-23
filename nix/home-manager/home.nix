@@ -7,6 +7,7 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
+      atuin
       bitwarden-cli
       boundary
       chezmoi
