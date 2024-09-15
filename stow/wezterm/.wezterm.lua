@@ -2,7 +2,11 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 -- local mux = wezterm.mux
 
--- require 'scrollback'
+-- git clone https://github.com/danielcopper/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
+local session_manager = require("wezterm-session-manager/session-manager")
+wezterm.on("save_session", function(window) session_manager.save_state(window) end)
+wezterm.on("load_session", function(window) session_manager.load_state(window) end)
+wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
 
 local config = wezterm.config_builder()
 config:set_strict_mode(true)
@@ -52,7 +56,6 @@ config.keys = {
   { key = 'V',     mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard', },
   { key = 'Z',     mods = 'CTRL|SHIFT', action = act.TogglePaneZoomState, },
   { key = 'F',     mods = 'CTRL|SHIFT', action = act.Search { CaseSensitiveString = "" }, },
---     -- { action = wezterm.action.Search      , mods = 'CTRL|SHIFT', key =   'F' },
   { key = 'Q',     mods = 'CTRL|SHIFT', action = act.CloseCurrentTab { confirm = false }, },
   { key = 'W',     mods = 'CTRL|SHIFT', action = act.CloseCurrentPane { confirm = false }, },
 
@@ -65,14 +68,9 @@ config.keys = {
   { key = 'H',     mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left', },
   { key = 'L',     mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Right', },
 
-  -- { key = 'H', mods = 'SHIFT|ALT', action = act.AdjustPaneSize {'Left', 4}, },
-  -- { key = 'L', mods = 'SHIFT|ALT', action = act.AdjustPaneSize {'Right', 4}, },
-  -- { key = 'J', mods = 'SHIFT|ALT', action = act.AdjustPaneSize {'Down', 4}, },
-  -- { key = 'K', mods = 'SHIFT|ALT', action = act.AdjustPaneSize {'Up', 4}, },
-
   { key = 'LeftArrow',  mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(-1), },
   { key = 'RightArrow', mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(1), },
-  { key = '<',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1), },
+  { key = '<',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1), }, -- []
   { key = '>',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1), },
 
   { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
@@ -85,7 +83,7 @@ config.keys = {
   { key = 'Enter', mods = 'ALT',        action = act.ToggleFullScreen, },
   { key = 'D',     mods = 'CTRL|SHIFT', action = act.ShowDebugOverlay, },
   { key = 'S',     mods = 'CTRL|SHIFT', action = act.QuickSelect, },
-  { key = 'w',     mods = 'ALT|SHIFT', action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
+  { key = 'W',     mods = 'ALT|SHIFT', action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
 
   {
     key = 'r',
@@ -95,19 +93,28 @@ config.keys = {
       one_shot = false,
     },
   },
+
+  { key = "s", mods = "ALT|SHIFT", action = act { EmitEvent = "save_session" } },
+  { key = "l", mods = "ALT|SHIFT", action = act { EmitEvent = "load_session" } },
+  { key = "r", mods = "ALT|SHIFT", action = act { EmitEvent = "restore_session" } },
+
+  -- Switch to the default workspace
+  { key = 'y', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace { name = 'default' } },
+
+  -- Switch to a monitoring workspace, which will have `top` launched into it
   {
-    key = 'm',
+    key = 'u',
     mods = 'CTRL|SHIFT',
-    action = act.ActivateKeyTable {
-      name = 'move_tab',
-      one_shot = false,
+    action = act.SwitchToWorkspace {
+      name = 'monitoring',
+      spawn = {
+        args = { 'btm' }, -- top
+      },
     },
   },
 
-
---   { key = '[', mods = 'ALT', action = act.ActivateTabRelative(-1), },
---   { key = ']', mods = 'ALT', action = act.ActivateTabRelative(1), },
---     -- bind "Alt b" { MovePaneBackwards; }
+  -- Create a new workspace with a random name and switch to it
+  -- { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
 }
 
 config.key_tables = {
@@ -118,54 +125,8 @@ config.key_tables = {
     { key = 'l',      action = act.AdjustPaneSize { 'Right', 4 } },
     { key = 'Escape', action = 'PopKeyTable' },
     { key = 'Enter',  action = 'PopKeyTable' },
-  },
-
-  move_tab = {
-    { key = 'h',      action = act.MoveTabRelative(-1) },
-    { key = 'j',      action = act.MoveTabRelative(-1) },
-    { key = 'k',      action = act.MoveTabRelative(1) },
-    { key = 'l',      action = act.MoveTabRelative(1) },
-    { key = 'Escape', action = 'PopKeyTable' },
-    { key = 'Enter',  action = 'PopKeyTable' },
-  },
+  }
 }
-
---   config.scrollback_lines = 10000,
-
--- Switch between just an opacity and a background image based on whether we are fullscreen
-local function set_background(config, is_fullscreen)
-  local dotfiles = '/work/github/.dotfiles'
-  if is_fullscreen then
-    config.window_background_opacity = nil
-    config.background = {
-      {
-        source = {
-          File = wezterm.home_dir .. dotfiles .. '/images/background.jpg',
-          -- File = wezterm.home_dir .. dotfiles .. '/images/forrest.png',
-        },
-        attachment = { Parallax = 0.1 },
-        repeat_y = 'Mirror',
-        horizontal_align = 'Center',
-        opacity = 0.4,
-        hsb = {
-          hue = 1.0,
-          saturation = 0.95,
-          brightness = 0.5,
-        },
-      },
-    }
-  else
-    config.window_background_opacity = 0.9
-    config.background = nil
-  end
-end
-
--- wezterm.on('window-resized', function(window, _) -- pane
---   local overrides = window:get_config_overrides() or {}
---   local is_fullscreen = window:get_dimensions().is_full_screen
---   set_background(overrides, is_fullscreen)
---   window:set_config_overrides(overrides)
--- end)
 
 local function get_ram_usage()
   local _, result, _ = wezterm.run_child_process {

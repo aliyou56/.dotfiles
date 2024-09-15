@@ -36,6 +36,7 @@ function M.config()
       "tsx",
       -- "unison",
       "typescript",
+      "terraform",
       "yaml",
     },
     ignore_install = { "" },
