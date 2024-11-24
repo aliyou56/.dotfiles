@@ -18,7 +18,8 @@
       awscli2          # Universal Command Line Interface for Amazon Web Services
       # azure-cli        # Azure Command-Line Interface
       # google-cloud-sdk # Google Cloud Platform SDK
-      terraform
+      # terraform
+      # opentofu
       duckdb
       bat              # A cat(1) clone with wings
       bun

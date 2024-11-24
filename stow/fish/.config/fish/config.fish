@@ -12,6 +12,7 @@ set -gx ATUIN_NOBIND "true"
 
 fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/share/coursier/bin
+fish_add_path $HOME/.local/bin
 
 # source global settings
 if test -f "$HOME/.bash_aliases"
@@ -33,15 +34,12 @@ zoxide init fish | source
 direnv hook fish | source
 atuin init fish | source
 
-# set -x PATH "$PATH:$HOME/.local/share/coursier/bin"
-
 set -gx PYENV_ROOT "$HOME/.pyenv"
 command -v pyenv >/dev/null || set -x PATH "$PATH:$PYENV_ROOT/bin"
 # pyenv init - | source"
 # pyenv virtualenv-init - | source"
 
 # set -x PATH "$PATH:$HOME/.cargo/bin"
-# # fastfetch
 
 function multicd
   echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)

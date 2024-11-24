@@ -101,7 +101,7 @@ alias ll='eza -l --color=always --group-directories-first --icons'  # long forma
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias l.='eza -a | egrep "^\."'
 
-alias http='noglob http'
+# alias http='noglob http'
 
 #alias say='espeak'
 alias cp='cp -iv'
@@ -109,7 +109,6 @@ alias mv='mv -iv'
 alias h='history'
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
-alias nowtime='now'
 # alias path='echo -e ${PATH//:/\\n}'
 alias poweroff='sudo shutdown -h now'
 alias restart='sudo shutdown -r now'
@@ -118,7 +117,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Apply changes to aliases
-alias sa='source ~/.bash_aliases;source ~/.zshrc;echo "Bash aliases sourced"'
+alias sa='source ~/.bash_aliases;source ~/.config/fish/config.fish;echo "Config sourced"'
 
 # Edit Aliases
 alias via='nvim ~/.bash_aliases'
