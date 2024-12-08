@@ -6,18 +6,22 @@ local M = {
 }
 
 function M.config()
-  -- local icons = require "user.icons"
-  -- local diff = {
-  --   "diff",
-  --   colored = false,
-  --   symbols = { added = icons.git.LineAdded, modified = icons.git.LineModified, removed = icons.git.LineRemoved }, -- Changes the symbols used by the diff.
-  -- }
+  local icons = require "user.icons"
+
+  local function lsp_server_names()
+    local lsp_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    local server_names = {}
+    for _, client in ipairs(lsp_clients) do
+      table.insert(server_names, client.name)
+    end
+    return table.concat(server_names, ", ")
+  end
 
   local diagnostics = {
     "diagnostics",
     sections = { "error", "warn" },
     colored = true, -- Displays diagnostics status in color if set to true.
-    always_visible = true, -- Show diagnostics even if there are none.
+    -- always_visible = true, -- Show diagnostics even if there are none.
   }
 
   require("lualine").setup {
@@ -25,25 +29,15 @@ function M.config()
       theme = "auto", --neovim
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
-      -- section_separators = { left = "", right = "" },
-
       ignore_focus = { "NvimTree" },
     },
     sections = {
-      -- lualine_a = { {"branch", icon =""} },
-      -- lualine_b = { diff },
-      -- lualine_c = { "diagnostics" },
-      -- lualine_x = { copilot },
-      -- lualine_y = { "filetype" },
-      -- lualine_z = { "progress" },
-      -- lualine_a = { "mode" },
-      lualine_a = {},
-      lualine_b = { "branch" },
-      lualine_c = { diagnostics },
-      -- lualine_x = { diff, "copilot", filetype },
-      -- lualine_x = { language_server },
+      lualine_a = { "mode" },
+      lualine_b = { "branch", "diff", diagnostics },
+      lualine_c = { "filename", { lsp_server_names, icon = icons.ui.BoldLineDashedMiddle} },
+      lualine_x = { "encoding", "fileformat", "filetype" },
       lualine_y = { "progress" },
-      lualine_z = {},
+      lualine_z = { "location" },
     },
     extensions = { "quickfix", "man", "fugitive" },
   }

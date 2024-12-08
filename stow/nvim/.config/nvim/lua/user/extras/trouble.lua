@@ -7,13 +7,17 @@ function M.config()
   local wk = require "which-key"
   wk.add {
     { "<leader>ld", "<cmd>Trouble<cr>", desc = "Diagnostics" },
-    -- { "<leader>lt", "<cmd>TodoTrouble<cr>", desc = "TODO" },
+    {
+      "<leader>lt",
+      "<cmd>lua: require('user.funstions').toggle_diagnostics()<cr>",
+      desc = "Toggle Diagnostics" 
+    },
 
-    --  {
-    --   "<leader>xx",
-    --   "<cmd>Trouble diagnostics toggle<cr>",
-    --   desc = "Diagnostics (Trouble)",
-    -- },
+    {
+      "<leader>lx",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Diagnostics (Trouble)",
+    },
     {
       -- "<leader>xX",
       "<leader>lb",
@@ -21,31 +25,10 @@ function M.config()
       desc = "Buffer Diagnostics (Trouble)",
     },
     {
-      -- "<leader>cs",
       "<leader>ls",
-      "<cmd>Trouble symbols toggle focus=false<cr>",
+      "<cmd>Trouble symbols toggle<cr>",
       desc = "Symbols (Trouble)",
     },
-    {
-      "<leader>lt",
-      "<cmd>Trouble todo toggle<cr>",
-      desc = "TODO",
-    },
-    -- {
-    --   "<leader>cl",
-    --   "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-    --   desc = "LSP Definitions / references / ... (Trouble)",
-    -- },
-    -- {
-    --   "<leader>xL",
-    --   "<cmd>Trouble loclist toggle<cr>",
-    --   desc = "Location List (Trouble)",
-    -- },
-    -- {
-    --   "<leader>xQ",
-    --   "<cmd>Trouble qflist toggle<cr>",
-    --   desc = "Quickfix List (Trouble)",
-    -- },
   }
 end
 

@@ -128,6 +128,7 @@ function M.config()
     "gopls",
     "dockerls",
     "solargraph",
+    "elmls"
     -- "unison",
   }
 
