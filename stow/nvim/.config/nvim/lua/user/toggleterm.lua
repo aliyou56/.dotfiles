@@ -95,40 +95,30 @@ function M.config()
         return term.count
       end,
     },
+    on_open = function(term)
+      local opts = { noremap = true, silent = true, buffer = term.bufnr }
+
+      vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+      vim.keymap.set("t", "<c-h>", [[<C-\><C-n><C-W>h]], opts)
+      vim.keymap.set("t", "<c-j>", [[<C-\><C-n><C-W>j]], opts)
+      vim.keymap.set("t", "<c-k>", [[<C-\><C-n><C-W>k]], opts)
+      vim.keymap.set("t", "<c-l>", [[<C-\><C-n><C-W>l]], opts)
+
+      -- when back to normal mode from terminal mode
+      vim.keymap.set("n", "<c-h>", "<c-w>h", opts)
+      vim.keymap.set("n", "<c-j>", "<c-w>j", opts)
+      vim.keymap.set("n", "<c-k>", "<c-w>k", opts)
+      vim.keymap.set("n", "<c-l>", "<c-w>l", opts)
+    end
   }
+
+  -- when using the mouse and ensuring the terminal is always in insert mode when active
   vim.cmd [[
     augroup terminal_setup | au!
     autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
     autocmd TermEnter * startinsert!
     augroup end
   ]]
-
-  local opts = { noremap = true, silent = true }
-  function _G.set_terminal_keymaps()
-    vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<c-h>", [[<C-\><C-n><C-W>h]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<c-j>", [[<C-\><C-n><C-W>j]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<c-k>", [[<C-\><C-n><C-W>k]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<c-l>", [[<C-\><C-n><C-W>l]], opts)
-
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
-    -- vim.api.nvim_buf_set_keymap(0, "t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-    -- map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-    -- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
-  end
-
-  vim.api.nvim_create_autocmd({ "TermEnter" }, {
-    pattern = { "*" },
-    callback = function()
-      vim.cmd "startinsert"
-      _G.set_terminal_keymaps()
-    end,
-  })
-
 
   -- abstract to function
   local Terminal = require("toggleterm.terminal").Terminal
@@ -148,34 +138,11 @@ function M.config()
     end,
   }
 
-  -- local cargo_run = Terminal:new {
-  --   cmd = "cargo run -q",
-  --   dir = "git_dir",
-  --   direction = "float",
-  --   float_opts = {
-  --     border = "rounded",
-  --   },
-  --   -- function to run on opening the terminal
-  --   on_open = function(term)
-  --     vim.cmd "startinsert!"
-  --     vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-  --   end,
-  --   -- function to run on closing the terminal
-  --   on_close = function(term)
-  --     vim.cmd "startinsert!"
-  --   end,
-  -- }
-
   function _lazygit_toggle()
     lazygit:toggle()
   end
 
-  -- function _cargo_run()
-  --   cargo_run:toggle()
-  -- end
-
-  vim.api.nvim_set_keymap("n", "<leader>gz", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
-  -- vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>lua _cargo_run()<CR>", { noremap = true, silent = true })
+  vim.keymap.set("n", "<leader>gz", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 end
 
 return M

@@ -21,7 +21,7 @@ function M.config()
     end,
   })
 
-  require("telescope").load_extension "harpoon"
+  -- require("telescope").load_extension "harpoon"
 end
 
 function M.mark_file()

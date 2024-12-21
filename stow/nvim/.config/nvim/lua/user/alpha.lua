@@ -22,13 +22,17 @@ function M.config()
   }
 
   dashboard.section.buttons.val = {
-    button("f", icons.ui.Files .. "  Find file", ":Telescope find_files <CR>"),
+    -- button("f", icons.ui.Files .. "  Find file", ":Telescope find_files <CR>"),
+    button("f", icons.ui.Files .. "  Find file", ":FzfLua files <CR>"),
     button("n", icons.ui.NewFile .. "  New file", ":ene <BAR> startinsert <CR>"),
-    button("s", icons.ui.SignIn .. " Load session", ":Telescope persisted<CR>"),
+    -- button("s", icons.ui.SignIn .. " Load session", ":Telescope persisted<CR>"),
     -- button("s", icons.ui.SignIn .. " Load session", ":lua require('persistence').load()<CR>"),
-    button("p", icons.git.Repo .. "  Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
-    button("r", icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>"),
-    button("t", icons.ui.Text .. "  Find text", ":Telescope live_grep <CR>"),
+    -- button("p", icons.git.Repo .. "  Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
+    -- button("p", icons.git.Repo .. "  Find project", ":lua require('user.project').OpenRecentProject()<CR>"),
+    -- button("r", icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>"),
+    button("r", icons.ui.History .. "  Recent files", ":FzfLua oldfiles <CR>"),
+    -- button("t", icons.ui.Text .. "  Find text", ":Telescope live_grep <CR>"),
+    button("t", icons.ui.Text .. "  Find text", ":FzfLua live_grep <CR>"),
     button("c", icons.ui.Gear .. "  Config", ":e ~/.config/nvim/init.lua <CR>"),
     button("q", icons.ui.SignOut .. "  Quit", ":qa<CR>"),
   }
@@ -59,9 +63,9 @@ function M.config()
     pattern = { "AlphaReady" },
     callback = function()
       vim.cmd [[
-      set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-      set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
-    ]]
+        set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+        set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+      ]]
     end,
   })
 end
