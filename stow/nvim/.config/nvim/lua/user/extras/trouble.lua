@@ -5,12 +5,14 @@ local M = {
 function M.config()
   require("trouble").setup()
   local wk = require "which-key"
+
   wk.add {
     { "<leader>ld", "<cmd>Trouble<cr>", desc = "Diagnostics" },
+    -- { "<leader>lt", "<cmd>TodoTrouble<cr>", desc = "TODO" },
     {
       "<leader>lt",
-      "<cmd>lua: require('user.funstions').toggle_diagnostics()<cr>",
-      desc = "Toggle Diagnostics" 
+      "<cmd>lua require('user.functions').toggle_diagnostics()<cr>",
+      desc = "Toggle Diagnostics"
     },
 
     {
@@ -28,7 +30,7 @@ function M.config()
       "<leader>ls",
       "<cmd>Trouble symbols toggle<cr>",
       desc = "Symbols (Trouble)",
-    },
+    }
   }
 end
 

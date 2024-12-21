@@ -21,7 +21,7 @@ M.execs = {
   "dockerls",
   -- "eslint",
   -- "cssls",
-  -- gopls,
+  "gopls",
 }
 
 function M.config()

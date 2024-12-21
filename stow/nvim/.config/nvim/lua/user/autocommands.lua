@@ -1,19 +1,18 @@
 
 -- Fixes Autocomment
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-    vim.cmd "set formatoptions-=cro"
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+--   callback = function()
+--     vim.cmd "set formatoptions-=cro"
+--   end,
+-- })
 
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
---   pattern = { "Jaq", "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "DressingSelect", "tsplayground" },
-  pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "Trouble" },
+  pattern = { "fzf", "qf", "help", "man", "lspinfo", "spectre_panel", "Trouble" },
   callback = function()
     vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR>
-      " nnoremap <silent> <buffer> <esc> :close<CR>
+      nnoremap <silent> <buffer> <esc> :close<CR>
       set nobuflisted
     ]]
   end,
@@ -25,11 +24,11 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     local buf_ft = vim.bo.filetype
     if buf_ft == "" or buf_ft == nil then
       vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR>
-      nnoremap <silent> <buffer> <c-j> j<CR>
-      nnoremap <silent> <buffer> <c-k> k<CR>
-      set nobuflisted 
-    ]]
+        nnoremap <silent> <buffer> q :close<CR>
+        nnoremap <silent> <buffer> <c-j> j<CR>
+        nnoremap <silent> <buffer> <c-k> k<CR>
+        set nobuflisted
+      ]]
     end
   end,
 })
@@ -52,8 +51,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "term://*" },
   callback = function()
     vim.cmd "startinsert!"
-    -- TODO: if java = 2
-    vim.cmd "set cmdheight=1"
+    vim.opt.cmdheight = 1
   end,
 })
 
@@ -65,8 +63,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.spell = true
   end,
 })
-
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()
@@ -87,31 +83,10 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
---   pattern = { "*.scala" },
---   callback = function()
---     vim.lsp.codelens.refresh()
---   end,
--- })
-
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
---     vim.cmd "hi link illuminatedWord LspReferenceText"
---   end,
--- })
-
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   pattern = { "*" },
   callback = function()
     vim.cmd "checktime"
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.scala", "*.sc" },
-  callback = function()
-    vim.lsp.buf.format { async = true }
-    vim.lsp.codelens.refresh()
   end,
 })
 

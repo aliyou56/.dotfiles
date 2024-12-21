@@ -12,7 +12,7 @@ set -gx ATUIN_NOBIND "true"
 
 fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/share/coursier/bin
-fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.local/bin # set PATH so it includes user's private bin if it exists
 
 # source global settings
 if test -f "$HOME/.bash_aliases"

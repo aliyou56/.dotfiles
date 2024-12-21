@@ -9,12 +9,14 @@ function M.config()
   local icons = require "user.icons"
 
   local function lsp_server_names()
-    local lsp_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-    local server_names = {}
-    for _, client in ipairs(lsp_clients) do
-      table.insert(server_names, client.name)
-    end
-    return table.concat(server_names, ", ")
+      local lsp_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+      local server_names = {}
+
+      for _, client in ipairs(lsp_clients) do
+          table.insert(server_names, client.name)
+      end
+
+      return table.concat(server_names, ", ")
   end
 
   local diagnostics = {
@@ -27,17 +29,19 @@ function M.config()
   require("lualine").setup {
     options = {
       theme = "auto", --neovim
+      -- component_separators = { left = '', right = ''},
+      -- section_separators = { left = '', right = ''},
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       ignore_focus = { "NvimTree" },
     },
     sections = {
-      lualine_a = { "mode" },
-      lualine_b = { "branch", "diff", diagnostics },
-      lualine_c = { "filename", { lsp_server_names, icon = icons.ui.BoldLineDashedMiddle} },
-      lualine_x = { "encoding", "fileformat", "filetype" },
-      lualine_y = { "progress" },
-      lualine_z = { "location" },
+      lualine_a = {'mode'},
+      lualine_b = {'branch', 'diff', diagnostics},
+      lualine_c = {'filename', { lsp_server_names, icon = icons.ui.BoldLineDashedMiddle } },
+      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
     },
     extensions = { "quickfix", "man", "fugitive" },
   }

@@ -11,8 +11,8 @@ function M.config()
   local metals_config = metals.bare_config()
 
     metals_config.settings = {
-      showImplicitArguments = true,
-      showImplicitConversionsAndClasses = true,
+      -- showImplicitArguments = true,
+      -- showImplicitConversionsAndClasses = true,
       showInferredType = true,
       serverVersion = "latest.snapshot",
       excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
@@ -51,6 +51,16 @@ function M.config()
     end,
     group = nvim_metals_group,
   })
+
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    pattern = { "*.scala", "*.sc" },
+    callback = function()
+      vim.lsp.buf.format { async = true }
+      vim.lsp.codelens.refresh()
+      vim.lsp.codelens.refresh()
+    end,
+  })
+
 end
 
 

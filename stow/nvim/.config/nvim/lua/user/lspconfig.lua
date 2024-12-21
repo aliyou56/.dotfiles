@@ -110,7 +110,7 @@ function M.config()
   local servers = {
     -- -- "basedpyright",
     -- "marksman",
-    "tailwindcss",
+    -- "tailwindcss",
     "eslint",
 
     "bashls",
