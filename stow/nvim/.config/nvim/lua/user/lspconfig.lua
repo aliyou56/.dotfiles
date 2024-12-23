@@ -3,25 +3,10 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
 }
 
--- local function attach_navic(client, bufnr)
---   vim.g.navic_silence = true
---   local navic = require "nvim-navic"
---   if client.server_capabilities.documentSymbolProvider then
---     navic.attach(client, bufnr)
---   end
--- end
-
+-- https://github.com/neovim/nvim-lspconfig
 M.lsp_keymaps = function(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
-
-  -- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  -- vim.keymap.set("n", "K", function()
-  --   local winid = require("ufo").peekFoldedLinesUnderCursor()
-  --   if not winid then
-  --     vim.lsp.buf.hover()
-  --   end
-  -- end)
 
   -- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -50,7 +35,6 @@ end
 
 M.on_attach = function(client, bufnr)
   M.lsp_keymaps(bufnr)
-  -- attach_navic(client, bufnr)
 
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(true)
@@ -62,11 +46,6 @@ M.toggle_inlay_hints = function()
 end
 
 function M.common_capabilities()
-  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  if status_ok then
-    return cmp_nvim_lsp.default_capabilities()
-  end
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -81,7 +60,8 @@ function M.common_capabilities()
     lineFoldingOnly = true,
   }
 
-  return capabilities
+  -- return capabilities
+  return require("blink.cmp").get_lsp_capabilities(capabilities)
 end
 
 function M.config()
@@ -108,11 +88,6 @@ function M.config()
   local icons = require "user.icons"
 
   local servers = {
-    -- -- "basedpyright",
-    -- "marksman",
-    -- "tailwindcss",
-    "eslint",
-
     "bashls",
     "cssls",
     "elixirls",
@@ -120,15 +95,21 @@ function M.config()
     "jsonls",
     "lemminx", -- xml
     "pyright",
-    -- "rust_analyzer",
-    -- "ruff_lsp",
     "sqlls",
     "lua_ls",
     "yamlls",
     "gopls",
     "dockerls",
     "solargraph",
+    "marksman",
+    "eslint",
+    "ts_ls",
     "elmls"
+
+    -- "basedpyright",
+    -- "tailwindcss",
+    -- "rust_analyzer",
+    -- "ruff_lsp",
     -- "unison",
   }
 
@@ -177,10 +158,6 @@ function M.config()
         cmd = { os.getenv("HOME") .. "/.local/share/nvim/mason/bin/elixir-ls" },
       }
     end
-
-    -- if server == "nginx-language-server" then
-    --   require("lspconfig").nginx_language_server.setup(opts)
-    -- end
   end
 end
 
