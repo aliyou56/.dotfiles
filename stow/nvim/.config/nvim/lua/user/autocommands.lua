@@ -1,11 +1,3 @@
-
--- Fixes Autocomment
--- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
---   callback = function()
---     vim.cmd "set formatoptions-=cro"
---   end,
--- })
-
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "fzf", "qf", "help", "man", "lspinfo", "spectre_panel", "Trouble" },
