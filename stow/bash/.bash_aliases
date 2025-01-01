@@ -33,7 +33,8 @@ alias update='\
   sudo apt -y autoremove && \
   cs update && \
   hmu && \
-  rustup update'
+  rustup update && \
+  pyenv update'
 # nvim --headless +PackerSync +qall'
 
 alias v='nvim'

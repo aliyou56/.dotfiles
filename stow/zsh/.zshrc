@@ -149,6 +149,9 @@ if [ -e $HOME/.nix-profile/bin/java ]; then
   export JAVA_HOME="${$(readlink -e $HOME/.nix-profile/bin/java)%*/bin/java}"
 fi
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"

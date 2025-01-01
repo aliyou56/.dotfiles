@@ -2,11 +2,11 @@ local M = {
   "saghen/blink.cmp",
   event = "InsertEnter",
   dependencies = {
-    "rafamadriz/friendly-snippets",
-    "L3MON4D3/LuaSnip" ,
+    -- "rafamadriz/friendly-snippets",
+    "L3MON4D3/LuaSnip",
   },
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '*',
 }
 
 -- documentation: https://cmp.saghen.dev/
@@ -34,14 +34,19 @@ M.config = function()
       ["<C-e>"] = { "hide", "fallback" },
     },
     completion = {
-      -- documentation = {
-      --   auto_show = true,
-      --   auto_show_delay_ms = 500,
-      -- },
-      -- ghost_text = { enabled = true },
-      -- menu = {
-      --   draw = {
-      --     -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = { border = "rounded" },
+      },
+      ghost_text = { enabled = true },
+      -- Don't select by default, auto insert on selection
+      list = { selection = { preselect = false, auto_insert = false } },
+      menu = {
+        border = "rounded",
+        draw = {
+          -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          columns = { { "kind_icon", "label", gap = 1 }, { "kind" } },
       --     components = {
       --       kind_icon = {
       --         ellipsis = false,
@@ -56,11 +61,37 @@ M.config = function()
       --         end,
       --       }
       --     }
-      --   }
-      -- }
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                return kind_icon
+              end,
+              highlight = 'CmpItemKind'
+              -- highlight = function(ctx)
+              --   local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              --   return hl
+              -- end,
+            },
+            label = {
+              text = function(item)
+                return item.label
+              end,
+              highlight = 'CmpItemAbbr'
+            },
+            kind = {
+              text = function(item)
+                return item.label
+              end,
+              highlight = 'CmpItemKind'
+            }
+          }
+        }
+      }
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "luasnip", "dadbod" },
+      -- default = { "lsp", "path", "snippets", "buffer", "luasnip", "dadbod" },
+      default = { "lsp", "path", "snippets", "buffer", "dadbod" },
       -- default = function(ctx)
       --   local success, node = pcall(vim.treesitter.get_node)
       --   if vim.bo.filetype == 'lua' then
@@ -74,48 +105,51 @@ M.config = function()
       -- optionally disable cmdline completions
       -- cmdline = {},
       providers = {
-        lsp = {
-          name = "LSP",
-          enabled = true,
-          module = "blink.cmp.sources.lsp",
-          -- kind = "LSP",
-          fallbacks = { "snippets", "luasnip", "buffer" },
-          score_offset = 90, -- the higher the number, the higer the priority
-        },
-        luasnip = {
-          name = "Luasnip",
-          enabled = true,
-          module = "blink.cmp.sources.luasnip",
-          min_keyword_length = 2,
-          fallbacks = { "snippets" },
-          score_offset = 85, -- the higher the number, the higer the priority
-        },
-        snippets = {
-          name = "Snippets",
-          enabled = true,
-          module = "blink.cmp.sources.snippets",
-          score_offset = 80, -- the higher the number, the higer the priority
-        },
-        path = {
-          name = "Path",
-          module = "blink.cmp.sources.path",
-          score_offset = 3,
-          fallbacks = { "snippets", "luasnip", "buffer" },
-          opts = {
-            trailing_slash = false,
-            label_trailing_slash = true,
-            get_cwd = function(context)
-              return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
-            end,
-            show_hidden_files_by_default = true,
-          }
-        },
-        buffer = {
-          name = "Buffer",
-          -- enabled = true,
-          module = "blink.cmp.sources.buffer",
-          min_keyword_length = 2,
-        },
+      --   lsp = {
+      --     name = "LSP",
+      --     enabled = true,
+      --     module = "blink.cmp.sources.lsp",
+      --     -- kind = "LSP",
+      --     -- fallbacks = { "snippets", "luasnip", "buffer" },
+      --     fallbacks = { "snippets", "buffer" },
+      --     score_offset = 90, -- the higher the number, the higer the priority
+      --   },
+      --   -- snippets = {
+      --   --   -- name = "Luasnip",
+      --   --   -- preset = "luasnip",
+      --   --   enabled = true,
+      --   --   -- module = "blink.cmp.sources.luasnip",
+      --   --   min_keyword_length = 2,
+      --   --   -- fallbacks = { "snippets" },
+      --   --   score_offset = 85, -- the higher the number, the higer the priority
+      --   -- },
+      --   snippets = {
+      --     name = "Snippets",
+      --     enabled = true,
+      --     min_keyword_length = 2,
+      --     module = "blink.cmp.sources.snippets",
+      --     score_offset = 80, -- the higher the number, the higer the priority
+      --   },
+      --   path = {
+      --     name = "Path",
+      --     module = "blink.cmp.sources.path",
+      --     score_offset = 3,
+      --     -- fallbacks = { "snippets", "luasnip", "buffer" },
+      --     fallbacks = { "snippets", "buffer" },
+      --     opts = {
+      --       trailing_slash = false,
+      --       label_trailing_slash = true,
+      --       get_cwd = function(context)
+      --         return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+      --       end,
+      --       show_hidden_files_by_default = true,
+      --     }
+      --   },
+      --   buffer = {
+      --     name = "Buffer",
+      --     module = "blink.cmp.sources.buffer",
+      --     min_keyword_length = 2,
+      --   },
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
@@ -125,7 +159,10 @@ M.config = function()
     },
 
     -- experimental signature help support
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = { border = "rounded" }
+    },
 
     -- allows extending the providers array elsewhere in your config
     -- without having to redefine it

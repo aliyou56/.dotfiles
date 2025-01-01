@@ -8,26 +8,26 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.add {
-    { "<leader>bb", "<cmd>FzfLua buffers<cr>", desc = "Find Buffers" },
+    -- { "<leader>bb", "<cmd>FzfLua buffers<cr>", desc = "Find Buffers" },
 
-    { "<leader>fb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout branch" },
+    -- { "<leader>fb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout branch" },
     { "<leader>fc", "<cmd>FzfLua colorschemes<cr>", desc = "Colorscheme" },
-    { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
+    -- { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
     -- { "<leader>fp", "<cmd>FzfLua projects<cr>", desc = "Projects" },
-    { "<leader>ft", "<cmd>FzfLua live_grep<cr>", desc = "Find Text" },
+    -- { "<leader>ft", "<cmd>FzfLua live_grep<cr>", desc = "Find Text" },
     { "<leader>fs", "<cmd>FzfLua grep_cword<cr>", desc = "Find String" },
     { "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help Tags" },
     { "<leader>fH", "<cmd>FzfLua highlights<cr>", desc = "Highlights" },
     -- { "<leader>fi", "<cmd>FzfLua media_files<cr>", desc = "Media Files" },
     { "<leader>fl", "<cmd>FzfLua resume<cr>", desc = "Last Search" },
     { "<leader>fM", "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
-    { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files" },
+    { "<leader><leader>", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files" },
     { "<leader>fR", "<cmd>FzfLua registers<cr>", desc = "Registers" },
     { "<leader>fk", "<cmd>FzfLua keymaps<cr>", desc = "Keymaps" },
     { "<leader>fC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
 
     { "<leader>go", "<cmd>FzfLua git_status<cr>", desc = "Open Changed Files" },
-    { "<leader>gb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout Branch" },
+    -- { "<leader>gb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout Branch" },
     { "<leader>gc", "<cmd>FzfLua git_commits<cr>", desc = "Checkout Commit" },
     { "<leader>gC", "<cmd>FzfLua git_bcommits<cr>", desc = "Checkout Commit (Current File)" },
 

@@ -3,7 +3,6 @@ local M = {
   dependencies = {
     "kevinhwang91/promise-async",
     "luukvbaal/statuscol.nvim",
-
     -- "anuvyklack/fold-preview.nvim",
     -- "anuvyklack/keymap-amend.nvim",
   },
@@ -27,10 +26,6 @@ function M.config()
   vim.o.foldlevelstart = 99
   vim.o.foldenable = true
   vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
-  -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-  -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-  -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
   local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
@@ -63,7 +58,8 @@ function M.config()
   local ftMap = {
     -- typescriptreact = { "lsp", "treesitter" },
     -- python = { "indent" },
-    yaml = "",
+    markdown = { "treesitter", "lsp" },
+    yaml = "indent",
     ["neo-tree"] = "",
   }
 
@@ -95,16 +91,12 @@ function M.config()
     },
   }
 
-  -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-  -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-  -- vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
-  -- vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
   vim.keymap.set("n", "K", function()
     local winid = require("ufo").peekFoldedLinesUnderCursor()
     if not winid then
       vim.lsp.buf.hover()
     end
-  end)
+  end, { desc = "Peek folded lines or show LSP hover" })
 
   local wk = require "which-key"
   wk.add {
