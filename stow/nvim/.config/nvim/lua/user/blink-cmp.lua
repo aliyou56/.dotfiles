@@ -3,10 +3,10 @@ local M = {
   event = "InsertEnter",
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "L3MON4D3/LuaSnip" ,
+    "L3MON4D3/LuaSnip",
   },
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '*',
 }
 
 -- documentation: https://cmp.saghen.dev/
@@ -34,14 +34,17 @@ M.config = function()
       ["<C-e>"] = { "hide", "fallback" },
     },
     completion = {
-      -- documentation = {
-      --   auto_show = true,
-      --   auto_show_delay_ms = 500,
-      -- },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+        window = { border = "rounded" },
+      },
       -- ghost_text = { enabled = true },
-      -- menu = {
-      --   draw = {
-      --     -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+      menu = {
+        border = "rounded",
+        draw = {
+          -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          columns = { { "kind_icon", "label", gap = 1 }, { "kind" } },
       --     components = {
       --       kind_icon = {
       --         ellipsis = false,
@@ -56,8 +59,33 @@ M.config = function()
       --         end,
       --       }
       --     }
-      --   }
-      -- }
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                return kind_icon
+              end,
+              highlight = 'CmpItemKind'
+              -- highlight = function(ctx)
+              --   local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              --   return hl
+              -- end,
+            },
+            label = {
+              text = function(item)
+                return item.label
+              end,
+              highlight = 'CmpItemAbbr'
+            },
+            kind = {
+              text = function(item)
+                return item.label
+              end,
+              highlight = 'CmpItemKind'
+            }
+          }
+        }
+      }
     },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "luasnip", "dadbod" },
@@ -93,6 +121,7 @@ M.config = function()
         snippets = {
           name = "Snippets",
           enabled = true,
+          min_keyword_length = 2,
           module = "blink.cmp.sources.snippets",
           score_offset = 80, -- the higher the number, the higer the priority
         },
@@ -112,7 +141,6 @@ M.config = function()
         },
         buffer = {
           name = "Buffer",
-          -- enabled = true,
           module = "blink.cmp.sources.buffer",
           min_keyword_length = 2,
         },
@@ -125,7 +153,10 @@ M.config = function()
     },
 
     -- experimental signature help support
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = { border = "rounded" }
+    },
 
     -- allows extending the providers array elsewhere in your config
     -- without having to redefine it
