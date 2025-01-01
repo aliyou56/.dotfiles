@@ -1,63 +1,15 @@
 local M = {
   "folke/snacks.nvim",
-  opts = {
-    lazygit = {
-      -- -- automatically configure lazygit to use the current colorscheme
-      -- -- and integrate edit with the current neovim instance
-      configure = true,
-      -- extra configuration for lazygit that will be merged with the default
-      -- snacks does NOT have a full yaml parser, so if you need `"test"` to appear with the quotes
-      -- you need to double quote it: `"\"test\""`
-      config = {
-        os = { editPreset = "nvim-remote" },
-        gui = {
-          -- set to an empty string "" to disable icons
-          nerdFontsVersion = "3",
-        },
-      },
-      theme_path = vim.fs.normalize(vim.fn.stdpath("cache") .. "/lazygit-theme.yml"),
-      -- Theme for lazygit
-      theme = {
-        [241]                      = { fg = "Special" },
-        activeBorderColor          = { fg = "MatchParen", bold = true },
-        cherryPickedCommitBgColor  = { fg = "Identifier" },
-        cherryPickedCommitFgColor  = { fg = "Function" },
-        defaultFgColor             = { fg = "Normal" },
-        inactiveBorderColor        = { fg = "FloatBorder" },
-        optionsTextColor           = { fg = "Function" },
-        searchingActiveBorderColor = { fg = "MatchParen", bold = true },
-        selectedLineBgColor        = { bg = "Visual" }, -- set to `default` to have no background colour
-        unstagedChangesColor       = { fg = "DiagnosticError" },
-      },
-      win = {
-        style = "lazygit",
-      },
-    },
-    -- input = {
-    --   enabled = true,
-    --   icon = " ",
-    --   icon_hl = "SnacksInputIcon",
-    --   icon_pos = "left",
-    --   prompt_pos = "title",
-    --   win = { style = "input" },
-    --   expand = true,
-    -- },
-    zen = { enabled = true },
-    -- scroll = {
-    --   enabled = true,
-    --   animate = {
-    --     duration = { step = 15, total = 250 },
-    --     easing = "linear",
-    --   },
-    --   spamming = 10, -- threshold for spamming detection
-    --   -- what buffers to animate
-    --   filter = function(buf)
-    --     return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= "terminal"
-    --   end,
-    -- }
-  },
+  priority = 1000,
+  lazy = false,
+}
 
-  keys = {
+function M.config()
+  local Snacks = require"snacks"
+  local icons = require"user.icons"
+
+  local wk = require "which-key"
+  wk.add {
     { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
     { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     -- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
@@ -75,7 +27,10 @@ local M = {
     -- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
     -- { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     -- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-  },
-}
+  }
+
+  Snacks.setup {
+  }
+end
 
 return M
