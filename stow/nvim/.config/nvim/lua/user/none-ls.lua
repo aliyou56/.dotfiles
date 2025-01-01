@@ -34,7 +34,7 @@ function M.config()
       --   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
       -- },
       -- formatting.eslint,
-      -- null_ls.builtins.diagnostics.eslint,
+      -- diagnostics.eslint,
       null_ls.builtins.completion.spell,
     },
   }

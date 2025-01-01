@@ -67,10 +67,10 @@ end
 function M.config()
   local wk = require "which-key"
   wk.add {
-    {
-      mode = {"n", "v"}, -- NORMAL and VISUAL mode
-      {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
-    },
+    -- {
+    --   mode = {"n", "v"}, -- NORMAL and VISUAL mode
+    --   {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+    -- },
     {"<leader>lf",
       "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
       desc = "Format",
@@ -120,6 +120,12 @@ function M.config()
         [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
         [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
         [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+        [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
       },
     },
     virtual_text = true,
