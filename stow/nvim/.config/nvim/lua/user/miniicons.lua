@@ -99,8 +99,18 @@ function M.config()
 
   require("mini.pairs").setup()
   require("mini.indentscope").setup()
-  require('mini.animate').setup()
+  require('mini.animate').setup {
+    open = { enable = false },
+    close = { enable = false },
+  }
   -- require("mini.tabline").setup()
+  -- vim.cmd [[
+  --   nnoremap <C-j> <C-D>
+  --   vnoremap <C-j> <C-D>
+  --
+  --   nnoremap <C-k> <C-U>
+  --   vnoremap <C-k> <C-U>
+  -- ]]
 end
 
 return M

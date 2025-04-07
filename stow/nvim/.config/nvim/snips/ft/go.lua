@@ -1,0 +1,79 @@
+--
+-- require("luasnip.session.snippet_collection").clear_snippets "go"
+--
+-- local ls = require "luasnip"
+--
+-- local fmta = require("luasnip.extras.fmt").fmta
+-- local rep = require("luasnip.extras").rep
+--
+-- local s = ls.snippet
+-- local c = ls.choice_node
+-- local d = ls.dynamic_node
+-- local i = ls.insert_node
+-- local t = ls.text_node
+-- local sn = ls.snippet_node
+--
+-- local go_result_type = function (info)
+--   local function_node_types = {
+--     function_declaration = true,
+--     method_declaration = true,
+--     func_literal = true,
+--   }
+--
+--   -- find the first function node that's a parent of the cursor
+--   local node = vim.treesitter.get_node()
+--   while node ~= nil do
+--     if function_node_types[node:type()] then
+--       break
+--     end
+--
+--     node = node:parent()
+--   end
+--
+--   -- exit if no match
+--   if not node then
+--     vim.notify "Not inside a function"
+--   end
+--
+--   local query = assert(vim.treesitter.query.get("go", "return-snippet"), "No query")
+--   for _, capture in query:iter_captures(node, 0) do
+--     if handlers[capture:type()] then
+--       return handlers[capture:type()](capture, info)
+--     end
+--   end
+-- end
+--
+-- local go_return_values = function(args)
+--   return sn(
+--     nil,
+--     go_result_type {
+--       index = 0,
+--       err_name = args[1][1],
+--       func_name = args[2][1],
+--     }
+--   )
+-- end
+--
+-- ls.add_snippets("go", {
+--   s(
+--     "efi",
+--     fmta(
+--       [[
+-- <val>, <err> := <f>(<args>)
+-- if <err_same> != nil {
+--   return <result>
+-- }
+-- <finish>
+-- ]],
+--       {
+--         val = i(1),
+--         err = i(2, "err"),
+--         f = i(3),
+--         args = i(4),
+--         err_sname = rep(2),
+--         result = d(5, go_return_values, { 2, 3 }),
+--         finish = i(0)
+--       }
+--     )
+--   ),
+-- })

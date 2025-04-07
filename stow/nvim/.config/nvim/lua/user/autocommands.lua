@@ -10,6 +10,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- comment in sql file
+--vim.api.nvim_create_augroup("FileType", {
+--  pattern = "sql",
+--  command = "setlocal commenstring=--\\ %s"
+--})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "" },
   callback = function()

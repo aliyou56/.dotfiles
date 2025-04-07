@@ -3,6 +3,7 @@ require "user.options"
 require "user.keymaps"
 require "user.autocommands"
 
+if not vim.g.vscode then
 spec "user.colorscheme"
 spec "user.miniicons"
 spec "user.treesitter"
@@ -44,7 +45,7 @@ spec "user.extras.snacks"
 spec "user.extras.modicator"
 spec "user.extras.bqf"
 spec "user.extras.ufo"
-spec "user.extras.nui"
+-- spec "user.extras.nui"
 -- spec "user.extras.dressing"
 -- spec "user.extras.surround"
 spec "user.extras.eyeliner"
@@ -66,3 +67,4 @@ spec "user.extras.endwise"
 spec "user.extras.markdown"
 
 require "user.lazy"
+end

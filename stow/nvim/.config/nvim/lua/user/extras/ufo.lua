@@ -96,7 +96,7 @@ function M.config()
     if not winid then
       vim.lsp.buf.hover()
     end
-  end)
+  end, { desc = "Peek folded lines or show LSP hover" })
 
   local wk = require "which-key"
   wk.add {

@@ -13,6 +13,7 @@ set -gx ATUIN_NOBIND "true"
 fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/share/coursier/bin
 fish_add_path $HOME/.local/bin # set PATH so it includes user's private bin if it exists
+fish_add_path $HOME/.encore/bin
 
 # source global settings
 if test -f "$HOME/.bash_aliases"
@@ -29,6 +30,8 @@ if test -e $HOME/.nix-profile/bin/java
   set -gx JAVA_HOME (readlink -e $HOME/.nix-profile/bin/java | sed 's:/bin/java$::')
 end
 
+# Set up fzf key bindings
+fzf --fish | source
 starship init fish | source
 zoxide init fish | source
 direnv hook fish | source
@@ -36,8 +39,8 @@ atuin init fish | source
 
 set -gx PYENV_ROOT "$HOME/.pyenv"
 command -v pyenv >/dev/null || set -x PATH "$PATH:$PYENV_ROOT/bin"
-# pyenv init - | source"
-# pyenv virtualenv-init - | source"
+pyenv init - | source
+pyenv virtualenv-init - | source
 
 # set -x PATH "$PATH:$HOME/.cargo/bin"
 
