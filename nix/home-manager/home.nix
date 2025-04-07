@@ -7,6 +7,15 @@
     homeDirectory = "/home/aliyou";
 
     packages = with pkgs; [
+      code-cursor
+      tree-sitter
+      flix
+      mermaid-cli
+      d2
+      typst
+      tinymist
+      flyway
+      
       atuin
       bitwarden-cli
       boundary
@@ -56,6 +65,7 @@
       go
       # graalvm-ce
       jdk
+      lua
       luarocks
       nodejs
       # sbt
