@@ -146,7 +146,7 @@ if [ -f "$HOME/.local/.bash_aliases" ] ; then
 fi
 
 if [ -e $HOME/.nix-profile/bin/java ]; then
-  export JAVA_HOME="${$(readlink -e $HOME/.nix-profile/bin/java)%*/bin/java}"
+  export JAVA_HOME="${$(readlink $HOME/.nix-profile/bin/java)%*/bin/java}"
 fi
 
 # Set up fzf key bindings and fuzzy completion

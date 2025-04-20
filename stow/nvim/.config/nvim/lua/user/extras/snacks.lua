@@ -35,7 +35,21 @@ function M.config()
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>N", function() Snacks.picker.notifications() end, desc = "Notification History" },
-    { "<leader>i", function() Snacks.explorer() end, desc = "File Explorer" },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer({
+          layout = {
+            layout = {
+              preset = "sidebar",
+              position = "right",
+              width = 40
+            }
+          }
+        })
+      end,
+      desc = "File Explorer"
+    },
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     -- { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -89,7 +103,7 @@ function M.config()
     notify = { enabled = true },
     zen = { enabled = true },
 
-    picker = { enable = true },
+    -- picker = { enable = true },
     -- indent = {
     --   enabled = true,
     --   priority = 1,
