@@ -37,6 +37,15 @@ alias update='\
   pyenv update'
 # nvim --headless +PackerSync +qall'
 
+alias updates='\
+  brew update && \
+  brew upgrade && \
+  brew autoremove && \
+  brew cleanup
+  cs update && \
+  hmu && \
+  rustup update'
+
 alias v='nvim'
 alias fv='v $(fzf)'
 # alias gt='git ls-tree -r --name-only HEAD | tree --fromfile'
@@ -89,8 +98,8 @@ alias hm='home-manager'
 alias hmd='cd ~/.dotfiles/nix/home-manager'
 alias hmgd='hm generations | head -n 2 | tac | cut -d " " -f 7 | xargs nix store diff-closures'
 alias hmp='hm packages'
-alias hms='hm switch --flake ~/work/github/.dotfiles/nix/home-manager#aliyou && hmgd'
-alias hmu='nix flake update ~/work/github/.dotfiles/nix/home-manager && hms'
+alias hms='hm switch --flake ~/.dotfiles/nix/home-manager#aliyou && hmgd'
+alias hmu='nix flake update --flake ~/.dotfiles/nix/home-manager && hms'
 alias hmhe='nvim ~/.dotfiles/nix/home-manager/home.nix'
 # alias reload='hms && source ~/.zshrc'
 alias garbage='nix-collect-garbage -d' # && docker image prune --force
@@ -119,6 +128,7 @@ alias fgrep='fgrep --color=auto'
 
 # Apply changes to aliases
 alias sa='source ~/.bash_aliases;source ~/.config/fish/config.fish;echo "Config sourced"'
+alias saz='source ~/.bash_aliases;source ~/.zshrc;echo "Config sourced"'
 
 # Edit Aliases
 alias via='nvim ~/.bash_aliases'

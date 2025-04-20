@@ -38,6 +38,20 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 
 ## Fish plugings
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-fisher install oh-my-fish/pligun-extract
+fisher install oh-my-fish/plugin-extract
 fisher install acomagu/fish-async-prompt
 fisher install jhillyerd/plugin-git
+
+echo $(which fish) | sudo tee -a /etc/shells
+chsh -s $(which fish)
+
+## scala stuf
+
+```bash
+cs install bloop metals sbt scala-cli scalafmt
+```
+
+## Mac
+```bash
+brew install coreutils wezterm@nightly google-chrome
+```
