@@ -153,8 +153,8 @@ wezterm.on('update-status', function(window, pane)
   local cmd = basename(pane:get_foreground_process_name())
   table.insert(cells, wezterm.nerdfonts.fa_code .. "  " .. cmd)
 
-  local ram_usage = string.format("%d%%", get_ram_usage())
-  table.insert(cells, wezterm.nerdfonts.md_memory .. " " .. ram_usage)
+  -- local ram_usage = string.format("%d%%", get_ram_usage())
+  -- table.insert(cells, wezterm.nerdfonts.md_memory .. " " .. ram_usage)
 
   local time = wezterm.strftime("%H:%M")
   table.insert(cells, wezterm.nerdfonts.md_clock .. " " .. time)

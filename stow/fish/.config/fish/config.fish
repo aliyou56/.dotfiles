@@ -1,10 +1,10 @@
-if status is-interactive
-  # Commands to run in interactive sessions can go here
-end
+#if status is-interactive
+# Commands to run in interactive sessions can go here
+#end
 
 set -g fish_greeting
 set -gx EIDITOR nvim
-set -gx ATUIN_NOBIND "true"
+#set -gx ATUIN_NOBIND true
 
 # set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep
 # set -x FZF_DEFAULT_OPTS_FILE ~/.config/fzf
@@ -14,6 +14,11 @@ fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/share/coursier/bin
 fish_add_path $HOME/.local/bin # set PATH so it includes user's private bin if it exists
 fish_add_path $HOME/.encore/bin
+
+if test (uname) = Darwin
+  fish_add_path $HOME/Library/Application Support/Coursier/bin
+  eval (/opt/homebrew/bin/brew shellenv)
+end
 
 # source global settings
 if test -f "$HOME/.bash_aliases"
@@ -31,16 +36,16 @@ if test -e $HOME/.nix-profile/bin/java
 end
 
 # Set up fzf key bindings
-fzf --fish | source
+# fzf --fish | source
 starship init fish | source
 zoxide init fish | source
 direnv hook fish | source
-atuin init fish | source
+#atuin init fish | source
 
 set -gx PYENV_ROOT "$HOME/.pyenv"
 command -v pyenv >/dev/null || set -x PATH "$PATH:$PYENV_ROOT/bin"
 pyenv init - | source
-pyenv virtualenv-init - | source
+#pyenv virtualenv-init - | source
 
 # set -x PATH "$PATH:$HOME/.cargo/bin"
 
