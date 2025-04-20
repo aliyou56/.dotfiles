@@ -32,7 +32,7 @@ end
 
 # setting JAVA_HOME variable
 if test -e $HOME/.nix-profile/bin/java
-  set -gx JAVA_HOME (readlink -e $HOME/.nix-profile/bin/java | sed 's:/bin/java$::')
+  set -gx JAVA_HOME (readlink $HOME/.nix-profile/bin/java | sed 's:/bin/java$::')
 end
 
 # Set up fzf key bindings
