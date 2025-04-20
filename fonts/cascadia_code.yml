@@ -14,7 +14,7 @@
     - name: Download CascadiaCode
       when: hack_exists is failed
       ansible.builtin.unarchive:
-        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip
         dest: "{{ lookup('env', 'HOME') }}/.fonts/"
         remote_src: yes
 
