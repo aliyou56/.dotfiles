@@ -1,2 +1,38 @@
 [language-server.rust-analyzer.config.check]
 command = "clippy"
+
+[[language]]
+name = "rust"
+language-servers = [ "rust-analyzer" ]
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+args = ["--stdio"]
+
+[[language]]
+name = "typescript"
+language-servers = [ "typescript-language-server" ]
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "scala"
+language-servers = [ "metals" ]
+
+[language-server.metals]
+command = "metals"
+args = []
+
+[[language]]
+name = "python"
+language-servers = ["pylsp"]
+
+[language-server.pylsp]
+command = "pylsp"
+
+[language-server.pylsp.config.pylsp.plugins]
+ruff.enabled = true
+black.enabled = true
+
