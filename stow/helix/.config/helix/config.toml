@@ -1,10 +1,10 @@
 theme = "kanagawa"
 
 [editor]
-line-number = "relative"
+#line-number = "relative"
 bufferline = "always"
 rulers = [100]
-true-color = true
+#true-color = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -17,10 +17,32 @@ hidden = false
 # At most one section each of 'keys.normal', 'keys.insert' and 'keys.select'
 [keys.normal]
 "X" = ["extend_line_up", "extend_to_line_bounds"]
-C-s = ":w" # Maps Ctrl-s to the typable command :w which is an alias for :write (save file)
-C-o = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
-C-q = ":bc"
+"Y" = "yank_to_clipboard"
+"D" = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+"C-s" = ":w"                # Save with Ctrl+S
+#"C-q" = ":q"                # Quit with Ctrl+Q
+"C-q" = ":bc"
+"C-o" = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
 g = { a = "code_action" } # Maps `ga` to show possible code actions
 
 [keys.insert]
-j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+C-s = ":w"
+#j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+
+[keys.select]
+"j" = "extend_line_down"
+"k" = "extend_line_up"
+"h" = "extend_char_left"
+"l" = "extend_char_right"
+"A-x" = "extend_to_line_bounds"
+"X" = "select_line_above"
+"C-c" = "toggle_comments"
+
+[editor.indent-guides]
+render = true               # Show indent guides (like vertical bars)
+character = "▏"             # Nice looking character for guides
+skip-levels = 1
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
