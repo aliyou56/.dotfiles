@@ -1,9 +1,10 @@
+
 https://github.com/ryanoasis/nerd-fonts
 
 ```bash
-python -m pip install --user pipx
-pipx install virtualenv
-pipx run --spec ansible ansible-playbook <file.yml>
-```
+# JetBrainsMono - FiraCode - Hack
+uvx --from ansible-core ansible-playbook playbook.yaml -e "nerd_font_name=CascadiaCode"
 
-`sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 10`
+# get the latest release version
+curl https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq '.tag_name'
+```
