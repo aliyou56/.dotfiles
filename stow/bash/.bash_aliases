@@ -52,6 +52,7 @@ alias fv='v $(fzf)'
 
 # Git and GitHub
 alias gb='git branch'
+alias gpr='git pull --rebase'
 alias fgco='gco $(gb | fzf)'
 alias fgcor='gco --track $(gbr | fzf)'
 alias fgcot='gco $(g tag | fzf)'
