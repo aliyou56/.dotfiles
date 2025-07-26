@@ -14,6 +14,7 @@ M.lsp_keymaps = function(bufnr)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
+  -- keymap(bufnr, "n", "<leader>ca", "<cmd>lua require('snacks.integrations.lsp').code_actions()<cr>", opts)
   keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
   keymap(bufnr, "n", "<leader>cl", ":lua vim.lsp.codelens.run()<CR>", opts)
   -- keymap(bufnr, "n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
@@ -104,10 +105,10 @@ function M.config()
     "marksman",
     "eslint",
     "ts_ls",
-    "elmls"
+    "elmls",
+    "tailwindcss",
 
     -- "basedpyright",
-    -- "tailwindcss",
     -- "rust_analyzer",
     -- "ruff_lsp",
     -- "unison",

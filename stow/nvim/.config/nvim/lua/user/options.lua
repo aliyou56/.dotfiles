@@ -56,7 +56,7 @@ local options = {
   grepformat = "%f:%l:%c:%m",
   formatoptions = "jcroqlnt", -- tcqj,
 
-  winborder = "rounded"
+  -- winborder = "rounded"
 }
 
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
