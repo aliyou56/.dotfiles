@@ -155,23 +155,17 @@ source <(fzf --zsh)
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
-# eval "$(atuin init zsh)"
 eval "$(rbenv init - zsh)"
 
 # export PATH="$PATH:$HOME/.cargo/bin"
 #export PATH="$PATH:~/.npm-global/bin"
 #export PATH="$PATH:~/go/bin"
 
-# bindkey '^r' atuin-search
-
-# bind to the up key, which depends on terminal mode
-# bindkey '^[[A' atuin-up-search
-# bindkey '^[OA' atuin-up-search
-
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+# to be removed
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PAT:$PYENV_ROOT/bin"
 eval "$(pyenv init -)"
