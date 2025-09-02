@@ -17,15 +17,15 @@
     # coreutils
     # bitwarden-cli # issue macos
     # boundary
-    chezmoi
+    # chezmoi
     duckdb
     brave
     cachix           # Command line client for Nix binary cache hosting
     # clickhouse       # for clickhouse-client
-    postgresql
-    pgcli
+    # postgresql
+    # pgcli            # issue on mac: broken  2/09/2025
     # cockroach
-    dbeaver-bin      # Free universal database tool and SQL client
+    # dbeaver-bin      # Free universal database tool and SQL client
     gh               # GitHub command line
     git
     git-lfs
@@ -79,7 +79,6 @@
 
     bat              # A cat(1) clone with wings
     bottom           # Yet another cross-platform graphical process/system monitor.
-    # broot            # A new way to see and navigate directory trees
     btop             #
     delta            # A syntax-highlighting pager for git, diff, and grep output
     direnv           # load/unload env variables. unclutter your .profile
@@ -126,31 +125,31 @@
     # tilt             # Fast paced kubernetes development
     # vault            # secret management
 
-    grype              # A vulnerability scanner for container images and filesystems
-    trivy              # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
+    # grype              # A vulnerability scanner for container images and filesystems
+    # trivy              # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
 
-    # consul # service discovery
-    # pre-commit
-    # lorri # easy nix shell
-    # asciiquarium
-    # certstrap
-    # cmatrix
-    # doppler
-    # firefox
-    # glow
-    # gnome-browser-connector
-    # nomad # lightwight scheduler
-    # nvd
-    # pulumi
-    # sl
-    # tealder # tldr for various shell tools
-    # tig
-    # watchexec # Filesystem watcher/executor
+# consul # service discovery
+# pre-commit
+# lorri # easy nix shell
+# asciiquarium
+# certstrap
+# cmatrix
+# doppler
+# firefox
+# glow
+# gnome-browser-connector
+# nomad # lightwight scheduler
+# nvd
+# pulumi
+# sl
+# tealder # tldr for various shell tools
+# tig
+# watchexec # Filesystem watcher/executor
 
-    # gettext
-    # graphviz
-    # virt-manager
-    # vlc
-    # tor-browser
+# gettext
+# graphviz
+# virt-manager
+# vlc
+    # tor-browser # issue on mac 2/09/2025
  ];
 }
