@@ -103,6 +103,23 @@ function M.config()
     notify = { enabled = true },
     zen = { enabled = true },
 
+    picker = {
+      enable = true,
+      hidden = true,
+      ignore = true,
+      -- sources = {
+      --   files = { hidden = true, ignored = true },
+      --   explorer = { hidden = true, ignored = true },
+      -- },
+      file_ignore_patterns = {
+        "^target/",
+        "^node_modules/",
+        "^build/",
+        "^coverage/",
+        "^history/",
+      }
+    }
+
     -- picker = { enable = true },
     -- indent = {
     --   enabled = true,
