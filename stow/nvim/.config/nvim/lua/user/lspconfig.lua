@@ -5,33 +5,31 @@ local M = {
 
 -- https://github.com/neovim/nvim-lspconfig
 M.lsp_keymaps = function(bufnr)
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_buf_set_keymap
+  local opts = { buffer = bufnr, silent = true }
 
-  -- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 
-  -- keymap(bufnr, "n", "<leader>ca", "<cmd>lua require('snacks.integrations.lsp').code_actions()<cr>", opts)
-  keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-  keymap(bufnr, "n", "<leader>cl", ":lua vim.lsp.codelens.run()<CR>", opts)
-  -- keymap(bufnr, "n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap(bufnr, "n", "<CR>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  -- keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-  keymap(bufnr, "n", "<leader>aa", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)                 -- all workplace diagnostics
-  keymap(bufnr, "n", "<leader>ae", "<cmd>lua vim.diagnostic.setqflist({severity = 'E'})<CR>", opts) -- all workplace errors
-  keymap(bufnr, "n", "<leader>aw", "<cmd>lua vim.diagnostic.setqflist({severity = 'W'})<CR>", opts)
-  keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)                 -- buffer diagnostics only
-  keymap(bufnr, "n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>", opts)
-  keymap(bufnr, "n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>", opts)
-  -- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]])
+  -- vim.keymap("n", "<leader>ca", "<cmd>lua require('snacks.integrations.lsp').code_actions()<cr>", opts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, opts)
+  vim.keymap.set("n", "<CR>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, opts)                 -- buffer diagnostics only
+  -- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format({ async = true }), opts)
+  -- vim.keymap.set("n", "<leader>aa", vim.diagnostic.setqflist(), opts)                 -- all workplace diagnostics
+  -- vim.keymap.set("n", "<leader>ae", vim.diagnostic.setqflist({severity = 'E'}), opts) -- all workplace errors
+  -- vim.keymap.set("n", "<leader>aw", vim.diagnostic.setqflist({severity = 'W'}), opts)
+  -- vim.keymap.set("n", "[c", vim.diagnostic.goto_prev { wrap = false }, opts)
+  -- vim.keymap.set("n", "]c", vim.diagnostic.goto_next { wrap = false }, opts)
+  -- vim.keymap.set("n", "[c", vim.diagnostic.jump { count = 1 }, opts)
+  -- vim.keymap.set("n", "]c", vim.diagnostic.jump { count = -1 }, opts)
 
-  -- keymap(bufnr, "n", "gDs", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
-  keymap(bufnr, "n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
-  -- keymap(bufnr, "n", "<M-f>", "<cmd>Format<cr>", opts)
+  -- vim.keymap.set("n", "gDs", vim.lsp.buf.document_symbol, opts)
+  vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, opts)
 end
 
 M.on_attach = function(client, bufnr)
@@ -43,7 +41,9 @@ M.on_attach = function(client, bufnr)
 end
 
 M.toggle_inlay_hints = function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+  -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+  local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+  vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
 end
 
 function M.common_capabilities()
@@ -61,8 +61,11 @@ function M.common_capabilities()
     lineFoldingOnly = true,
   }
 
-  -- return capabilities
-  return require("blink.cmp").get_lsp_capabilities(capabilities)
+  local has_blink, blink = pcall(require, "blink.cmp")
+  if has_blink then
+    return blink.get_lsp_capabilities(capabilities)
+  end
+  return capabilities
 end
 
 function M.config()
@@ -101,16 +104,17 @@ function M.config()
     "yamlls",
     "gopls",
     "dockerls",
-    "solargraph",
     "marksman",
     "eslint",
     "ts_ls",
     "elmls",
-    "tailwindcss",
+    "ruby_lsp"
 
+    -- "solargraph",
     -- "basedpyright",
     -- "rust_analyzer",
     -- "ruff_lsp",
+    -- "tailwindcss",
     -- "unison",
   }
 
@@ -145,7 +149,18 @@ function M.config()
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-  require("lspconfig.ui.windows").default_options.border = "rounded"
+
+  local server_configs = {
+    elixirls = {
+      cmd = { os.getenv("HOME") .. "/.local/share/nvim/mason/bin/elixir-ls" },
+    },
+    ruby_lsp = {
+      init_options = {
+        formatter = 'standard',
+        linters = { 'standard' },
+      },
+    },
+  }
 
   for _, server in pairs(servers) do
     local opts = {
@@ -153,19 +168,19 @@ function M.config()
       capabilities = M.common_capabilities(),
     }
 
+    if server_configs[server] then
+      opts = vim.tbl_deep_extend("force", opts, server_configs[server])
+    end
+
     local require_ok, settings = pcall(require, "user.lspsettings." .. server)
     if require_ok then
       opts = vim.tbl_deep_extend("force", settings, opts)
     end
 
     lspconfig[server].setup(opts)
-
-    if server == "elixirls" then
-      require("lspconfig").elixirls.setup {
-        cmd = { os.getenv("HOME") .. "/.local/share/nvim/mason/bin/elixir-ls" },
-      }
-    end
+    -- vim.lsp.config(server, opts)
   end
+  -- vim.lsp.enable(servers)
 end
 
 return M
