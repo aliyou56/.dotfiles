@@ -12,24 +12,17 @@ local config = wezterm.config_builder()
 config:set_strict_mode(true)
 
 config.font = wezterm.font 'CaskaydiaCove Nerd Font'
-config.font_size = 12
--- config.color_scheme = 'Catppuccin Mocha (Gogh)'
--- config.color_scheme = 'Catppuccin Frappe'
-config.color_scheme = 'Kanagawa (Gogh)'
+config.font_size = 14
+config.color_scheme = 'Catppuccin Mocha' -- 'Kanagawa'
 
 local TITLEBAR_COLOR = '#333333'
--- config.native_macos_fullscreen_mode = true
 -- config.use_fancy_tab_bar = false
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 -- config.integrated_title_button_style = 'Gnome'
 config.window_frame = {
   font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
-  font_size = 11,
+  font_size = 14,
   active_titlebar_bg = TITLEBAR_COLOR,
-  -- inactive_titlebar_bg = TITLEBAR_COLOR,
-
-  -- inactive_titlebar_fg = '#cccccc',
-  -- active_titlebar_fg = '#ffffff',
 }
 config.window_padding = {
   top = 0,
@@ -40,15 +33,12 @@ config.inactive_pane_hsb = {
   brightness = 0.7
 }
 
--- config.audible_bell = 'Disabled'
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 20
 
 config.disable_default_key_bindings = true
 
--- config.leader = { key = 'Space', mods = 'CTRL|SHIFT' }
--- config.leader = { key = "SHIFT", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
---   { action = wezterm.action.Nop                   , mods =        'ALT', key = 'Enter' },
   { key = 'P',     mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
   { key = 'N',     mods = 'CTRL|SHIFT', action = act.SpawnWindow, },
   { key = 'T',     mods = 'CTRL|SHIFT', action = act.SpawnTab 'DefaultDomain', },
@@ -74,7 +64,7 @@ config.keys = {
   { key = '>',          mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1), },
 
   { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
-  { key = 'Space', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
+  { key = '_', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
   { key = 'M',     mods = 'CTRL|SHIFT', action = act.RotatePanes 'CounterClockwise', },
 
   { key = 'PageUp',   mods = 'CTRL|SHIFT', action = act.ScrollByPage(-1), },
@@ -102,19 +92,19 @@ config.keys = {
   { key = 'y', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace { name = 'default' } },
 
   -- Switch to a monitoring workspace, which will have `top` launched into it
-  {
-    key = 'u',
-    mods = 'CTRL|SHIFT',
-    action = act.SwitchToWorkspace {
-      name = 'monitoring',
-      spawn = {
-        args = { 'btm' }, -- top
-      },
-    },
-  },
+  -- {
+  --   key = 'u',
+  --   mods = 'CTRL|SHIFT',
+  --   action = act.SwitchToWorkspace {
+  --     name = 'monitoring',
+  --     spawn = {
+  --       args = { 'btm' }, -- top
+  --     },
+  --   },
+  -- },
 
   -- Create a new workspace with a random name and switch to it
-  -- { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
+  { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
 }
 
 config.key_tables = {
@@ -128,13 +118,13 @@ config.key_tables = {
   }
 }
 
-local function get_ram_usage()
-  local _, result, _ = wezterm.run_child_process {
-    'bash', '-c',
-    "free | grep Mem | awk '{printf \"%d\", $3/$2 * 100.0}'"
-  }
-  return tonumber(result) or 0
-end
+-- local function get_ram_usage()
+--   local _, result, _ = wezterm.run_child_process {
+--     'bash', '-c',
+--     "free | grep Mem | awk '{printf \"%d\", $3/$2 * 100.0}'"
+--   }
+--   return tonumber(result) or 0
+-- end
 
 wezterm.on('update-status', function(window, pane)
   local cells = {}
@@ -191,17 +181,5 @@ wezterm.on('update-status', function(window, pane)
   end
   window:set_right_status(wezterm.format(elements))
 end)
-
--- wezterm.on("gui-startup", function(cmd)
---   local _, _, window = wezterm.mux.spawn_window(cmd or {})
---   window:gui_window():toggle_fullscreen()
--- end)
-
--- this is called by the mux server when it starts up.
--- It makes a window split top/bottom
--- wezterm.on('mux-startup', function()
---   local tab, pane, window = mux.spawn_window {}
---   pane:split { direction = 'Top' }
--- end)
 
 return config
