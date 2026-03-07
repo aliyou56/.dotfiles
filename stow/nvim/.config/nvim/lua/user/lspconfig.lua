@@ -73,22 +73,22 @@ function M.config()
   wk.add {
     -- {
     --   mode = {"n", "v"}, -- NORMAL and VISUAL mode
-    --   {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+    --   {"<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
     -- },
-    {"<leader>lf",
+    { "<leader>lf",
       "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
       desc = "Format",
     },
-    {"<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
-    {"<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
-    {"<leader>lh", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
-    {"<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
-    {"<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
-    {"<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
-    {"<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+    { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
+    { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
+    { "<leader>lh", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
+    { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
+    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
+    { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
   }
 
-  local lspconfig = require "lspconfig"
+  -- local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
   local servers = {
@@ -98,7 +98,7 @@ function M.config()
     "html",
     "jsonls",
     "lemminx", -- xml
-    "pyright",
+    -- "pyright",
     "sqlls",
     "lua_ls",
     "yamlls",
@@ -108,12 +108,13 @@ function M.config()
     "eslint",
     "ts_ls",
     "elmls",
-    "ruby_lsp"
+    "ruby_lsp",
+    "ruff",
+    "ty"
 
     -- "solargraph",
     -- "basedpyright",
     -- "rust_analyzer",
-    -- "ruff_lsp",
     -- "tailwindcss",
     -- "unison",
   }
@@ -160,6 +161,27 @@ function M.config()
         linters = { 'standard' },
       },
     },
+    ruff = {
+      init_options = {
+        settings = {
+          args = {}
+        }
+      }
+    },
+    -- pyright = {
+    --   settings = {
+    --     pyright = {
+    --       -- Using Ruff's import organizer
+    --       disableOrganizeImports = true,
+    --     },
+    --     python = {
+    --       analysis = {
+    --         -- Ignore all files for analysis to exclusively use Ruff for linting
+    --         ignore = { '*' },
+    --       },
+    --     },
+    --   },
+    -- }
   }
 
   for _, server in pairs(servers) do
@@ -177,10 +199,10 @@ function M.config()
       opts = vim.tbl_deep_extend("force", settings, opts)
     end
 
-    lspconfig[server].setup(opts)
-    -- vim.lsp.config(server, opts)
+    -- lspconfig[server].setup(opts)
+    vim.lsp.config(server, opts)
   end
-  -- vim.lsp.enable(servers)
+  vim.lsp.enable(servers)
 end
 
 return M

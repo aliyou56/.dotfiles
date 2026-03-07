@@ -2,6 +2,7 @@ local M = {
   "echasnovski/mini.nvim",
   version = false,
 }
+
 function M.config()
   local wk = require "which-key"
   wk.add {
@@ -103,14 +104,14 @@ function M.config()
     open = { enable = false },
     close = { enable = false },
   }
-  -- require("mini.tabline").setup()
-  -- vim.cmd [[
-  --   nnoremap <C-j> <C-D>
-  --   vnoremap <C-j> <C-D>
-  --
-  --   nnoremap <C-k> <C-U>
-  --   vnoremap <C-k> <C-U>
-  -- ]]
+  require("mini.tabline").setup()
+  vim.cmd [[
+    nnoremap <C-j> <C-D>
+    vnoremap <C-j> <C-D>
+
+    nnoremap <C-k> <C-U>
+    vnoremap <C-k> <C-U>
+  ]]
 end
 
 return M

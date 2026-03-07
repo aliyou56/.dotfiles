@@ -1,8 +1,5 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  -- dependencies = {
-  --   "AndreM222/copilot-lualine",
-  -- },
 }
 
 function M.config()
@@ -41,7 +38,12 @@ function M.config()
       lualine_c = {'filename', { lsp_server_names, icon = icons.ui.BoldLineDashedMiddle } },
       lualine_x = {'encoding', 'fileformat', 'filetype'},
       lualine_y = {'progress'},
-      lualine_z = {'location'}
+      lualine_z = {'location'},
+      -- lualine_z = {
+      --   {
+      --     require("opencode").statusline,
+      --   },
+      -- }
     },
     extensions = { "quickfix", "man", "fugitive" },
   }

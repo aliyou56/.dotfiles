@@ -57,7 +57,7 @@ function M.config()
   end, opts)
 
   -- Outline
-  keymap("n","<leader>o", ":Lspsaga outline<CR>",opts)
+  -- keymap("n","<leader>o", ":Lspsaga outline<CR>",opts)
 
   -- Hover Doc
   -- keymap("n", "<leader>K", "<cmd>Lspsaga hover_doc<CR>", opts)

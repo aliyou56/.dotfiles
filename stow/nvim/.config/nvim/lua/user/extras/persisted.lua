@@ -20,7 +20,7 @@ function M.config()
     autosave = true, -- automatically save session files when exiting Neovim
     should_autosave = function()
       -- do not autosave if the alpha dashboard is the current filetype
-      if vim.bo.filetype == "alpha" then
+      if vim.bo.filetype == "snacks_dashboard" then
         return false
       end
       return true

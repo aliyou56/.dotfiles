@@ -13,31 +13,26 @@ function M.config()
     sources = {
       formatting.stylua,
       formatting.prettier,
-      formatting.black,
       formatting.shfmt,
 
-    -- formatting.isort,
-    formatting.sql_formatter,
-    formatting.yamlfmt,
+      formatting.sql_formatter,
+      formatting.yamlfmt,
+      formatting.rubocop,
 
-    -- formatting.jq,
+      -- formatting.jq,
 
-    -- diagnostics.ruff,
-    -- diagnostics.luacheck,
-    -- diagnostics.shellcheck,
-    -- diagnostics.sqlfluff,
-    -- diagnostics.tidy,
-    -- diagnostics.markdownlint,
+      -- diagnostics.luacheck,
+      -- diagnostics.shellcheck,
+      -- diagnostics.sqlfluff,
+      -- diagnostics.tidy,
+      -- diagnostics.markdownlint,
 
-      -- formatting.prettier.with {
-      --   extra_filetypes = { "toml" },
-      --   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-      -- },
       -- formatting.eslint,
       -- diagnostics.eslint,
       null_ls.builtins.completion.spell,
     },
   }
+  -- vim.keymap.set("n", "<leader>=", vim.lsp.buf.format, { desc = "formattes code using none-ls" })
 end
 
 return M
