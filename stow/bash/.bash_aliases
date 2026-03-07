@@ -18,7 +18,6 @@ alias ipp='curl ifconfig.me && echo'
 alias java-switch='cs java --jvm $(cs java --available | fzf) --env 2>/dev/null > .envrc && di'
 alias jps='jps -lm'
 alias jpsk9='jps | fzf --reverse -m -e -i | cut -d " " -f1 | xargs kill -9 2>/dev/null'
-alias k='kubectl'
 # alias list-colors='for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\''\n'\''}; done'
 alias sbtd='sbt -jvm-debug 5005'
 # alias sbtnoss='sbt -Dsbt.supershell=false'
@@ -33,9 +32,7 @@ alias update='\
   sudo apt -y autoremove && \
   cs update && \
   hmu && \
-  rustup update && \
-  pyenv update'
-# nvim --headless +PackerSync +qall'
+  rustup update'
 
 alias updates='\
   brew update && \
@@ -111,6 +108,19 @@ alias la='eza -a --color=always --group-directories-first --icons'  # all files 
 alias ll='eza -l --color=always --group-directories-first --icons'  # long format
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias l.='eza -a | egrep "^\."'
+
+## Kubernetes
+alias k='kubectl'
+alias ka='kubectl apply -f'
+alias kd='kubectl describe'
+alias kg='kubectl get'
+alias kdel='kubectl delete'
+alias kl='kubectl logs -f'
+alias kgpo='kubectl get pod'
+alias kgd='kubectl get deployments'
+# alias kc='kubectlx'
+# alias kns='kubens'
+alias ke='kubectl exec -it'
 
 # alias http='noglob http'
 
