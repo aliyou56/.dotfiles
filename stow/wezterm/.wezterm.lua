@@ -11,7 +11,7 @@ wezterm.on("restore_session", function(window) session_manager.restore_state(win
 local config = wezterm.config_builder()
 config:set_strict_mode(true)
 
-config.font = wezterm.font 'CaskaydiaCove Nerd Font'
+config.font = wezterm.font 'JetBrains Mono' -- CaskaydiaCove Nerd Font
 config.font_size = 14
 config.color_scheme = 'Catppuccin Mocha' -- 'Kanagawa'
 
@@ -20,7 +20,7 @@ local TITLEBAR_COLOR = '#333333'
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 -- config.integrated_title_button_style = 'Gnome'
 config.window_frame = {
-  font = wezterm.font { family = 'CaskaydiaCove Nerd Font', weight = 'Bold' },
+  font = wezterm.font { family = 'JetBrains Mono', weight = 'Bold' },
   font_size = 14,
   active_titlebar_bg = TITLEBAR_COLOR,
 }
