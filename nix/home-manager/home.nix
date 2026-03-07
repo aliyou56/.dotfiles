@@ -2,15 +2,17 @@
 
 {
   home.packages = with pkgs; [
+    # kilocode-cli
     # claude-code
-    code-cursor
+    # code-cursor
     tree-sitter
-    # flix
     mermaid-cli
     d2
-    typst
-    tinymist
+    # typst
+    # tinymist
     flyway
+    devbox
+    pnpm
 
     uv
     pyenv # to be removed
@@ -23,7 +25,7 @@
     cachix           # Command line client for Nix binary cache hosting
     # clickhouse       # for clickhouse-client
     # postgresql
-    # pgcli            # issue on mac: broken  2/09/2025
+    pgcli            # issue on mac: broken  2/09/2025
     # cockroach
     # dbeaver-bin      # Free universal database tool and SQL client
     gh               # GitHub command line
@@ -38,7 +40,7 @@
     moreutils
     obsidian
     ncdu             # a disk usage analyzer with an ncurses interface
-    neofetch
+    # neofetch
     neovim
     # ngrok
     # protonvpn-gui
@@ -56,13 +58,14 @@
     zip
 
     bun
-    clang
+    # clang # !! mix with rust tools
     coursier         # Pure Scala Artifact Fetching
     elmPackages.elm
     elixir
+    # flix
     go
     # graalvm-ce
-    jdk
+    jdk17
     lua
     luarocks
     nodejs
@@ -98,23 +101,26 @@
     ripgrep-all
     sad              # CLI search and replace | Space Age seD
     sd               # Intuitive find & replace CLI (sed alternative)
+    xh
     tokei
 
     fish
     zsh
     starship
     zoxide           # A smarter cd command
+    tmux
     # wezterm
     # kitty
+    # ghostty
 
     dive             # A tool for exploring each layer in a docker image
     # docker
     docker-compose   # Define and run multi-container applications with Docker
-    kind
+    # kind
     kubectl
     minikube
     kubernetes-helm
-    awscli2           # Universal Command Line Interface for Amazon Web Services
+    # awscli2           # Universal Command Line Interface for Amazon Web Services
     # azure-cli        # Azure Command-Line Interface
     # google-cloud-sdk # Google Cloud Platform SDK
     # terraform
@@ -127,24 +133,6 @@
 
     # grype              # A vulnerability scanner for container images and filesystems
     # trivy              # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
-
-# consul # service discovery
-# pre-commit
-# lorri # easy nix shell
-# asciiquarium
-# certstrap
-# cmatrix
-# doppler
-# firefox
-# glow
-# gnome-browser-connector
-# nomad # lightwight scheduler
-# nvd
-# pulumi
-# sl
-# tealder # tldr for various shell tools
-# tig
-# watchexec # Filesystem watcher/executor
 
 # gettext
 # graphviz
