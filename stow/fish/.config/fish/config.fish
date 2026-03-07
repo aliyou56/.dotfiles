@@ -5,15 +5,19 @@
 set -g fish_greeting
 set -gx EIDITOR nvim
 
+fish_vi_key_bindings
+
 fish_add_path /nix/var/nix/profiles/default/bin
 fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/bin # set PATH so it includes user's private bin if it exists
+fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.encore/bin
-# fish_add_path "$PATH:$HOME/.cargo/bin"
 
 if test (uname) = Darwin
   fish_add_path "$HOME/Library/Application Support/Coursier/bin"
   eval (/opt/homebrew/bin/brew shellenv)
+  fish_add_path /opt/homebrew/opt/ruby/bin
+  fish_add_path /opt/homebrew/lib/ruby/gems/3.4.0/bin
 else
   fish_add_path $HOME/.local/share/coursier/bin
 end
@@ -42,7 +46,7 @@ direnv hook fish | source
 # to be removed
 set -gx PYENV_ROOT "$HOME/.pyenv"
 command -v pyenv >/dev/null || set -x PATH "$PATH:$PYENV_ROOT/bin"
-pyenv init - | source
+pyenv init - fish | source
 #pyenv virtualenv-init - | source
 
 function multicd
