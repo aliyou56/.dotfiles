@@ -72,7 +72,7 @@ config.keys = {
 
   { key = 'Enter', mods = 'ALT',        action = act.ToggleFullScreen, },
   { key = 'D',     mods = 'CTRL|SHIFT', action = act.ShowDebugOverlay, },
-  { key = 'S',     mods = 'CTRL|SHIFT', action = act.QuickSelect, },
+  -- { key = 'S',     mods = 'CTRL|SHIFT', action = act.QuickSelect, },
   { key = 'W',     mods = 'ALT|SHIFT', action = act.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" } },
 
   {
@@ -105,6 +105,30 @@ config.keys = {
 
   -- Create a new workspace with a random name and switch to it
   { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
+
+  -- Prompt for a name to use for a new workspace and switch to it.
+  {
+    key = 'u',
+    mods = 'CTRL|SHIFT',
+    action = act.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter name for new workspace' },
+      },
+      action = wezterm.action_callback(function(window, pane, line)
+        -- line will be `nil` if they hit escape without entering anything
+        -- An empty string if they just hit enter
+        -- Or the actual line of text they wrote
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace { name = line },
+            pane
+          )
+        end
+      end),
+    },
+  },
 }
 
 config.key_tables = {
@@ -128,6 +152,8 @@ config.key_tables = {
 
 wezterm.on('update-status', function(window, pane)
   local cells = {}
+
+  table.insert(cells, wezterm.nerdfonts.cod_terminal .. "  " .. window:active_workspace())
 
   -- Figure out the hostname of the pane on a best-effort basis
   local hostname = wezterm.hostname()
