@@ -20,10 +20,10 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 -- map("n", "<leader>sv", "<cmd>source $MYVIMRC<CR>", opts)
 
 -- resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- move text up and down
 map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move Down" })

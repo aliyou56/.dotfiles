@@ -28,7 +28,7 @@ function M.config()
   -- use <C-t> to jump back
   keymap("n", "gh", ":Lspsaga finder<CR>", opts)
 
-  keymap({"n", "v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+  -- keymap({"n", "v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
 
   -- keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
 

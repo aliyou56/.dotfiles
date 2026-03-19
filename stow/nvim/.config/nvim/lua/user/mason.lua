@@ -6,29 +6,13 @@ local M = {
   },
 }
 
-M.execs = {
-  "bashls",
-  "elixirls",
-  "html",
-  "jsonls",
-  "lemminx", -- xml
-  "lua_ls",
-  "marksman",
-  "pyright",
-  "rust_analyzer",
-  -- "sqlls",
-  "yamlls",
-  "dockerls",
-  -- "eslint",
-  -- "cssls",
-  "gopls",
-}
-
 function M.config()
   local wk = require "which-key"
   wk.add {
     { "<leader>lI", "<cmd>Mason<cr>", desc = "Mason Info" },
   }
+
+  local servers = require"user.lspconfig".servers
 
   require("mason").setup {
     ui = {
@@ -36,7 +20,7 @@ function M.config()
     },
   }
   require("mason-lspconfig").setup {
-    ensure_installed = M.execs,
+    ensure_installed = servers,
   }
 end
 

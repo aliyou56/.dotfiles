@@ -68,6 +68,34 @@ function M.common_capabilities()
   return capabilities
 end
 
+M.servers = {
+  "bashls",
+  -- "cssls",
+  "dockerls",
+  "elixirls",
+  -- "elmls",
+  "eslint",
+  "gopls",
+  "html",
+  "jsonls",
+  "lemminx", -- xml
+  "lua_ls",
+  "marksman",
+  "ruby_lsp",
+  "ruff",
+  "sqlls",
+  "ts_ls",
+  "ty",
+  "yamlls",
+
+  -- "pyright",
+  -- "basedpyright",
+  -- "solargraph",
+  -- "rust_analyzer",
+  -- "tailwindcss",
+  -- "unison",
+}
+
 function M.config()
   local wk = require "which-key"
   wk.add {
@@ -90,34 +118,6 @@ function M.config()
 
   -- local lspconfig = require "lspconfig"
   local icons = require "user.icons"
-
-  local servers = {
-    "bashls",
-    "cssls",
-    "elixirls",
-    "html",
-    "jsonls",
-    "lemminx", -- xml
-    -- "pyright",
-    "sqlls",
-    "lua_ls",
-    "yamlls",
-    "gopls",
-    "dockerls",
-    "marksman",
-    "eslint",
-    "ts_ls",
-    "elmls",
-    "ruby_lsp",
-    "ruff",
-    "ty"
-
-    -- "solargraph",
-    -- "basedpyright",
-    -- "rust_analyzer",
-    -- "tailwindcss",
-    -- "unison",
-  }
 
   vim.diagnostic.config {
     signs = {
@@ -184,7 +184,7 @@ function M.config()
     -- }
   }
 
-  for _, server in pairs(servers) do
+  for _, server in pairs(M.servers) do
     local opts = {
       on_attach = M.on_attach,
       capabilities = M.common_capabilities(),
@@ -202,7 +202,7 @@ function M.config()
     -- lspconfig[server].setup(opts)
     vim.lsp.config(server, opts)
   end
-  vim.lsp.enable(servers)
+  vim.lsp.enable(M.servers)
 end
 
 return M
