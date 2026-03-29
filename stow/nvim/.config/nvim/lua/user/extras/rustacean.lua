@@ -1,12 +1,13 @@
 local M = {
   "mrcjkb/rustaceanvim",
-  version = "^4",
+  version = "^8",
   lazy = false,
   ft = { "rust" },
 }
 
 function M.config()
   local lspconfig = require "user.lspconfig"
+
   vim.g.rustaceanvim = {
     tools = {},
     server = {
