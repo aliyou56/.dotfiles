@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # kilocode-cli
-    # claude-code
+    claude-code
     # code-cursor
     tree-sitter
     mermaid-cli
