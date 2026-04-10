@@ -3,9 +3,9 @@
 {
   home.packages = with pkgs; [
     # kilocode-cli
-    claude-code
+    # claude-code
     # code-cursor
-    tree-sitter
+    # tree-sitter
     mermaid-cli
     d2
     # typst
@@ -126,7 +126,7 @@
     # terraform
     # opentofu
     # podman
-    # kubectlx         # kubectl context switching
+    kubectx         # kubectl context switching
     # skaffold         # local kubernetes dev tool
     # tilt             # Fast paced kubernetes development
     # vault            # secret management
