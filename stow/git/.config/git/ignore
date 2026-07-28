@@ -69,3 +69,5 @@ target/
 # Git #
 ###########
 *.orig
+
+**/.claude/settings.local.json

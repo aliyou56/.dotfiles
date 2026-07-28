@@ -155,6 +155,7 @@ source <(fzf --zsh)
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
+eval "$(mise activate zsh)"
 eval "$(rbenv init - zsh)"
 
 # export PATH="$PATH:$HOME/.cargo/bin"
@@ -164,12 +165,6 @@ eval "$(rbenv init - zsh)"
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-# to be removed
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PAT:$PYENV_ROOT/bin"
-eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
 
 if [[ "$(uname)" == "Darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"

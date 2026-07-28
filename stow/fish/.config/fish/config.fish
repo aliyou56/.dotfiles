@@ -38,16 +38,11 @@ if test -e $HOME/.nix-profile/bin/java
 end
 
 # Set up fzf key bindings
-# fzf --fish | source
+fzf --fish | source
 starship init fish | source
 zoxide init fish | source
 direnv hook fish | source
-
-# to be removed
-set -gx PYENV_ROOT "$HOME/.pyenv"
-command -v pyenv >/dev/null || set -x PATH "$PATH:$PYENV_ROOT/bin"
-pyenv init - fish | source
-#pyenv virtualenv-init - | source
+mise activate fish | source
 
 function multicd
   echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
