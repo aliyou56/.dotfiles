@@ -87,10 +87,10 @@ alias hmhe='nvim ~/.dotfiles/nix/home-manager/home.nix'
 alias garbage='nix-collect-garbage -d' # && docker image prune --force
 
 # Changing "ls" to "exa"
-alias ls='eza -al --color=always --group-directories-first --icons'
-alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons'  # long format
-alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
+alias ls='eza -al --color=always --group-directories-first --icons=always'
+alias la='eza -a --color=always --group-directories-first --icons=allways'  # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons=always'  # long format
+alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
 alias l.='eza -a | egrep "^\."'
 
 ## Kubernetes
