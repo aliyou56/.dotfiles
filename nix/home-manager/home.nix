@@ -2,37 +2,32 @@
 
 {
   home.packages = with pkgs; [
-    # kilocode-cli
-    # claude-code
-    # code-cursor
-    # tree-sitter
+    claude-code
     mermaid-cli
-    d2
-    # typst
-    # tinymist
-    flyway
-    devbox
-    pnpm
+    # tree-sitter ## mise
+    # d2          ## mise
+    # flyway      ## mise
+    # pnpm        ## mise
+    # rtk         ## mise
+    # devbox
 
     uv
-    pyenv # to be removed
     # coreutils
-    # bitwarden-cli # issue macos
     # boundary
     # chezmoi
-    duckdb
+    # duckdb      ## mise
     brave
     cachix           # Command line client for Nix binary cache hosting
     # clickhouse       # for clickhouse-client
     # postgresql
-    pgcli            # issue on mac: broken  2/09/2025
+    pgcli
     # cockroach
     # dbeaver-bin      # Free universal database tool and SQL client
     gh               # GitHub command line
     git
     git-lfs
     gnupg
-    helix
+    # helix ## mise 
     htop
     # insomnia # issue on macos
     keychain
@@ -44,7 +39,7 @@
     neovim
     # ngrok
     # protonvpn-gui
-    shellcheck      # a static analysis tool for shell scripts - neovim
+    # shellcheck    ## mise  # a static analysis tool for shell scripts - neovim
     sqlfluff        # A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
     # slack
     stow
@@ -57,28 +52,24 @@
     yq-go
     zip
 
-    bun
+    # bun      ## mise
     # clang # !! mix with rust tools
     coursier         # Pure Scala Artifact Fetching
-    elmPackages.elm
+    # elmPackages.elm
     elixir
-    # flix
-    go
+    # go       ## mise
     # graalvm-ce
-    jdk17
-    lua
+    # jdk17    ## mise
+    # lua      ## mise
     luarocks
-    nodejs
-    # sbt
-    # scala-cli
+    # nodejs   ## mise
     rbenv
     rustup
-    # rust-analyzer
     # cargo-audit      #
     cargo-edit       # Easy Rust dependency management
     # cargo-graph      # !! Rust dependency graphs
-    cargo-watch      # watch rust project and execute custom commands upon change
-    yarn             # Node.js package manager
+    # cargo-watch      # watch rust project and execute custom commands upon change
+    # yarn            ## mise # Node.js package manager
 
     bat              # A cat(1) clone with wings
     bottom           # Yet another cross-platform graphical process/system monitor.
@@ -108,7 +99,6 @@
     zsh
     starship
     zoxide           # A smarter cd command
-    tmux
     # wezterm
     # kitty
     # ghostty
@@ -116,28 +106,31 @@
     dive             # A tool for exploring each layer in a docker image
     # docker
     docker-compose   # Define and run multi-container applications with Docker
-    # kind
     kubectl
-    minikube
-    kubernetes-helm
+    # minikube     ## mise
+    # kubernetes-helm
     # awscli2           # Universal Command Line Interface for Amazon Web Services
     # azure-cli        # Azure Command-Line Interface
     # google-cloud-sdk # Google Cloud Platform SDK
     # terraform
     # opentofu
     # podman
-    kubectx         # kubectl context switching
+    # kubectx         # kubectl context switching
     # skaffold         # local kubernetes dev tool
     # tilt             # Fast paced kubernetes development
     # vault            # secret management
 
+    # tectonic
+    # typst
+    # tinymist           # typst lsp
+
     # grype              # A vulnerability scanner for container images and filesystems
     # trivy              # Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
 
-# gettext
-# graphviz
-# virt-manager
-# vlc
+    # gettext
+    # graphviz
+    # virt-manager
+    # vlc
     # tor-browser # issue on mac 2/09/2025
  ];
 }

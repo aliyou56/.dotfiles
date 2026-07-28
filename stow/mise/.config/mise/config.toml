@@ -1,3 +1,23 @@
 [tools]
+bun = "latest"
+codex = "latest"
+d2 = "latest"
+dbmate = "latest"
+duckdb = "latest"
+elm = { version = "latest", bin = "elm" }
+flyway = { version = "latest", platforms = { linux-x64 = { asset_pattern = "flyway-commandline-{{ version }}-linux-x64.tar.gz", bin_path = "flyway-{{ version }}" }, macos-arm64 = { asset_pattern = "flyway-commandline-{{ version }}-macosx-arm64.tar.gz", bin_path = "flyway-{{ version }}" }, macos-x64 = { asset_pattern = "flyway-commandline-{{ version }}-macosx-x64.tar.gz", bin_path = "flyway-{{ version }}" }, windows-x64 = { asset_pattern = "flyway-commandline-{{ version }}-windows-x64.zip", bin_path = "flyway-{{ version }}" } }, version_prefix = "flyway-" }
+gemini-cli = "latest"
+go = "latest"
+helix = "latest"
+java = "21"
+lua = "latest"
+minikube = "latest"
+node = "latest"
+pnpm = "latest"
 python = "3.13"
+rtk = "latest"
+shellcheck = "latest"
+tmux = "latest"
 tree-sitter = "latest"
+ty = "latest"
+yarn = "latest"
