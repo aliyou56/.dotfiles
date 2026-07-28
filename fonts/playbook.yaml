@@ -3,14 +3,14 @@
   gather_facts: true
   vars:
     nerd_font_name: "CascadiaCode"  # Change this to any Nerd Font name, e.g., FiraCode, Hack, etc.
-    nerd_font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/{{ nerd_font_name }}.zip"
+    nerd_font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ nerd_font_name }}.zip"
     default_fonts_dir: "{{ lookup('env', 'HOME') }}/.fonts"
     macos_fonts_dir: "{{ lookup('env', 'HOME') }}/Library/Fonts"
 
   pre_tasks:
     - name: Set fonts_dir based on OS
       set_fact:
-        fonts_dir: "{{ macos_fonts_dir if ansible_system == 'Darwin' else default_fonts_dir }}"
+        fonts_dir: "{{ macos_fonts_dir if ansible_facts['system'] == 'Darwin' else default_fonts_dir }}"
 
   tasks:
     - name: Ensure fonts directory exists
@@ -35,7 +35,7 @@
         mode: '0644'
 
     - name: Update font cache (Linux only)
-      when: ansible_system != 'Darwin'
+      when: ansible_facts['system'] != 'Darwin'
       ansible.builtin.command: fc-cache -fv
       changed_when: true
 
