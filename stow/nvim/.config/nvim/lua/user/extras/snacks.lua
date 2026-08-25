@@ -157,6 +157,7 @@ function M.config()
             ".bloop/",
             "__pycache__/",
             ".pytest_cache/",
+            ".ruff_cache/",
             ".venv/"
           },
         },

@@ -93,6 +93,10 @@ alias ll='eza -l --color=always --group-directories-first --icons=always'  # lon
 alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
 alias l.='eza -a | egrep "^\."'
 
+## ai
+alias oc='opencode'
+alias cc='claude'
+
 ## Kubernetes
 alias k='kubectl'
 alias ka='kubectl apply -f'

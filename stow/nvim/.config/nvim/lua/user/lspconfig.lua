@@ -35,7 +35,7 @@ end
 M.on_attach = function(client, bufnr)
   M.lsp_keymaps(bufnr)
 
-  if client.supports_method "textDocument/inlayHint" then
+  if client:supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(true)
   end
 end
@@ -148,8 +148,10 @@ function M.config()
     },
   }
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  vim.lsp.buf.hover({ border = "rounded" })
+  vim.lsp.buf.signature_help({ border = "rounded" })
 
   local server_configs = {
     elixirls = {

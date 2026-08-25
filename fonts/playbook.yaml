@@ -2,8 +2,8 @@
   hosts: localhost
   gather_facts: true
   vars:
-    nerd_font_name: "CascadiaCode"  # Change this to any Nerd Font name, e.g., FiraCode, Hack, etc.
-    nerd_font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ nerd_font_name }}.zip"
+    nerd_font_name: "CascadiaCode" # Change this to any Nerd Font name, e.g., FiraCode, Hack, etc.
+    nerd_font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.0/{{ nerd_font_name }}.zip"
     default_fonts_dir: "{{ lookup('env', 'HOME') }}/.fonts"
     macos_fonts_dir: "{{ lookup('env', 'HOME') }}/Library/Fonts"
 
@@ -17,7 +17,7 @@
       ansible.builtin.file:
         path: "{{ fonts_dir }}"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Check if {{ nerd_font_name }} Nerd Font is already installed
       ansible.builtin.shell: |
@@ -32,10 +32,9 @@
         src: "{{ nerd_font_url }}"
         dest: "{{ fonts_dir }}/"
         remote_src: yes
-        mode: '0644'
+        mode: "0644"
 
     - name: Update font cache (Linux only)
       when: ansible_facts['system'] != 'Darwin'
       ansible.builtin.command: fc-cache -fv
       changed_when: true
-

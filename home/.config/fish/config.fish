@@ -12,6 +12,8 @@ fish_add_path $HOME/.nix-profile/bin
 fish_add_path $HOME/.local/bin # set PATH so it includes user's private bin if it exists
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.encore/bin
+# Pi
+fish_add_path "$HOME/.local/share/mise/installs/node/26/bin"
 
 if test (uname) = Darwin
   fish_add_path "$HOME/Library/Application Support/Coursier/bin"

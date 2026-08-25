@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 40 }
+    vim.hl.on_yank { higroup = "Visual", timeout = 40 }
   end,
 })
 
@@ -89,42 +89,61 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   end,
 })
 
-local function handle_command(cmd)
-  vim.cmd(cmd)
-  local matches = #vim.fn.getqflist()
-  if matches > 0 then
-    vim.cmd "copen"
-  else
-    vim.api.nvim_err_writeln("No matches were found")
-  end
-end
+-- vim.api.nvim_create_autocmd("LspProgress", {
+--   callback = function(ev)
+--     -- local progress = vim.lsp.status()
+--     -- if progress ~= "" then 
+--     --   vim.notify(progress, vim.log.levels.INFO, { title = "LSP", replace = "lsp_progress" })
+--     -- end
+--
+--     local value = ev.data.params.value
+--     vim.api.nvim_echo( { { value.message or 'done' }}, false, {
+--       id = "lsp."..ev.data.client_id,
+--       kind = "progress",
+--       source = "vim.lsp",
+--       status = value.kind ~= "end" and "running" or "success",
+--       percent = value.percentage
+--     } )
+--
+--   end
+-- })
 
-vim.api.nvim_create_user_command("ExtGrep", function(params)
-  local command = "silent grep"
-  local has_extension = #params.fargs > 1
-
-  if params.bang then
-    -- -uu = search ignored and hidden files and directories
-    command = command .. " -uu"
-  end
-
-  if has_extension then
-    local ext = params.fargs[1]
-    local query = ""
-    for index, arg in ipairs(params.fargs) do
-      if index > 1 then
-        query = query .. " " .. arg
-      end
-    end
-    command = command .. " -g " .. vim.fn.shellescape(("*.%s"):format(ext))
-    command = command .. query
-  else
-    command = command .. " " .. params.args
-  end
-
-  handle_command(command)
-end, {
-    nargs = "+",
-    bang = true,
-    desc = "Call grep silently for a specific file extension (first parameter) and open the quickfix list"
-})
+-- local function handle_command(cmd)
+--   vim.cmd(cmd)
+--   local matches = #vim.fn.getqflist()
+--   if matches > 0 then
+--     vim.cmd "copen"
+--   else
+--     vim.api.nvim_err_writeln("No matches were found")
+--   end
+-- end
+--
+-- vim.api.nvim_create_user_command("ExtGrep", function(params)
+--   local command = "silent grep"
+--   local has_extension = #params.fargs > 1
+--
+--   if params.bang then
+--     -- -uu = search ignored and hidden files and directories
+--     command = command .. " -uu"
+--   end
+--
+--   if has_extension then
+--     local ext = params.fargs[1]
+--     local query = ""
+--     for index, arg in ipairs(params.fargs) do
+--       if index > 1 then
+--         query = query .. " " .. arg
+--       end
+--     end
+--     command = command .. " -g " .. vim.fn.shellescape(("*.%s"):format(ext))
+--     command = command .. query
+--   else
+--     command = command .. " " .. params.args
+--   end
+--
+--   handle_command(command)
+-- end, {
+--     nargs = "+",
+--     bang = true,
+--     desc = "Call grep silently for a specific file extension (first parameter) and open the quickfix list"
+-- })

@@ -1,0 +1,54 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "ui_font_family": ".ZedSans",
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false,
+  },
+  "vim_mode": true,
+  "ui_font_size": 14,
+  "buffer_font_size": 12,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+  "languages": {
+    "Scala": {
+      "language_servers": ["metals"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+    },
+  },
+  "lsp": {
+    "metals": {
+      "binary": {
+        "path": "/Users/aliyou/Library/Application Support/Coursier/bin/metals",
+      },
+    },
+  },
+}

@@ -2,9 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -39,7 +37,7 @@
               home = {
                 username = "aliyou";
                 homeDirectory =
-                  if pkgs.stdenv.isDarwin
+                  if pkgs.stdenv.hostPlatform.isDarwin
                   then "/Users/aliyou"
                   else "/home/aliyou";
                 stateVersion = "25.05";

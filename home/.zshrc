@@ -171,33 +171,31 @@ if [[ "$(uname)" == "Darwin" ]]; then
   export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
 fi
 
-# fastfetch
+function gwt-clone() {
+  local url=$1
+  local repo_name=$(basename "$url" .git)
 
-# nixify() {
-#   if [ ! -e ./.envrc ]; then
-#     echo "use nix" > .envrc
-#     direnv allow
-#   fi
-#   if [[ ! -e shell.nix ]] && [[ ! -e default.nix ]]; then
-#     cat > default.nix <<'EOF'
-# with import <nixpkgs> {};
-# mkShell {
-#   nativeBuildInputs = [
-#     bashInteractive
-#   ];
-# }
-# EOF
-#     ${EDITOR:-vim} default.nix
-#   fi
-# }
-# flakify() {
-#   if [ ! -e flake.nix ]; then
-#     nix flake new -t github:nix-community/nix-direnv .
-#   elif [ ! -e .envrc ]; then
-#     echo "use flake" > .envrc
-#     direnv allow
-#   fi
-#   ${EDITOR:-vim} flake.nix
-# }
-#
-#
+  # 1. Create the project directory and enter it
+  mkdir -p "$repo_name" && cd "$repo_name" || return
+
+  # 2. Clone the bare repo into a hidden folder
+  git clone --bare "$url" .bare
+
+  # 3. Create the .git file pointer
+  echo "gitdir: ./.bare" > .git
+
+  # 4. Fix remote fetch to work with worktrees
+  # This ensures all branches are fetched correctly into the bare repo
+  pushd .bare > /dev/null
+    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  popd > /dev/null
+ 
+  # 5. Create the default main worktree
+  if git ls-remote --exit-code --heads "$url" main > /dev/null; then
+    git worktree add main
+  else
+    git worktree add master
+  fi
+}
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
